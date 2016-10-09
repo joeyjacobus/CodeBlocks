@@ -1,18 +1,24 @@
 /*
+ * Lab 3 - Joey Jacobus 10/9/2016
  */
 
 #include <mcs51/8051.h>
 #include "at89c51ed2.h"
 #include <stdio.h>
 #include <malloc.h>
+#include "serial.h"
 
 #define AUXR_ENABLE_XRAM_MASK 0x0C
 
-#define TIMER1_RELOAD_VAL 0xFD
-#define TIMER1_TMOD_VAL 0x20
-#define TIMER1_TCON_START_BIT (1 << 6)
+#define HEAP_SIZE 4000
 
-#define SCON_SERIAL_INIT 0x50   //Mode 1, 8 bit uart with timer 1 baud generator, Receive enable
+#define BUF1_MAX_STR_LENGTH 3
+#define BUF1_MIN_VALUE 4
+#define BUF1_MAX_VALUE 200
+
+/** Define the Heap */
+unsigned char xdata heap[HEAP_SIZE];
+unsigned char xdata *buffer_0;
 
 
 // All processor XRAM should be enabled before the call to main().
@@ -22,45 +28,77 @@ _sdcc_external_startup(){
     return 0;
 }
 
-void putchar (char c){
-    while (TI == 0);
-    SBUF = c; // load serial port with transmit value
-    TI = 0; // clear TI flag
+
+/**
+ *  Gets the user input size and allocates space for the buffer
+ *  @param buf_size a pointer to a variable to store the buffer size
+ *  @param an uninitialized pointer that will point to the buffer allocation
+ */
+void setupBuffer(int *buf_size, char **buffer, int buffer_id){
+    while (*buf_size == -1 || *buf_size > BUF1_MAX_VALUE || *buf_size < BUF1_MIN_VALUE){
+        printf ("\r\nEnter a size for buffer_%d between %d and %d: ", buffer_id, BUF1_MIN_VALUE, BUF1_MAX_VALUE);
+        *buf_size = serial_getInteger(BUF1_MAX_STR_LENGTH);
+        if (*buf_size < BUF1_MIN_VALUE){
+            printf("\r\nError. Value must be greater than %d", BUF1_MIN_VALUE);
+        }
+        else if(*buf_size > BUF1_MAX_VALUE){
+            printf("\r\nError. Value must be less than %d", BUF1_MAX_VALUE);
+        }
+    }
+
+    //Malloc the buffer
+    *buffer = malloc(*buf_size);
+    if (*buffer == NULL){
+        printf("Buffer of size %d allocation failed", buf_size);
+        while(1);
+    }
+    printf ("\r\nBuffer %d of size: %d allocated at address: %x", buffer_id, *buf_size, *buffer);
 }
 
-char getchar (){
-    // char cc;
-    while (RI == 0);
-    RI = 0; // clear RI flag
-    return SBUF; // return character from SBUF
+int Buf1_Size;
+int Buf2_Size;
+int Buf3_Size;
+char *Buf1;
+char *Buf2;
+char *Buf3;
+void setupBuffers(void){
+    //Setup buffer 1
+    setupBuffer(&Buf1_Size, &Buf1, 1);
+    setupBuffer(&Buf2_Size, &Buf2, 2);
+    setupBuffer(&Buf3_Size, &Buf3, 3);
+
 }
 
-void Serial_Init(void){
-   	SCON = SCON_SERIAL_INIT;    //Init serial port
-    TMOD = TIMER1_TMOD_VAL;     // 8 bit auto-reload mode 2
-    TH1 = TIMER1_RELOAD_VAL;
-    TL1 = TIMER1_RELOAD_VAL;  //Auto-Reload value for timer 1 baud-rate = 9600
-   //Start timer 1
-    TR1 = 1;
-    TI = 1; //Clear to start
-}
 
 void main(void){
-    char c;
-    //char *p = malloc(4);
-    //if (p == NULL){
-    //    while(1);
-    //}
+    //char c;
+    //char buf[10];
+
+    init_dynamic_memory((MEMHEADER xdata *)heap, HEAP_SIZE);
     Serial_Init();
 
-    P1_4 = 0;
+    buffer_0 = malloc(1400);
+    if (buffer_0 == NULL){
+        while(1){
+            printf("Malloc failed.\r\n");
+        }
+    }
+
+    setupBuffers();
+
+
+
+    P1_5 = 0;
     while(1){
-        P1_4 = !P1_4;
-        c = getchar();
-        printf("Character received = %c\r\n", c);
-        printf ("test");
-        c = 0x41;
-        //putchar('A');
+        P1_5 = !P1_5;   //Debug
+        //printf("Enter a string and press <enter>:\r\n");
+        //getstring(buf, sizeof buf);
+        //fgets(buf, sizeof buf);
+        //printf("\r\n");
+        //printf("%s", buf);
+        //c = getchar();
+        //putchar(c);
+        //printf("Character received = %c\r\n", c);
     }
 
 }
