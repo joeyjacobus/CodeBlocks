@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include "serial.h"
 
 #define TIMER1_RELOAD_VAL 0xFD
 #define TIMER1_TMOD_VAL 0x20
@@ -11,7 +12,6 @@
 
 #define SCON_SERIAL_INIT 0x50   //Mode 1, 8 bit uart with timer 1 baud generator, Receive enable
 
-#define ENTER_KEY 0x0D
 #define BACKSPACE_KEY '\b'
 
 void putchar (char c){
@@ -33,7 +33,7 @@ char getchar (){
  *  max_length cannot be greater than 10
  *  Else returns -1 for errors
  */
-int serial_getInteger(int max_length){
+int Serial_GetInteger(int max_length){
     char c;
     char buf[11];   //Can't be longer than 10 bytes
     int index = 0;
@@ -50,6 +50,9 @@ int serial_getInteger(int max_length){
                 break;
             else if (c == BACKSPACE_KEY)
                 --index;
+            else if (c == 'q' || c == 'Q'){
+                return -2;
+            }
             else if ( isdigit(c) ){
                 buf[index] = c;
                 ++index;

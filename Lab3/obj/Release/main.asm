@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Oct 09 13:32:16 2016
+; This file generated Wed Oct 12 19:12:34 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -10,8 +10,12 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _displayWelcome
+	.globl _FreeAll
+	.globl _handleInput
+	.globl _handleMinus
+	.globl _handlePlus
 	.globl _setupBuffers
-	.globl _setupBuffer
 	.globl __sdcc_external_startup
 	.globl _P5_7
 	.globl _P5_6
@@ -209,16 +213,13 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _Buf3
-	.globl _Buf2
-	.globl _Buf1
-	.globl _Buf3_Size
-	.globl _Buf2_Size
-	.globl _Buf1_Size
-	.globl _setupBuffer_PARM_3
-	.globl _setupBuffer_PARM_2
-	.globl _buffer_0
+	.globl _Num_Input_Chars
+	.globl _Num_Buffers
+	.globl _Buffer_Size
+	.globl _Buffers
 	.globl _heap
+	.globl _Restart
+	.globl _displayPrompt
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -432,8 +433,6 @@ _P5_7	=	0x00df
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-_setupBuffer_sloc0_1_0:
-	.ds 3
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
@@ -453,6 +452,14 @@ __start__stack:
 ; bit data
 ;--------------------------------------------------------
 	.area BSEG    (BIT)
+_Restart::
+	.ds 1
+_setupBuffers_alloc_failed_1_1:
+	.ds 1
+_setupBuffers_sloc0_1_0:
+	.ds 1
+_handlePlus_alloc_success_1_1:
+	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
 ;--------------------------------------------------------
@@ -462,31 +469,27 @@ __start__stack:
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
 _heap::
-	.ds 4000
-_buffer_0::
+	.ds 1600
+_Buffers::
+	.ds 1200
+_setupBuffers_i_1_1:
 	.ds 2
-_setupBuffer_PARM_2:
-	.ds 3
-_setupBuffer_PARM_3:
+_handlePlus_buffer_size_1_1:
 	.ds 2
-_setupBuffer_buf_size_1_1:
-	.ds 3
-_Buf1_Size::
+_handleMinus_buffer_number_1_1:
 	.ds 2
-_Buf2_Size::
-	.ds 2
-_Buf3_Size::
-	.ds 2
-_Buf1::
-	.ds 3
-_Buf2::
-	.ds 3
-_Buf3::
-	.ds 3
+_handleInput_c_1_1:
+	.ds 1
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
 	.area XISEG   (XDATA)
+_Buffer_Size::
+	.ds 2
+_Num_Buffers::
+	.ds 2
+_Num_Input_Chars::
+	.ds 2
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -516,6 +519,9 @@ __interrupt_vect:
 	.globl __mcs51_genXINIT
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
+;	main.c:41: bool Restart = false;
+;	genAssign
+	clr	_Restart
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
 ;--------------------------------------------------------
@@ -535,7 +541,7 @@ __sdcc_program_startup:
 ;Allocation info for local variables in function '_sdcc_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:25: _sdcc_external_startup(){
+;	main.c:44: _sdcc_external_startup(){
 ;	-----------------------------------------
 ;	 function _sdcc_external_startup
 ;	-----------------------------------------
@@ -548,84 +554,165 @@ __sdcc_external_startup:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:27: AUXR |= AUXR_ENABLE_XRAM_MASK;   //Enable all XRAM
+;	main.c:46: AUXR |= AUXR_ENABLE_XRAM_MASK;   //Enable all XRAM
 ;	genOr
 	orl	_AUXR,#0x0C
-;	main.c:28: return 0;
+;	main.c:47: return 0;
 ;	genRet
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0000
 ;	Peephole 300	removed redundant label 00101$
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'setupBuffer'
+;Allocation info for local variables in function 'setupBuffers'
 ;------------------------------------------------------------
-;sloc0                     Allocated with name '_setupBuffer_sloc0_1_0'
-;buffer                    Allocated with name '_setupBuffer_PARM_2'
-;buffer_id                 Allocated with name '_setupBuffer_PARM_3'
-;buf_size                  Allocated with name '_setupBuffer_buf_size_1_1'
+;i                         Allocated with name '_setupBuffers_i_1_1'
 ;------------------------------------------------------------
-;	main.c:37: void setupBuffer(int *buf_size, char **buffer, int buffer_id){
+;	main.c:51: void setupBuffers(void){
 ;	-----------------------------------------
-;	 function setupBuffer
+;	 function setupBuffers
 ;	-----------------------------------------
-_setupBuffer:
-;	genReceive
-	mov	r2,b
-	mov	r3,dph
-	mov	a,dpl
-	mov	dptr,#_setupBuffer_buf_size_1_1
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r2
-	movx	@dptr,a
-;	main.c:38: while (*buf_size == -1 || *buf_size > BUF1_MAX_VALUE || *buf_size < BUF1_MIN_VALUE){
+_setupBuffers:
+;	main.c:53: bool alloc_failed = true;
 ;	genAssign
-	mov	dptr,#_setupBuffer_PARM_3
+	setb	_setupBuffers_alloc_failed_1_1
+;	main.c:54: Buffer_Size = -1;
+;	genAssign
+	mov	dptr,#_Buffer_Size
+	mov	a,#0xFF
+	movx	@dptr,a
+	inc	dptr
+;	Peephole 101	removed redundant mov
+	movx	@dptr,a
+;	main.c:55: Num_Buffers = 0;    //Reset
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:58: for (i = 0; i < MAX_NUM_BUFFERS; ++i){
+;	genAssign
+	mov	dptr,#_setupBuffers_i_1_1
+	mov	a,#0x64
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+00125$:
+;	main.c:59: Buffers[i].in_use = false;
+;	genAssign
+	mov	dptr,#_setupBuffers_i_1_1
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r3,a
+;	genMinus
+;	genMinusDec
+	dec	r2
+	cjne	r2,#0xff,00141$
+	dec	r3
+00141$:
 ;	genAssign
-	mov	dptr,#_setupBuffer_buf_size_1_1
-	movx	a,@dptr
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_Buffers
 	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_Buffers >> 8)
 	mov	r5,a
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x0A
+;	Peephole 236.a	used r4 instead of ar4
+	add	a,r4
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r5 instead of ar5
+	addc	a,r5
+	mov	dph,a
+;	genPointerSet
+;     genFarPointerSet
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+;	Peephole 101	removed redundant mov
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_setupBuffers_i_1_1
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	main.c:58: for (i = 0; i < MAX_NUM_BUFFERS; ++i){
+;	genAssign
+	mov	dptr,#_setupBuffers_i_1_1
+	movx	a,@dptr
+	mov	r2,a
 	inc	dptr
 	movx	a,@dptr
-	mov	r6,a
-00108$:
-;	genPointerGet
-;	genGenPointerGet
-	mov	dpl,r4
-	mov	dph,r5
-	mov	b,r6
-	lcall	__gptrget
-	mov	r7,a
+;	genIfx
+	mov	r3,a
+;	Peephole 135	removed redundant mov
+	orl	a,r2
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00125$
+;	Peephole 300	removed redundant label 00142$
+;	main.c:63: while (alloc_failed){
+00120$:
+;	genIfx
+;	genIfxJump
+	jb	_setupBuffers_alloc_failed_1_1,00143$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00143$:
+;	main.c:66: while (Buffer_Size == -1 || Buffer_Size > BUF1_MAX_VALUE || Buffer_Size < BUF1_MIN_VALUE || (Buffer_Size & 0xF) ){
+00112$:
+;	genAssign
+	mov	dptr,#_Buffer_Size
+	movx	a,@dptr
+	mov	r2,a
 	inc	dptr
-	lcall	__gptrget
-	mov	r0,a
+	movx	a,@dptr
+	mov	r3,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r7,#0xFF,00125$
-	cjne	r0,#0xFF,00125$
+	cjne	r2,#0xFF,00144$
+	cjne	r3,#0xFF,00144$
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00109$
-00125$:
+	sjmp	00113$
+00144$:
 ;	genCmpGt
 ;	genCmp
 	clr	c
-	mov	a,#0xC8
-	subb	a,r7
+	mov	a,#0x40
+	subb	a,r2
 ;	Peephole 159	avoided xrl during execution
-	mov	a,#(0x00 ^ 0x80)
-	mov	b,r0
+	mov	a,#(0x06 ^ 0x80)
+	mov	b,r3
 	xrl	b,#0x80
 	subb	a,b
 ;	genIfxJump
@@ -633,44 +720,38 @@ _setupBuffer:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 ;	genCmpLt
 ;	genCmp
-	jc	00109$
-;	Peephole 300	removed redundant label 00126$
+	jc	00113$
+;	Peephole 300	removed redundant label 00145$
 ;	Peephole 256.a	removed redundant clr c
-	mov	a,r7
-	subb	a,#0x04
-	mov	a,r0
+	mov	a,r2
+	subb	a,#0x20
+	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00127$
-	ljmp	00110$
-00127$:
-00109$:
-;	main.c:39: printf ("\r\nEnter a size for buffer_%d between %d and %d: ", buffer_id, BUF1_MIN_VALUE, BUF1_MAX_VALUE);
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 160.a	removed sjmp by inverse jump logic
+	jc	00113$
+;	Peephole 300	removed redundant label 00146$
+;	genAnd
+	mov	a,r2
+	anl	a,#0x0F
+	jnz	00147$
+	ljmp	00114$
+00147$:
+00113$:
+;	main.c:67: printf ("\r\nEnter a size for the buffers that is a multiple of 16 between %d and %d: ", BUF1_MIN_VALUE, BUF1_MAX_VALUE);
 ;	genIpush
-	push	ar4
-	push	ar5
-	push	ar6
+	mov	a,#0x40
+	push	acc
+	mov	a,#0x06
+	push	acc
 ;	genIpush
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	mov	a,#0xC8
+	mov	a,#0x20
 	push	acc
 ;	Peephole 181	changed mov to clr
 	clr	a
 	push	acc
-;	genIpush
-	mov	a,#0x04
-	push	acc
-;	Peephole 181	changed mov to clr
-	clr	a
-	push	acc
-;	genIpush
-	push	ar2
-	push	ar3
 ;	genIpush
 	mov	a,#__str_0
 	push	acc
@@ -681,76 +762,38 @@ _setupBuffer:
 ;	genCall
 	lcall	_printf
 	mov	a,sp
-	add	a,#0xf7
+	add	a,#0xf9
 	mov	sp,a
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	main.c:40: *buf_size = serial_getInteger(BUF1_MAX_STR_LENGTH);
-;	genAssign
-	mov	dptr,#_setupBuffer_buf_size_1_1
-	movx	a,@dptr
-	mov	_setupBuffer_sloc0_1_0,a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_setupBuffer_sloc0_1_0 + 1),a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_setupBuffer_sloc0_1_0 + 2),a
+;	main.c:68: Buffer_Size = Serial_GetInteger(BUF1_MAX_STR_LENGTH);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x0003
-	push	ar2
-	push	ar3
-	push	ar5
-	push	ar6
-	lcall	_serial_getInteger
-	mov	r1,dpl
-	mov	r4,dph
-	pop	ar6
-	pop	ar5
-	pop	ar3
-	pop	ar2
-;	genPointerSet
-;	genGenPointerSet
-	mov	dpl,_setupBuffer_sloc0_1_0
-	mov	dph,(_setupBuffer_sloc0_1_0 + 1)
-	mov	b,(_setupBuffer_sloc0_1_0 + 2)
-	mov	a,r1
-	lcall	__gptrput
-	inc	dptr
+	mov	dptr,#0x000A
+	lcall	_Serial_GetInteger
+	mov	r4,dpl
+	mov	r5,dph
+;	genAssign
+	mov	dptr,#_Buffer_Size
 	mov	a,r4
-	lcall	__gptrput
-;	main.c:41: if (*buf_size < BUF1_MIN_VALUE){
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r5
+	movx	@dptr,a
+;	main.c:69: if (Buffer_Size < BUF1_MIN_VALUE){
 ;	genCmpLt
 ;	genCmp
 	clr	c
-	mov	a,r1
-	subb	a,#0x04
 	mov	a,r4
+	subb	a,#0x20
+	mov	a,r5
 	xrl	a,#0x80
 	subb	a,#0x80
-	clr	a
-	rlc	a
-;	genIpop
-	pop	ar6
-	pop	ar5
-	pop	ar4
-;	genIfx
 ;	genIfxJump
-;	Peephole 108.c	removed ljmp by inverse jump logic
-	jz	00104$
-;	Peephole 300	removed redundant label 00128$
-;	main.c:42: printf("\r\nError. Value must be greater than %d", BUF1_MIN_VALUE);
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00107$
+;	Peephole 300	removed redundant label 00148$
+;	main.c:70: printf("\r\nError. Value must be greater than %d\r\n", BUF1_MIN_VALUE);
 ;	genIpush
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	mov	a,#0x04
+	mov	a,#0x20
 	push	acc
 ;	Peephole 181	changed mov to clr
 	clr	a
@@ -767,57 +810,28 @@ _setupBuffer:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-	ljmp	00108$
-00104$:
-;	main.c:44: else if(*buf_size > BUF1_MAX_VALUE){
-;	genIpush
-	push	ar2
-	push	ar3
-;	genPointerGet
-;	genGenPointerGet
-	mov	dpl,_setupBuffer_sloc0_1_0
-	mov	dph,(_setupBuffer_sloc0_1_0 + 1)
-	mov	b,(_setupBuffer_sloc0_1_0 + 2)
-	lcall	__gptrget
-	mov	r1,a
-	inc	dptr
-	lcall	__gptrget
-	mov	r2,a
+	ljmp	00112$
+00107$:
+;	main.c:72: else if(Buffer_Size > BUF1_MAX_VALUE){
 ;	genCmpGt
 ;	genCmp
 	clr	c
-	mov	a,#0xC8
-	subb	a,r1
+	mov	a,#0x40
+	subb	a,r4
 ;	Peephole 159	avoided xrl during execution
-	mov	a,#(0x00 ^ 0x80)
-	mov	b,r2
+	mov	a,#(0x06 ^ 0x80)
+	mov	b,r5
 	xrl	b,#0x80
 	subb	a,b
-;	genIpop
-;	genIfx
 ;	genIfxJump
-;	Peephole 129.c	optimized condition
-	pop	ar3
-	pop	ar2
-	jc	00129$
-	ljmp	00108$
-00129$:
-;	main.c:45: printf("\r\nError. Value must be less than %d", BUF1_MAX_VALUE);
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00104$
+;	Peephole 300	removed redundant label 00149$
+;	main.c:73: printf("\r\nError. Value must be less than %d\r\n", BUF1_MAX_VALUE);
 ;	genIpush
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	mov	a,#0xC8
+	mov	a,#0x40
 	push	acc
-;	Peephole 181	changed mov to clr
-	clr	a
+	mov	a,#0x06
 	push	acc
 ;	genIpush
 	mov	a,#__str_2
@@ -831,71 +845,19 @@ _setupBuffer:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-	ljmp	00108$
-00110$:
-;	main.c:50: *buffer = malloc(*buf_size);
-;	genAssign
-	mov	dptr,#_setupBuffer_PARM_2
-	movx	a,@dptr
-	mov	_setupBuffer_sloc0_1_0,a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_setupBuffer_sloc0_1_0 + 1),a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_setupBuffer_sloc0_1_0 + 2),a
-;	genCall
-	mov	dpl,r7
-	mov	dph,r0
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	lcall	_malloc
-	mov	r7,dpl
-	mov	r0,dph
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	genCast
-	mov	r1,#0x0
-;	genPointerSet
-;	genGenPointerSet
-	mov	dpl,_setupBuffer_sloc0_1_0
-	mov	dph,(_setupBuffer_sloc0_1_0 + 1)
-	mov	b,(_setupBuffer_sloc0_1_0 + 2)
-	mov	a,r7
-	lcall	__gptrput
-	inc	dptr
-	mov	a,r0
-	lcall	__gptrput
-	inc	dptr
-	mov	a,r1
-	lcall	__gptrput
-;	main.c:51: if (*buffer == NULL){
-;	genCmpEq
-;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 196	optimized misc jump sequence
-	cjne	r7,#0x00,00115$
-	cjne	r0,#0x00,00115$
-	cjne	r1,#0x00,00115$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00130$
-;	Peephole 300	removed redundant label 00131$
-;	main.c:52: printf("Buffer of size %d allocation failed", buf_size);
+	ljmp	00112$
+00104$:
+;	main.c:76: else if (Buffer_Size & 0xF){
+;	genAnd
+	mov	a,r4
+	anl	a,#0x0F
+	jnz	00150$
+	ljmp	00112$
+00150$:
+;	main.c:77: printf ("\r\nError. Buffer Size must be a multiple of 16\r\n", Buffer_Size);
 ;	genIpush
 	push	ar4
 	push	ar5
-	push	ar6
 ;	genIpush
 	mov	a,#__str_3
 	push	acc
@@ -906,47 +868,223 @@ _setupBuffer:
 ;	genCall
 	lcall	_printf
 	mov	a,sp
-	add	a,#0xfa
+	add	a,#0xfb
 	mov	sp,a
-;	main.c:53: while(1);
-00112$:
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00112$
-00115$:
-;	main.c:55: printf ("\r\nBuffer %d of size: %d allocated at address: %x", buffer_id, *buf_size, *buffer);
-;	genPointerGet
-;	genGenPointerGet
-	mov	dpl,_setupBuffer_sloc0_1_0
-	mov	dph,(_setupBuffer_sloc0_1_0 + 1)
-	mov	b,(_setupBuffer_sloc0_1_0 + 2)
-	lcall	__gptrget
-	mov	r7,a
+	ljmp	00112$
+00114$:
+;	main.c:81: alloc_failed = !Buffer_Init(&Buffers[Num_Buffers], Buffer_Size, 0);
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r4,a
 	inc	dptr
-	lcall	__gptrget
-	mov	r0,a
+	movx	a,@dptr
+	mov	r5,a
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
 	inc	dptr
-	lcall	__gptrget
-	mov	r1,a
-;	genPointerGet
-;	genGenPointerGet
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_Buffers
+	mov	r4,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_Buffers >> 8)
+	mov	r5,a
+;	genCast
+	mov	r6,#0x0
+;	genAssign
+	mov	dptr,#_Buffer_Init_PARM_2
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_Buffer_Init_PARM_3
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
 	mov	dpl,r4
 	mov	dph,r5
 	mov	b,r6
-	lcall	__gptrget
-	mov	r4,a
+	lcall	_Buffer_Init
+	mov	_setupBuffers_sloc0_1_0,c
+;	genNot
+	mov	c,_setupBuffers_sloc0_1_0
+	cpl	c
+	mov	_setupBuffers_alloc_failed_1_1,c
+;	main.c:82: Num_Buffers++;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
 	inc	dptr
-	lcall	__gptrget
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_Num_Buffers
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+;	main.c:83: if (!alloc_failed){
+;	genIfx
+;	genIfxJump
+;	Peephole 108.e	removed ljmp by inverse jump logic
+	jb	_setupBuffers_alloc_failed_1_1,00116$
+;	Peephole 300	removed redundant label 00151$
+;	main.c:84: alloc_failed = !Buffer_Init(&Buffers[Num_Buffers], Buffer_Size, 1);
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	__mulint
+	mov	r2,dpl
+	mov	r3,dph
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+	add	a,#_Buffers
+	mov	r2,a
+;	Peephole 236.g	used r3 instead of ar3
+	mov	a,r3
+	addc	a,#(_Buffers >> 8)
+	mov	r3,a
+;	genCast
+	mov	r4,#0x0
+;	genAssign
+	mov	dptr,#_Buffer_Size
+	movx	a,@dptr
 	mov	r5,a
-;	genIpush
-	push	ar7
-	push	ar0
-	push	ar1
-;	genIpush
-	push	ar4
-	push	ar5
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+;	genAssign
+	mov	dptr,#_Buffer_Init_PARM_2
+	mov	a,r5
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r6
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_Buffer_Init_PARM_3
+	mov	a,#0x01
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	_Buffer_Init
+	mov	_setupBuffers_sloc0_1_0,c
+;	genNot
+	mov	c,_setupBuffers_sloc0_1_0
+	cpl	c
+	mov	_setupBuffers_alloc_failed_1_1,c
+;	main.c:85: Num_Buffers++;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_Num_Buffers
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+00116$:
+;	main.c:88: if (!alloc_failed)
+;	genIfx
+;	genIfxJump
+;	Peephole 108.e	removed ljmp by inverse jump logic
+	jb	_setupBuffers_alloc_failed_1_1,00118$
+;	Peephole 300	removed redundant label 00152$
+;	main.c:89: printf ("\r\nBuffers of size: %d allocated at addresses: %p and %p\r\n", Buffer_Size, Buffers[0].buf_start, Buffers[1].buf_start);
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_Buffers + 0x000c)
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCast
+	mov	r4,#0x0
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#_Buffers
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+;	genCast
+	mov	r7,#0x0
 ;	genIpush
 	push	ar2
 	push	ar3
+	push	ar4
+;	genIpush
+	push	ar5
+	push	ar6
+	push	ar7
+;	genIpush
+	mov	dptr,#_Buffer_Size
+	movx	a,@dptr
+	push	acc
+	inc	dptr
+	movx	a,@dptr
+	push	acc
 ;	genIpush
 	mov	a,#__str_4
 	push	acc
@@ -957,141 +1095,18 @@ _setupBuffer:
 ;	genCall
 	lcall	_printf
 	mov	a,sp
-	add	a,#0xf6
+	add	a,#0xf5
 	mov	sp,a
-;	Peephole 300	removed redundant label 00116$
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'setupBuffers'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:64: void setupBuffers(void){
-;	-----------------------------------------
-;	 function setupBuffers
-;	-----------------------------------------
-_setupBuffers:
-;	main.c:66: setupBuffer(&Buf1_Size, &Buf1, 1);
-;	genCast
-	mov	dptr,#_setupBuffer_PARM_2
-	mov	a,#_Buf1
-	movx	@dptr,a
+	ljmp	00120$
+00118$:
+;	main.c:91: printf("\r\nMalloc failed for buffer size %d, choose something smaller\r\n", Buffer_Size);
+;	genIpush
+	mov	dptr,#_Buffer_Size
+	movx	a,@dptr
+	push	acc
 	inc	dptr
-	mov	a,#(_Buf1 >> 8)
-	movx	@dptr,a
-	inc	dptr
-	mov	a,#0x0
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_setupBuffer_PARM_3
-	mov	a,#0x01
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	genCall
-;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_Buf1_Size
-	mov	b,#0x00
-	lcall	_setupBuffer
-;	main.c:67: setupBuffer(&Buf2_Size, &Buf2, 2);
-;	genCast
-	mov	dptr,#_setupBuffer_PARM_2
-	mov	a,#_Buf2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,#(_Buf2 >> 8)
-	movx	@dptr,a
-	inc	dptr
-	mov	a,#0x0
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_setupBuffer_PARM_3
-	mov	a,#0x02
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	genCall
-;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_Buf2_Size
-	mov	b,#0x00
-	lcall	_setupBuffer
-;	main.c:68: setupBuffer(&Buf3_Size, &Buf3, 3);
-;	genCast
-	mov	dptr,#_setupBuffer_PARM_2
-	mov	a,#_Buf3
-	movx	@dptr,a
-	inc	dptr
-	mov	a,#(_Buf3 >> 8)
-	movx	@dptr,a
-	inc	dptr
-	mov	a,#0x0
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_setupBuffer_PARM_3
-	mov	a,#0x03
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	genCall
-;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_Buf3_Size
-	mov	b,#0x00
-;	Peephole 253.b	replaced lcall/ret with ljmp
-	ljmp	_setupBuffer
-;
-;------------------------------------------------------------
-;Allocation info for local variables in function 'main'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:73: void main(void){
-;	-----------------------------------------
-;	 function main
-;	-----------------------------------------
-_main:
-;	main.c:77: init_dynamic_memory((MEMHEADER xdata *)heap, HEAP_SIZE);
-;	genAssign
-	mov	dptr,#_init_dynamic_memory_PARM_2
-	mov	a,#0xA0
-	movx	@dptr,a
-	inc	dptr
-	mov	a,#0x0F
-	movx	@dptr,a
-;	genCall
-;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_heap
-	lcall	_init_dynamic_memory
-;	main.c:78: Serial_Init();
-;	genCall
-	lcall	_Serial_Init
-;	main.c:80: buffer_0 = malloc(1400);
-;	genCall
-;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x0578
-	lcall	_malloc
-	mov	r2,dpl
-	mov	r3,dph
-;	genAssign
-	mov	dptr,#_buffer_0
-	mov	a,r2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
-;	main.c:81: if (buffer_0 == NULL){
-;	genCmpEq
-;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.a	optimized misc jump sequence
-	cjne	r2,#0x00,00105$
-	cjne	r3,#0x00,00105$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00113$
-;	Peephole 300	removed redundant label 00114$
-;	main.c:82: while(1){
-00102$:
-;	main.c:83: printf("Malloc failed.\r\n");
+	movx	a,@dptr
+	push	acc
 ;	genIpush
 	mov	a,#__str_5
 	push	acc
@@ -1101,55 +1116,1871 @@ _main:
 	push	acc
 ;	genCall
 	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:93: Buffer_Free(&Buffers[0]);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_Buffers
+	mov	b,#0x00
+	lcall	_Buffer_Free
+;	main.c:94: Buffer_Free(&Buffers[1]);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#(_Buffers + 0x000c)
+	mov	b,#0x00
+	lcall	_Buffer_Free
+;	main.c:95: Num_Buffers = 0;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:96: Buffer_Size = 0;    //Reset so it will ask again
+;	genAssign
+	mov	dptr,#_Buffer_Size
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+	ljmp	00120$
+;	Peephole 259.b	removed redundant label 00126$ and ret
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'handlePlus'
+;------------------------------------------------------------
+;buffer_size               Allocated with name '_handlePlus_buffer_size_1_1'
+;first_free_buffer_index   Allocated with name '_handlePlus_first_free_buffer_index_1_1'
+;------------------------------------------------------------
+;	main.c:102: void handlePlus(void){
+;	-----------------------------------------
+;	 function handlePlus
+;	-----------------------------------------
+_handlePlus:
+;	main.c:104: int buffer_size = -1;
+;	genAssign
+	mov	dptr,#_handlePlus_buffer_size_1_1
+	mov	a,#0xFF
+	movx	@dptr,a
+	inc	dptr
+;	Peephole 101	removed redundant mov
+	movx	@dptr,a
+;	main.c:107: while (buffer_size == -1 || buffer_size > NEW_BUF_MAX_VALUE || buffer_size < NEW_BUF_MIN_VALUE ){
+00108$:
+;	genAssign
+	mov	dptr,#_handlePlus_buffer_size_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0xFF,00130$
+	cjne	r3,#0xFF,00130$
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00109$
+00130$:
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x90
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x01 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 160.a	removed sjmp by inverse jump logic
+;	genCmpLt
+;	genCmp
+	jc	00109$
+;	Peephole 300	removed redundant label 00131$
+;	Peephole 256.a	removed redundant clr c
+	mov	a,r2
+	subb	a,#0x14
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+	jc	00132$
+	ljmp	00127$
+00132$:
+00109$:
+;	main.c:108: printf ("\r\nEnter a size for the new buffer between %d and %d: ", NEW_BUF_MIN_VALUE, NEW_BUF_MAX_VALUE);
+;	genIpush
+	mov	a,#0x90
+	push	acc
+	mov	a,#0x01
+	push	acc
+;	genIpush
+	mov	a,#0x14
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf9
+	mov	sp,a
+;	main.c:109: buffer_size = Serial_GetInteger(BUF1_MAX_STR_LENGTH);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x000A
+	lcall	_Serial_GetInteger
+	mov	r2,dpl
+	mov	r3,dph
+;	genAssign
+	mov	dptr,#_handlePlus_buffer_size_1_1
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	main.c:110: if (buffer_size < NEW_BUF_MIN_VALUE){
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x14
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00104$
+;	Peephole 300	removed redundant label 00133$
+;	main.c:111: printf("\r\nError. Value must be greater than %d\r\n", NEW_BUF_MIN_VALUE);
+;	genIpush
+	mov	a,#0x14
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	ljmp	00108$
+00104$:
+;	main.c:113: else if(buffer_size > NEW_BUF_MAX_VALUE){
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x90
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x01 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+	jc	00134$
+	ljmp	00108$
+00134$:
+;	main.c:114: printf("\r\nError. Value must be less than %d\r\n", NEW_BUF_MAX_VALUE);
+;	genIpush
+	mov	a,#0x90
+	push	acc
+	mov	a,#0x01
+	push	acc
+;	genIpush
+	mov	a,#__str_2
+	push	acc
+	mov	a,#(__str_2 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	ljmp	00108$
+;	main.c:119: while(Buffers[first_free_buffer_index].in_use){
+00127$:
+;	genAssign
+	mov	r2,#0x01
+	mov	r3,#0x00
+00113$:
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_Buffers
+	mov	r4,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_Buffers >> 8)
+	mov	r5,a
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x0A
+;	Peephole 236.a	used r4 instead of ar4
+	add	a,r4
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r5 instead of ar5
+	addc	a,r5
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+	mov	r6,a
+	inc	dptr
+	movx	a,@dptr
+;	genIfx
+	mov	r7,a
+;	Peephole 135	removed redundant mov
+	orl	a,r6
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00115$
+;	Peephole 300	removed redundant label 00135$
+;	main.c:120: first_free_buffer_index++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00136$
+	inc	r3
+00136$:
+;	main.c:121: if (first_free_buffer_index > MAX_NUM_BUFFERS) {
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x64
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00113$
+;	Peephole 300	removed redundant label 00137$
+;	main.c:122: printf ("\r\nOut of possible buffers. Allocation failed");
+;	genIpush
+	mov	a,#__str_7
+	push	acc
+	mov	a,#(__str_7 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:123: return;
+;	genRet
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00115$:
+;	main.c:126: alloc_success = Buffer_Init(&Buffers[first_free_buffer_index], buffer_size, first_free_buffer_index);
+;	genAssign
+;	genCast
+	mov	r6,#0x0
+;	genAssign
+	mov	dptr,#_handlePlus_buffer_size_1_1
+	movx	a,@dptr
+	mov	r7,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r0,a
+;	genAssign
+	mov	dptr,#_Buffer_Init_PARM_2
+	mov	a,r7
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r0
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_Buffer_Init_PARM_3
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	push	ar7
+	push	ar0
+	lcall	_Buffer_Init
+	pop	ar0
+	pop	ar7
+	mov	_handlePlus_alloc_success_1_1,c
+;	main.c:127: Num_Buffers++;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_Num_Buffers
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+;	main.c:129: if (alloc_success)
+;	genIfx
+;	genIfxJump
+;	Peephole 108.d	removed ljmp by inverse jump logic
+	jnb	_handlePlus_alloc_success_1_1,00117$
+;	Peephole 300	removed redundant label 00138$
+;	main.c:130: printf ("\r\nBuffer of size: %d allocated at address: %p \r\n", buffer_size, Buffers[Num_Buffers-1].buf_start);
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCast
+;	genMinus
+;	genMinusDec
+	mov	a,r2
+	dec	a
+;	genMult
+;	genMultOneByte
+	mov	b,#0x0C
+	mul	ab
+;	genPlus
+	add	a,#_Buffers
+	mov	dpl,a
+	mov	a,#(_Buffers >> 8)
+	addc	a,b
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCast
+	mov	r4,#0x0
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+;	genIpush
+	push	ar7
+	push	ar0
+;	genIpush
+	mov	a,#__str_8
+	push	acc
+	mov	a,#(__str_8 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf8
+	mov	sp,a
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00117$:
+;	main.c:132: printf("\r\nMalloc failed for buffer size %d\r\n", buffer_size);
+;	genIpush
+	push	ar7
+	push	ar0
+;	genIpush
+	mov	a,#__str_9
+	push	acc
+	mov	a,#(__str_9 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:134: Num_Buffers--;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genMinus
+;	genMinusDec
+	dec	r2
+	cjne	r2,#0xff,00139$
+	dec	r3
+00139$:
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	main.c:135: Buffer_Free(&Buffers[Num_Buffers]);
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	__mulint
+	mov	r2,dpl
+	mov	r3,dph
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+	add	a,#_Buffers
+	mov	r2,a
+;	Peephole 236.g	used r3 instead of ar3
+	mov	a,r3
+	addc	a,#(_Buffers >> 8)
+	mov	r3,a
+;	genCast
+	mov	r4,#0x0
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+;	main.c:136: buffer_size = -1;    //Reset so it will ask again
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_Buffer_Free
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'handleMinus'
+;------------------------------------------------------------
+;buffer_number             Allocated with name '_handleMinus_buffer_number_1_1'
+;------------------------------------------------------------
+;	main.c:143: void handleMinus(void){
+;	-----------------------------------------
+;	 function handleMinus
+;	-----------------------------------------
+_handleMinus:
+;	main.c:145: printf("\r\nEnter id of buffer you want to free: ");
+;	genIpush
+	mov	a,#__str_10
+	push	acc
+	mov	a,#(__str_10 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:146: buffer_number = Serial_GetInteger(BUF1_MAX_STR_LENGTH);    //Get a three digit integer
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x000A
+	lcall	_Serial_GetInteger
+	mov	a,dpl
+	mov	b,dph
+;	genAssign
+	mov	dptr,#_handleMinus_buffer_number_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+;	main.c:147: while (buffer_number <= 1 ){
+00103$:
+;	genAssign
+	mov	dptr,#_handleMinus_buffer_number_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x01
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 160.a	removed sjmp by inverse jump logic
+	jc	00105$
+;	Peephole 300	removed redundant label 00115$
+;	main.c:148: if (buffer_number == -2){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.a	optimized misc jump sequence
+	cjne	r2,#0xFE,00102$
+	cjne	r3,#0xFF,00102$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00116$
+;	Peephole 300	removed redundant label 00117$
+;	main.c:149: printf("\r\nCancelling");
+;	genIpush
+	mov	a,#__str_11
+	push	acc
+	mov	a,#(__str_11 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:150: return;
+;	genRet
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00102$:
+;	main.c:152: printf("\r\nCan't free buffers 0 or 1. Enter another buffer id: ");
+;	genIpush
+	mov	a,#__str_12
+	push	acc
+	mov	a,#(__str_12 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:153: buffer_number = Serial_GetInteger(BUF1_MAX_STR_LENGTH);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x000A
+	lcall	_Serial_GetInteger
+	mov	a,dpl
+	mov	b,dph
+;	genAssign
+	mov	dptr,#_handleMinus_buffer_number_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00103$
+00105$:
+;	main.c:155: if( Buffers[buffer_number].in_use){
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_Buffers
+	mov	r6,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_Buffers >> 8)
+	mov	r7,a
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x0A
+;	Peephole 236.a	used r6 instead of ar6
+	add	a,r6
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r7 instead of ar7
+	addc	a,r7
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+	mov	r6,a
+	inc	dptr
+	movx	a,@dptr
+;	genIfx
+	mov	r7,a
+;	Peephole 135	removed redundant mov
+	orl	a,r6
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00107$
+;	Peephole 300	removed redundant label 00118$
+;	main.c:156: printf ("\r\nFreeing Buffer %d", buffer_number);
+;	genIpush
+	push	ar4
+	push	ar5
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_13
+	push	acc
+	mov	a,#(__str_13 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+;	main.c:157: Buffer_Free(&Buffers[buffer_number]);
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_Buffers
+	mov	r4,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_Buffers >> 8)
+	mov	r5,a
+;	genCast
+	mov	r6,#0x0
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	_Buffer_Free
+;	main.c:158: Num_Buffers--;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genMinus
+;	genMinusDec
+	dec	r4
+	cjne	r4,#0xff,00119$
+	dec	r5
+00119$:
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	mov	a,r4
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r5
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00107$:
+;	main.c:161: printf ("\r\nInvalid buffer id %d.", buffer_number);
+;	genIpush
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_14
+	push	acc
+	mov	a,#(__str_14 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	Peephole 300	removed redundant label 00109$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'handleInput'
+;------------------------------------------------------------
+;c                         Allocated with name '_handleInput_c_1_1'
+;i                         Allocated with name '_handleInput_i_1_1'
+;------------------------------------------------------------
+;	main.c:165: void handleInput(char c){
+;	-----------------------------------------
+;	 function handleInput
+;	-----------------------------------------
+_handleInput:
+;	genReceive
+	mov	a,dpl
+	mov	dptr,#_handleInput_c_1_1
+	movx	@dptr,a
+;	main.c:167: if (isdigit(c) || isalpha(c)){
+;	genAssign
+	mov	dptr,#_handleInput_c_1_1
+	movx	a,@dptr
+;	genCall
+	mov	r2,a
+;	Peephole 244.c	loading dpl from a instead of r2
+	mov	dpl,a
+	push	ar2
+	lcall	_isdigit
+	mov	a,dpl
+	pop	ar2
+;	genIfx
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00125$
+;	Peephole 300	removed redundant label 00150$
+;	genCall
+	mov	dpl,r2
+	push	ar2
+	lcall	_isupper
+	mov	a,dpl
+	pop	ar2
+;	genIfx
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00125$
+;	Peephole 300	removed redundant label 00151$
+;	genCall
+	mov	dpl,r2
+	push	ar2
+	lcall	_islower
+	mov	a,dpl
+	pop	ar2
+;	genIfx
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00126$
+;	Peephole 300	removed redundant label 00152$
+00125$:
+;	main.c:169: if (Buffers[0].buf_start + Buffers[0].buf_insert < Buffers[0].buf_end ){
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#_Buffers
+	movx	a,@dptr
+	mov	r3,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r4,a
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_Buffers + 0x0004)
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+;	genPlus
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.a	used r3 instead of ar3
+	add	a,r3
+	mov	r3,a
+;	Peephole 236.g	used r6 instead of ar6
+	mov	a,r6
+;	Peephole 236.b	used r4 instead of ar4
+	addc	a,r4
+	mov	r4,a
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_Buffers + 0x0002)
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r3
+	subb	a,r5
+	mov	a,r4
+	subb	a,r6
+;	genIfxJump
+	jc	00153$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00153$:
+;	main.c:170: Buffers[0].buf_start[Buffers[0].buf_insert]  = c;
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#_Buffers
+	movx	a,@dptr
+	mov	r3,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r4,a
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_Buffers + 0x0004)
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+;	genPlus
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.a	used r3 instead of ar3
+	add	a,r3
+	mov	r3,a
+;	Peephole 236.g	used r6 instead of ar6
+	mov	a,r6
+;	Peephole 236.b	used r4 instead of ar4
+	addc	a,r4
+	mov	r4,a
+;	genAssign
+	mov	dptr,#_handleInput_c_1_1
+	movx	a,@dptr
+;	genPointerSet
+;     genFarPointerSet
+	mov	r7,a
+	mov	dpl,r3
+	mov	dph,r4
+;	Peephole 136	removed redundant move
+	movx	@dptr,a
+;	main.c:171: ++Buffers[0].buf_insert;
+;	genPlus
+;     genPlusIncr
+	inc	r5
+	cjne	r5,#0x00,00154$
+	inc	r6
+00154$:
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_Buffers + 0x0004)
+	mov	a,r5
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r6
+	movx	@dptr,a
+;	main.c:172: ++Num_Input_Chars;
+;	genPlus
+	mov	dptr,#_Num_Input_Chars
+	movx	a,@dptr
+	add	a,#0x01
+	movx	@dptr,a
+	inc	dptr
+	movx	a,@dptr
+	addc	a,#0x00
+	movx	@dptr,a
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00126$:
+;	main.c:175: else if(c == '?'){
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x3F,00155$
+	sjmp	00156$
+00155$:
+	ljmp	00123$
+00156$:
+;	main.c:177: for (i = 0; i < MAX_NUM_BUFFERS; ++i){
+;	genAssign
+	mov	r3,#0x00
+	mov	r4,#0x00
+00130$:
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r3
+	subb	a,#0x64
+	mov	a,r4
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00133$
+;	Peephole 300	removed redundant label 00157$
+;	main.c:178: if (Buffers[i].in_use){
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r3
+	mov	dph,r4
+	push	ar3
+	push	ar4
+	lcall	__mulint
+	mov	r5,dpl
+	mov	r6,dph
+	pop	ar4
+	pop	ar3
+;	genPlus
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	add	a,#_Buffers
+	mov	r5,a
+;	Peephole 236.g	used r6 instead of ar6
+	mov	a,r6
+	addc	a,#(_Buffers >> 8)
+	mov	r6,a
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x0A
+;	Peephole 236.a	used r5 instead of ar5
+	add	a,r5
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r6 instead of ar6
+	addc	a,r6
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+	mov	r7,a
+	inc	dptr
+	movx	a,@dptr
+;	genIfx
+	mov	r0,a
+;	Peephole 135	removed redundant mov
+	orl	a,r7
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00132$
+;	Peephole 300	removed redundant label 00158$
+;	main.c:179: Buffer_Print(&Buffers[i], false);
+;	genAssign
+;	genCast
+	mov	r7,#0x0
+;	genAssign
+	clr	_Buffer_Print_PARM_2
+;	genCall
+	mov	dpl,r5
+	mov	dph,r6
+	mov	b,r7
+	push	ar3
+	push	ar4
+	lcall	_Buffer_Print
+	pop	ar4
+	pop	ar3
+00132$:
+;	main.c:177: for (i = 0; i < MAX_NUM_BUFFERS; ++i){
+;	genPlus
+;     genPlusIncr
+	inc	r3
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 243	avoided branch to sjmp
+	cjne	r3,#0x00,00130$
+	inc	r4
+;	Peephole 300	removed redundant label 00159$
+	sjmp	00130$
+00133$:
+;	main.c:182: Buffer_Clear(&Buffers[0]);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_Buffers
+	mov	b,#0x00
+	lcall	_Buffer_Clear
+;	main.c:183: printf("Number of characters input since last '?': %d\r\n", Num_Input_Chars);
+;	genIpush
+	mov	dptr,#_Num_Input_Chars
+	movx	a,@dptr
+	push	acc
+	inc	dptr
+	movx	a,@dptr
+	push	acc
+;	genIpush
+	mov	a,#__str_15
+	push	acc
+	mov	a,#(__str_15 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:184: Num_Input_Chars = 0;    //Reset the count
+;	genAssign
+	mov	dptr,#_Num_Input_Chars
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:185: displayPrompt();
+;	genCall
+;	Peephole 251.a	replaced ljmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_displayPrompt
+00123$:
+;	main.c:188: else if(c == '+'){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x2B,00120$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00160$
+;	Peephole 300	removed redundant label 00161$
+;	main.c:193: handlePlus();
+;	genCall
+	lcall	_handlePlus
+;	main.c:194: displayPrompt();
+;	genCall
+;	Peephole 251.a	replaced ljmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_displayPrompt
+00120$:
+;	main.c:196: else if(c == '-'){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x2D,00117$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00162$
+;	Peephole 300	removed redundant label 00163$
+;	main.c:201: handleMinus();
+;	genCall
+	lcall	_handleMinus
+;	main.c:202: displayPrompt();
+;	genCall
+;	Peephole 251.a	replaced ljmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_displayPrompt
+00117$:
+;	main.c:204: else if(c == '='){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x3D,00114$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00164$
+;	Peephole 300	removed redundant label 00165$
+;	main.c:206: Buffer_Print(&Buffers[0], true);
+;	genAssign
+	setb	_Buffer_Print_PARM_2
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_Buffers
+	mov	b,#0x00
+	lcall	_Buffer_Print
+;	main.c:207: printf("Number of characters input since last '?': %d\r\n", Num_Input_Chars);
+;	genIpush
+	mov	dptr,#_Num_Input_Chars
+	movx	a,@dptr
+	push	acc
+	inc	dptr
+	movx	a,@dptr
+	push	acc
+;	genIpush
+	mov	a,#__str_15
+	push	acc
+	mov	a,#(__str_15 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:209: displayPrompt();
+;	genCall
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_displayPrompt
+00114$:
+;	main.c:211: else if(c == '%'){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x25,00111$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00166$
+;	Peephole 300	removed redundant label 00167$
+;	main.c:213: if(Buffers[1].in_use){
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_Buffers + 0x0016)
+	movx	a,@dptr
+	mov	r3,a
+	inc	dptr
+	movx	a,@dptr
+;	genIfx
+	mov	r4,a
+;	Peephole 135	removed redundant mov
+	orl	a,r3
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00106$
+;	Peephole 300	removed redundant label 00168$
+;	main.c:214: Buffer_ContentSwap(&Buffers[0], &Buffers[1]);
+;	genCast
+	mov	dptr,#_Buffer_ContentSwap_PARM_2
+	mov	a,#(_Buffers + 0x000c)
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#((_Buffers + 0x000c) >> 8)
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#0x0
+	movx	@dptr,a
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_Buffers
+	mov	b,#0x00
+	lcall	_Buffer_ContentSwap
+;	main.c:215: printf("\r\n\r\nSwapped contents of Buffer0 and Buffer 1.\r\n");
+;	genIpush
+	mov	a,#__str_16
+	push	acc
+	mov	a,#(__str_16 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:216: displayPrompt();
+;	genCall
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_displayPrompt
+00106$:
+;	main.c:219: printf("\r\nCan't swap. Need to allocate buffer 1. Press '+'");
+;	genIpush
+	mov	a,#__str_17
+	push	acc
+	mov	a,#(__str_17 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
 	dec	sp
 	dec	sp
 	dec	sp
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00102$
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00111$:
+;	main.c:222: else if(c == '@'){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x40,00134$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00169$
+;	Peephole 300	removed redundant label 00170$
+;	main.c:224: Restart = true;
+;	genAssign
+	setb	_Restart
+00134$:
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'FreeAll'
+;------------------------------------------------------------
+;i                         Allocated with name '_FreeAll_i_1_1'
+;------------------------------------------------------------
+;	main.c:228: void FreeAll(void){
+;	-----------------------------------------
+;	 function FreeAll
+;	-----------------------------------------
+_FreeAll:
+;	main.c:231: for (i = 0; i < MAX_NUM_BUFFERS; ++i){
+;	genAssign
+	mov	r2,#0x00
+	mov	r3,#0x00
+00101$:
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x64
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00105$
+;	Peephole 300	removed redundant label 00110$
+;	main.c:232: Buffer_Free(&Buffers[i]);
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0C
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_Buffers
+	mov	r4,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_Buffers >> 8)
+	mov	r5,a
+;	genCast
+	mov	r6,#0x0
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	push	ar2
+	push	ar3
+	lcall	_Buffer_Free
+	pop	ar3
+	pop	ar2
+;	main.c:233: Num_Buffers = 0;
+;	genAssign
+	mov	dptr,#_Num_Buffers
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:231: for (i = 0; i < MAX_NUM_BUFFERS; ++i){
+;	genPlus
+;     genPlusIncr
+	inc	r2
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 243	avoided branch to sjmp
+	cjne	r2,#0x00,00101$
+	inc	r3
+;	Peephole 300	removed redundant label 00111$
+	sjmp	00101$
 00105$:
-;	main.c:87: setupBuffers();
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'displayWelcome'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:237: void displayWelcome(void){
+;	-----------------------------------------
+;	 function displayWelcome
+;	-----------------------------------------
+_displayWelcome:
+;	main.c:238: printf("\r\n********************");
+;	genIpush
+	mov	a,#__str_18
+	push	acc
+	mov	a,#(__str_18 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:239: printf("\r\n* Welcome to Lab 3 *");
+;	genIpush
+	mov	a,#__str_19
+	push	acc
+	mov	a,#(__str_19 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:240: printf("\r\n********************");
+;	genIpush
+	mov	a,#__str_18
+	push	acc
+	mov	a,#(__str_18 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:241: printf("\r\nAuthor: Joey Jacobus");
+;	genIpush
+	mov	a,#__str_20
+	push	acc
+	mov	a,#(__str_20 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:242: printf("\r\nOctober 2016");
+;	genIpush
+	mov	a,#__str_21
+	push	acc
+	mov	a,#(__str_21 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:243: printf("\r\nEmbedded Systems Design: The University of Colorado at Boulder");
+;	genIpush
+	mov	a,#__str_22
+	push	acc
+	mov	a,#(__str_22 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:244: printf("\r\n\r\n");
+;	genIpush
+	mov	a,#__str_23
+	push	acc
+	mov	a,#(__str_23 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:245: printf("Enter alpha numeric characters to store them in buffer 0\r\n");
+;	genIpush
+	mov	a,#__str_24
+	push	acc
+	mov	a,#(__str_24 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:246: printf("Enter a special character at any time to perform the following ops:\r\n");
+;	genIpush
+	mov	a,#__str_25
+	push	acc
+	mov	a,#(__str_25 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:248: printf("\r\n'+': Create a new buffer");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:249: printf("\r\n'-': Delete an existing buffer");
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:250: printf("\r\n'?': Clear contents of Buffer 0 and display in ASCII format");
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:251: printf("\r\n'=': Show contents of Buffer 0 in hexadecimal format");
+;	genIpush
+	mov	a,#__str_29
+	push	acc
+	mov	a,#(__str_29 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:252: printf("\r\n'%c': Swap the contents of Buffer 0 and Buffer 1", '%');
+;	genIpush
+	mov	a,#0x25
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_30
+	push	acc
+	mov	a,#(__str_30 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:253: printf("\r\n'@': Clear buffers and restart the program");
+;	genIpush
+	mov	a,#__str_31
+	push	acc
+	mov	a,#(__str_31 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:254: printf("\r\n\r\n");
+;	genIpush
+	mov	a,#__str_23
+	push	acc
+	mov	a,#(__str_23 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'displayPrompt'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:257: void displayPrompt(void){
+;	-----------------------------------------
+;	 function displayPrompt
+;	-----------------------------------------
+_displayPrompt:
+;	main.c:258: printf ("\r\nEnter characters to add to Buffer0: ");
+;	genIpush
+	mov	a,#__str_32
+	push	acc
+	mov	a,#(__str_32 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'main'
+;------------------------------------------------------------
+;c                         Allocated with name '_main_c_1_1'
+;------------------------------------------------------------
+;	main.c:261: void main(void){
+;	-----------------------------------------
+;	 function main
+;	-----------------------------------------
+_main:
+;	main.c:264: Restart = false;
+;	genAssign
+	clr	_Restart
+;	main.c:266: init_dynamic_memory((MEMHEADER xdata *)heap, HEAP_SIZE); // Initialize the heap
+;	genAssign
+	mov	dptr,#_init_dynamic_memory_PARM_2
+	mov	a,#0x40
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#0x06
+	movx	@dptr,a
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_heap
+	lcall	_init_dynamic_memory
+;	main.c:267: Serial_Init();
+;	genCall
+	lcall	_Serial_Init
+;	main.c:273: while(1){
+00109$:
+;	main.c:274: displayWelcome();
+;	genCall
+	lcall	_displayWelcome
+;	main.c:275: setupBuffers();
 ;	genCall
 	lcall	_setupBuffers
-;	main.c:91: P1_5 = 0;
+;	main.c:276: printf ("\r\nBuffers set up!");
+;	genIpush
+	mov	a,#__str_33
+	push	acc
+	mov	a,#(__str_33 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:277: displayPrompt();
+;	genCall
+	lcall	_displayPrompt
+;	main.c:278: P1_5 = 0;
 ;	genAssign
 	clr	_P1_5
-;	main.c:92: while(1){
-00107$:
-;	main.c:93: P1_5 = !P1_5;   //Debug
+;	main.c:279: while(1){
+00106$:
+;	main.c:280: P1_5 = !P1_5;   //Debug
 ;	genNot
 	cpl	_P1_5
+;	main.c:281: c = getchar();
+;	genCall
+	lcall	_getchar
+	mov	r2,dpl
+;	main.c:282: if (c == ENTER_KEY){
+;	genCmpEq
+;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00107$
-;	Peephole 259.a	removed redundant label 00109$ and ret
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x0D,00102$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00117$
+;	Peephole 300	removed redundant label 00118$
+;	main.c:283: putchar('\n');
+;	genCall
+	mov	dpl,#0x0A
+	push	ar2
+	lcall	_putchar
+	pop	ar2
+00102$:
+;	main.c:285: putchar(c);
+;	genCall
+	mov	dpl,r2
+	push	ar2
+	lcall	_putchar
+	pop	ar2
+;	main.c:287: handleInput(c);
+;	genCall
+	mov	dpl,r2
+	lcall	_handleInput
+;	main.c:288: if (Restart){
+;	genIfx
+;	genIfxJump
+;	Peephole 108.d	removed ljmp by inverse jump logic
+;	main.c:289: Restart = false;
+;	genAssign
+;	Peephole 250.a	using atomic test and clear
+	jbc	_Restart,00119$
+	sjmp	00106$
+00119$:
+;	main.c:290: FreeAll();
+;	genCall
+	lcall	_FreeAll
+;	main.c:291: break;
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00109$
+;	Peephole 259.a	removed redundant label 00111$ and ret
 ;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 __str_0:
 	.db 0x0D
 	.db 0x0A
-	.ascii "Enter a size for buffer_%d between %d and %d: "
+	.ascii "Enter a size for the buffers that is a multiple of 16 betw"
+	.ascii "een %d and %d: "
 	.db 0x00
 __str_1:
 	.db 0x0D
 	.db 0x0A
 	.ascii "Error. Value must be greater than %d"
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 __str_2:
 	.db 0x0D
 	.db 0x0A
 	.ascii "Error. Value must be less than %d"
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 __str_3:
-	.ascii "Buffer of size %d allocation failed"
+	.db 0x0D
+	.db 0x0A
+	.ascii "Error. Buffer Size must be a multiple of 16"
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 __str_4:
 	.db 0x0D
 	.db 0x0A
-	.ascii "Buffer %d of size: %d allocated at address: %x"
-	.db 0x00
-__str_5:
-	.ascii "Malloc failed."
+	.ascii "Buffers of size: %d allocated at addresses: %p and %p"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
+__str_5:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Malloc failed for buffer size %d, choose something smaller"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_6:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Enter a size for the new buffer between %d and %d: "
+	.db 0x00
+__str_7:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Out of possible buffers. Allocation failed"
+	.db 0x00
+__str_8:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Buffer of size: %d allocated at address: %p "
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_9:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Malloc failed for buffer size %d"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_10:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Enter id of buffer you want to free: "
+	.db 0x00
+__str_11:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Cancelling"
+	.db 0x00
+__str_12:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Can't free buffers 0 or 1. Enter another buffer id: "
+	.db 0x00
+__str_13:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Freeing Buffer %d"
+	.db 0x00
+__str_14:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Invalid buffer id %d."
+	.db 0x00
+__str_15:
+	.ascii "Number of characters input since last '?': %d"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_16:
+	.db 0x0D
+	.db 0x0A
+	.db 0x0D
+	.db 0x0A
+	.ascii "Swapped contents of Buffer0 and Buffer 1."
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_17:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Can't swap. Need to allocate buffer 1. Press '+'"
+	.db 0x00
+__str_18:
+	.db 0x0D
+	.db 0x0A
+	.ascii "********************"
+	.db 0x00
+__str_19:
+	.db 0x0D
+	.db 0x0A
+	.ascii "* Welcome to Lab 3 *"
+	.db 0x00
+__str_20:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Author: Joey Jacobus"
+	.db 0x00
+__str_21:
+	.db 0x0D
+	.db 0x0A
+	.ascii "October 2016"
+	.db 0x00
+__str_22:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Embedded Systems Design: The University of Colorado at Bou"
+	.ascii "lder"
+	.db 0x00
+__str_23:
+	.db 0x0D
+	.db 0x0A
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_24:
+	.ascii "Enter alpha numeric characters to store them in buffer 0"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_25:
+	.ascii "Enter a special character at any time to perform the followi"
+	.ascii "ng ops:"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_26:
+	.db 0x0D
+	.db 0x0A
+	.ascii "'+': Create a new buffer"
+	.db 0x00
+__str_27:
+	.db 0x0D
+	.db 0x0A
+	.ascii "'-': Delete an existing buffer"
+	.db 0x00
+__str_28:
+	.db 0x0D
+	.db 0x0A
+	.ascii "'?': Clear contents of Buffer 0 and display in ASCII forma"
+	.ascii "t"
+	.db 0x00
+__str_29:
+	.db 0x0D
+	.db 0x0A
+	.ascii "'=': Show contents of Buffer 0 in hexadecimal format"
+	.db 0x00
+__str_30:
+	.db 0x0D
+	.db 0x0A
+	.ascii "'%c': Swap the contents of Buffer 0 and Buffer 1"
+	.db 0x00
+__str_31:
+	.db 0x0D
+	.db 0x0A
+	.ascii "'@': Clear buffers and restart the program"
+	.db 0x00
+__str_32:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Enter characters to add to Buffer0: "
+	.db 0x00
+__str_33:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Buffers set up!"
+	.db 0x00
 	.area XINIT   (CODE)
+__xinit__Buffer_Size:
+	.byte #0xFF,#0xFF
+__xinit__Num_Buffers:
+	.byte #0x00,#0x00
+__xinit__Num_Input_Chars:
+	.byte #0x00,#0x00

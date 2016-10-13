@@ -12,6 +12,7 @@
 -l libint
 -l liblong
 -l libfloat
+obj\Release\buffer.rel
 obj\Release\main.rel
 obj\Release\serial.rel
 

@@ -1,17 +1,30 @@
 # depslib dependency file v1.0
-1476044139 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\main.c
+1476244735 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\main.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
 	<malloc.h>
+	<stdbool.h>
+	<ctype.h>
 	"serial.h"
+	"buffer.h"
 
-1476044148 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\serial.c
+1476322453 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\serial.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
 	<ctype.h>
 	<stdlib.h>
+	"serial.h"
 
-1476044125 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\serial.h
+1476070063 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\serial.h
+
+1476244660 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\buffer.c
+	<stdbool.h>
+	<stdio.h>
+	<malloc.h>
+	"buffer.h"
+
+1476244649 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3\buffer.h
+	<stdbool.h>
 
