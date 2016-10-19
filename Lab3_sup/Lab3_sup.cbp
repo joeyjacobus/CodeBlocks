@@ -12,9 +12,18 @@
 				<Option object_output="obj/Release/" />
 				<Option type="5" />
 				<Option compiler="sdcc" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
+					<Add option="--out-fmt-ihx" />
+					<Add option="--model-large" />
+					<Add option="-mmcs51" />
 					<Add option="--opt-code-size" />
+					<Add option="--verbose" />
+					<Add option="--std-sdcc99" />
 				</Compiler>
+				<Linker>
+					<Add option="--code-loc 0x0000 --code-size 0x8000 --xram-loc 0x0000 --xram-size 0x8000" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
@@ -33,6 +42,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="serial.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="serial.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

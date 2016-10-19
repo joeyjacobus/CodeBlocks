@@ -14,5 +14,8 @@
 -l liblong
 -l libfloat
 obj\Release\main.rel
+obj\Release\PWM.rel
+obj\Release\serial.rel
+obj\Release\TIMER.rel
 
 -e

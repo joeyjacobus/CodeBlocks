@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1476334361 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\serial.c
+	<mcs51/8051.h>
+	"at89c51ed2.h"
+	<stdio.h>
+	<ctype.h>
+	<stdlib.h>
+	"serial.h"
+
+1476334381 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\serial.h
+
+1476854910 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\main.c
+	<mcs51/8051.h>
+	"at89c51ed2.h"
+	<stdio.h>
+	"serial.h"
+	"PWM.h"
+	"TIMER.h"
+
+1476851182 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\pwm.h
+	<stdint.h>
+
+1476854682 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\pwm.c
+	"at89c51ed2.h"
+	<stdio.h>
+	"PWM.h"
+	<stdint.h>
+
+1476857314 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\timer.c
+	"at89c51ed2.h"
+	<stdio.h>
+	"TIMER.h"
+	<stdint.h>
+	"PWM.h"
+	"serial.h"
+
+1476857143 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab3\lab3_sup\timer.h
+

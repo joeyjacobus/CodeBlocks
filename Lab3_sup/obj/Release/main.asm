@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Tue Oct 18 19:30:25 2016
+; This file generated Tue Oct 18 23:19:53 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -10,6 +10,58 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _handleInput
+	.globl _ShowMenu
+	.globl __sdcc_external_startup
+	.globl _P5_7
+	.globl _P5_6
+	.globl _P5_5
+	.globl _P5_4
+	.globl _P5_3
+	.globl _P5_2
+	.globl _P5_1
+	.globl _P5_0
+	.globl _P4_7
+	.globl _P4_6
+	.globl _P4_5
+	.globl _P4_4
+	.globl _P4_3
+	.globl _P4_2
+	.globl _P4_1
+	.globl _P4_0
+	.globl _PX0L
+	.globl _PT0L
+	.globl _PX1L
+	.globl _PT1L
+	.globl _PLS
+	.globl _PT2L
+	.globl _PPCL
+	.globl _EC
+	.globl _CCF0
+	.globl _CCF1
+	.globl _CCF2
+	.globl _CCF3
+	.globl _CCF4
+	.globl _CR
+	.globl _CF
+	.globl _TF2
+	.globl _EXF2
+	.globl _RCLK
+	.globl _TCLK
+	.globl _EXEN2
+	.globl _TR2
+	.globl _C_T2
+	.globl _CP_RL2
+	.globl _T2CON_7
+	.globl _T2CON_6
+	.globl _T2CON_5
+	.globl _T2CON_4
+	.globl _T2CON_3
+	.globl _T2CON_2
+	.globl _T2CON_1
+	.globl _T2CON_0
+	.globl _PT2
+	.globl _ET2
 	.globl _CY
 	.globl _AC
 	.globl _F0
@@ -85,6 +137,57 @@
 	.globl _P0_2
 	.globl _P0_1
 	.globl _P0_0
+	.globl _EECON
+	.globl _KBF
+	.globl _KBE
+	.globl _KBLS
+	.globl _BRL
+	.globl _BDRCON
+	.globl _T2MOD
+	.globl _SPDAT
+	.globl _SPSTA
+	.globl _SPCON
+	.globl _SADEN
+	.globl _SADDR
+	.globl _WDTPRG
+	.globl _WDTRST
+	.globl _P5
+	.globl _P4
+	.globl _IPH1
+	.globl _IPL1
+	.globl _IPH0
+	.globl _IPL0
+	.globl _IEN1
+	.globl _IEN0
+	.globl _CMOD
+	.globl _CL
+	.globl _CH
+	.globl _CCON
+	.globl _CCAPM4
+	.globl _CCAPM3
+	.globl _CCAPM2
+	.globl _CCAPM1
+	.globl _CCAPM0
+	.globl _CCAP4L
+	.globl _CCAP3L
+	.globl _CCAP2L
+	.globl _CCAP1L
+	.globl _CCAP0L
+	.globl _CCAP4H
+	.globl _CCAP3H
+	.globl _CCAP2H
+	.globl _CCAP1H
+	.globl _CCAP0H
+	.globl _CKCKON1
+	.globl _CKCKON0
+	.globl _CKRL
+	.globl _AUXR1
+	.globl _AUXR
+	.globl _TH2
+	.globl _TL2
+	.globl _RCAP2H
+	.globl _RCAP2L
+	.globl _T2CON
 	.globl _B
 	.globl _ACC
 	.globl _PSW
@@ -131,6 +234,57 @@ _IP	=	0x00b8
 _PSW	=	0x00d0
 _ACC	=	0x00e0
 _B	=	0x00f0
+_T2CON	=	0x00c8
+_RCAP2L	=	0x00ca
+_RCAP2H	=	0x00cb
+_TL2	=	0x00cc
+_TH2	=	0x00cd
+_AUXR	=	0x008e
+_AUXR1	=	0x00a2
+_CKRL	=	0x0097
+_CKCKON0	=	0x008f
+_CKCKON1	=	0x008f
+_CCAP0H	=	0x00fa
+_CCAP1H	=	0x00fb
+_CCAP2H	=	0x00fc
+_CCAP3H	=	0x00fd
+_CCAP4H	=	0x00fe
+_CCAP0L	=	0x00ea
+_CCAP1L	=	0x00eb
+_CCAP2L	=	0x00ec
+_CCAP3L	=	0x00ed
+_CCAP4L	=	0x00ee
+_CCAPM0	=	0x00da
+_CCAPM1	=	0x00db
+_CCAPM2	=	0x00dc
+_CCAPM3	=	0x00dd
+_CCAPM4	=	0x00de
+_CCON	=	0x00d8
+_CH	=	0x00f9
+_CL	=	0x00e9
+_CMOD	=	0x00d9
+_IEN0	=	0x00a8
+_IEN1	=	0x00b1
+_IPL0	=	0x00b8
+_IPH0	=	0x00b7
+_IPL1	=	0x00b2
+_IPH1	=	0x00b3
+_P4	=	0x00c0
+_P5	=	0x00d8
+_WDTRST	=	0x00a6
+_WDTPRG	=	0x00a7
+_SADDR	=	0x00a9
+_SADEN	=	0x00b9
+_SPCON	=	0x00c3
+_SPSTA	=	0x00c4
+_SPDAT	=	0x00c5
+_T2MOD	=	0x00c9
+_BDRCON	=	0x009b
+_BRL	=	0x009a
+_KBLS	=	0x009c
+_KBE	=	0x009d
+_KBF	=	0x009e
+_EECON	=	0x00d2
 ;--------------------------------------------------------
 ; special function bits
 ;--------------------------------------------------------
@@ -210,6 +364,55 @@ _RS1	=	0x00d4
 _F0	=	0x00d5
 _AC	=	0x00d6
 _CY	=	0x00d7
+_ET2	=	0x00ad
+_PT2	=	0x00bd
+_T2CON_0	=	0x00c8
+_T2CON_1	=	0x00c9
+_T2CON_2	=	0x00ca
+_T2CON_3	=	0x00cb
+_T2CON_4	=	0x00cc
+_T2CON_5	=	0x00cd
+_T2CON_6	=	0x00ce
+_T2CON_7	=	0x00cf
+_CP_RL2	=	0x00c8
+_C_T2	=	0x00c9
+_TR2	=	0x00ca
+_EXEN2	=	0x00cb
+_TCLK	=	0x00cc
+_RCLK	=	0x00cd
+_EXF2	=	0x00ce
+_TF2	=	0x00cf
+_CF	=	0x00df
+_CR	=	0x00de
+_CCF4	=	0x00dc
+_CCF3	=	0x00db
+_CCF2	=	0x00da
+_CCF1	=	0x00d9
+_CCF0	=	0x00d8
+_EC	=	0x00ae
+_PPCL	=	0x00be
+_PT2L	=	0x00bd
+_PLS	=	0x00bc
+_PT1L	=	0x00bb
+_PX1L	=	0x00ba
+_PT0L	=	0x00b9
+_PX0L	=	0x00b8
+_P4_0	=	0x00c0
+_P4_1	=	0x00c1
+_P4_2	=	0x00c2
+_P4_3	=	0x00c3
+_P4_4	=	0x00c4
+_P4_5	=	0x00c5
+_P4_6	=	0x00c6
+_P4_7	=	0x00c7
+_P5_0	=	0x00d8
+_P5_1	=	0x00d9
+_P5_2	=	0x00da
+_P5_3	=	0x00db
+_P5_4	=	0x00dc
+_P5_5	=	0x00dd
+_P5_6	=	0x00de
+_P5_7	=	0x00df
 ;--------------------------------------------------------
 ; overlayable register banks
 ;--------------------------------------------------------
@@ -246,6 +449,8 @@ __start__stack:
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
+_handleInput_c_1_1:
+	.ds 1
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
@@ -266,6 +471,19 @@ __start__stack:
 	.area HOME    (CODE)
 __interrupt_vect:
 	ljmp	__sdcc_gsinit_startup
+	reti
+	.ds	7
+	reti
+	.ds	7
+	reti
+	.ds	7
+	reti
+	.ds	7
+	reti
+	.ds	7
+	reti
+	.ds	7
+	ljmp	_PCAInt_Handler
 ;--------------------------------------------------------
 ; global & static initialisations
 ;--------------------------------------------------------
@@ -295,14 +513,14 @@ __sdcc_program_startup:
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'main'
+;Allocation info for local variables in function '_sdcc_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:6: void main(void)
+;	main.c:17: _sdcc_external_startup(){
 ;	-----------------------------------------
-;	 function main
+;	 function _sdcc_external_startup
 ;	-----------------------------------------
-_main:
+__sdcc_external_startup:
 	ar2 = 0x02
 	ar3 = 0x03
 	ar4 = 0x04
@@ -311,12 +529,696 @@ _main:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:11: while(1)
-00102$:
+;	main.c:19: AUXR |= AUXR_ENABLE_XRAM_MASK;   //Enable all XRAM
+;	genOr
+	orl	_AUXR,#0x0C
+;	main.c:20: return 0;
+;	genRet
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0000
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'ShowMenu'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:29: void ShowMenu(void){
+;	-----------------------------------------
+;	 function ShowMenu
+;	-----------------------------------------
+_ShowMenu:
+;	main.c:30: printf("\r\n***************");
+;	genIpush
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:31: printf("\r\n    Menu\r\n");
+;	genIpush
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:32: printf("\r\n***************");
+;	genIpush
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:33: printf("\r\nPress 'R' to start PWM");
+;	genIpush
+	mov	a,#__str_2
+	push	acc
+	mov	a,#(__str_2 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:34: printf("\r\nPress 'S' to stop PWM");
+;	genIpush
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:35: printf("\r\nPress '+' to increase PWM duty cycle");
+;	genIpush
+	mov	a,#__str_4
+	push	acc
+	mov	a,#(__str_4 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:36: printf("\r\nPress '-' to decrease PWM duty cycle");
+;	genIpush
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:37: printf("\r\nPress 'I' to enter idle mode");
+;	genIpush
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:38: printf("\r\nPress 'P' to enter power down mode");
+;	genIpush
+	mov	a,#__str_7
+	push	acc
+	mov	a,#(__str_7 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:39: printf("\r\nPress 'T' to disable PWM and use PCA0 as a Software Timer");
+;	genIpush
+	mov	a,#__str_8
+	push	acc
+	mov	a,#(__str_8 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:40: printf("\r\nPress 'D' to the Software Timer");
+;	genIpush
+	mov	a,#__str_9
+	push	acc
+	mov	a,#(__str_9 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:41: printf("\r\nPress 'H' to display this menu\r\n");
+;	genIpush
+	mov	a,#__str_10
+	push	acc
+	mov	a,#(__str_10 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'handleInput'
+;------------------------------------------------------------
+;c                         Allocated with name '_handleInput_c_1_1'
+;------------------------------------------------------------
+;	main.c:49: void handleInput(char c){
+;	-----------------------------------------
+;	 function handleInput
+;	-----------------------------------------
+_handleInput:
+;	genReceive
+	mov	a,dpl
+	mov	dptr,#_handleInput_c_1_1
+	movx	@dptr,a
+;	main.c:50: switch (c){
+;	genAssign
+	mov	dptr,#_handleInput_c_1_1
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x2B,00123$
+	ljmp	00103$
+00123$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x2D,00124$
+	ljmp	00104$
+00124$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x44,00125$
+	ljmp	00108$
+00125$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x48,00126$
+	ljmp	00109$
+00126$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x49,00127$
+	ljmp	00105$
+00127$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x50,00128$
+	ljmp	00106$
+00128$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x52,00129$
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00101$
+00129$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x53,00130$
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00102$
-;	Peephole 259.a	removed redundant label 00104$ and ret
+00130$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x54,00131$
+	ljmp	00107$
+00131$:
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+;	main.c:51: case 'R':
+00101$:
+;	main.c:52: printf ("\r\nStarting PWM with duty cycle 40%%\r\n");
+;	genIpush
+	mov	a,#__str_11
+	push	acc
+	mov	a,#(__str_11 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:53: SWT_Stop();
+;	genCall
+	lcall	_SWT_Stop
+;	main.c:54: PWM_Init();
+;	genCall
+	lcall	_PWM_Init
+;	main.c:55: PWM_Start(40);
+;	genCall
+	mov	dpl,#0x28
+	lcall	_PWM_Start
+;	main.c:56: printf ("Duty cycle at %d%%\r\n", PWM_GetDuty());
+;	genCall
+	lcall	_PWM_GetDuty
+	mov	r2,dpl
+;	genCast
+	mov	r3,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_12
+	push	acc
+	mov	a,#(__str_12 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:57: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+;	main.c:58: case 'S':
+00102$:
+;	main.c:59: printf ("\r\nStopping the PWM\r\n");
+;	genIpush
+	mov	a,#__str_13
+	push	acc
+	mov	a,#(__str_13 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:60: PWM_Stop();
+;	genCall
+;	main.c:61: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_PWM_Stop
+;	main.c:62: case '+':
+00103$:
+;	main.c:63: printf("\r\nIncreasing duty cycle by 5%%\r\n");
+;	genIpush
+	mov	a,#__str_14
+	push	acc
+	mov	a,#(__str_14 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:64: PWM_Increase5();
+;	genCall
+	lcall	_PWM_Increase5
+;	main.c:65: printf ("Duty cycle at %d%%\r\n", PWM_GetDuty());
+;	genCall
+	lcall	_PWM_GetDuty
+	mov	r2,dpl
+;	genCast
+	mov	r3,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_12
+	push	acc
+	mov	a,#(__str_12 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:66: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+;	main.c:67: case '-':
+00104$:
+;	main.c:68: printf("\r\nDecreasing duty cycle by 5%%\r\n");
+;	genIpush
+	mov	a,#__str_15
+	push	acc
+	mov	a,#(__str_15 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:69: PWM_Decrease5();
+;	genCall
+	lcall	_PWM_Decrease5
+;	main.c:70: printf ("Duty cycle at %d%%\r\n", PWM_GetDuty());
+;	genCall
+	lcall	_PWM_GetDuty
+	mov	r2,dpl
+;	genCast
+	mov	r3,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_12
+	push	acc
+	mov	a,#(__str_12 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:71: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+;	main.c:72: case 'I':
+00105$:
+;	main.c:73: printf("\r\nEntering Idle Mode... Press INT0 Button to wake up\r\n");
+;	genIpush
+	mov	a,#__str_16
+	push	acc
+	mov	a,#(__str_16 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:74: PWM_Stop();
+;	genCall
+	lcall	_PWM_Stop
+;	main.c:75: SWT_Stop();
+;	genCall
+	lcall	_SWT_Stop
+;	main.c:76: IEN0 |= IEN0_INT0_EN | GLOBAL_INTERRUPT_ENABLE_MASK;
+;	genOr
+	orl	_IEN0,#0x81
+;	main.c:77: PCON |= PCON_IDLE_EN;
+;	genOr
+	orl	_PCON,#0x01
+;	main.c:78: break;
+;	main.c:79: case 'P':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00106$:
+;	main.c:80: printf("\r\nEntering Power Down Mode... Press INT0 Button to wake up\r\n");
+;	genIpush
+	mov	a,#__str_17
+	push	acc
+	mov	a,#(__str_17 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:81: PWM_Stop();
+;	genCall
+	lcall	_PWM_Stop
+;	main.c:82: SWT_Stop();
+;	genCall
+	lcall	_SWT_Stop
+;	main.c:83: IEN0 |= IEN0_INT0_EN | GLOBAL_INTERRUPT_ENABLE_MASK;
+;	genOr
+	orl	_IEN0,#0x81
+;	main.c:84: PCON |= PCON_PD_EN;
+;	genOr
+	orl	_PCON,#0x02
+;	main.c:85: break;
+;	main.c:86: case 'T':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00107$:
+;	main.c:87: printf("\r\nStarting the software timer at 4Hz\r\n");
+;	genIpush
+	mov	a,#__str_18
+	push	acc
+	mov	a,#(__str_18 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:88: PWM_Stop();
+;	genCall
+	lcall	_PWM_Stop
+;	main.c:89: SWT_Start();
+;	genCall
+;	main.c:90: break;
+;	main.c:91: case 'D':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_SWT_Start
+00108$:
+;	main.c:92: printf("\r\nStopping the software timer\r\n");
+;	genIpush
+	mov	a,#__str_19
+	push	acc
+	mov	a,#(__str_19 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:93: SWT_Stop();
+;	genCall
+;	main.c:94: break;
+;	main.c:95: case 'H':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_SWT_Stop
+00109$:
+;	main.c:96: ShowMenu();
+;	genCall
+;	main.c:100: }
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_ShowMenu
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'main'
+;------------------------------------------------------------
+;c                         Allocated with name '_main_c_2_2'
+;------------------------------------------------------------
+;	main.c:106: void main(void)
+;	-----------------------------------------
+;	 function main
+;	-----------------------------------------
+_main:
+;	main.c:108: Serial_Init();
+;	genCall
+	lcall	_Serial_Init
+;	main.c:109: PWM_Init();
+;	genCall
+	lcall	_PWM_Init
+;	main.c:111: ShowMenu();
+;	genCall
+	lcall	_ShowMenu
+;	main.c:113: while(1){
+00104$:
+;	main.c:115: c = getchar ();
+;	genCall
+	lcall	_getchar
+	mov	r2,dpl
+;	main.c:116: if (c == ENTER_KEY){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x0D,00102$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00110$
+;	Peephole 300	removed redundant label 00111$
+;	main.c:117: putchar('\n');
+;	genCall
+	mov	dpl,#0x0A
+	push	ar2
+	lcall	_putchar
+	pop	ar2
+00102$:
+;	main.c:119: putchar(c);
+;	genCall
+	mov	dpl,r2
+	push	ar2
+	lcall	_putchar
+	pop	ar2
+;	main.c:120: handleInput(c);
+;	genCall
+	mov	dpl,r2
+	lcall	_handleInput
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00104$
+;	Peephole 259.a	removed redundant label 00106$ and ret
 ;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
+__str_0:
+	.db 0x0D
+	.db 0x0A
+	.ascii "***************"
+	.db 0x00
+__str_1:
+	.db 0x0D
+	.db 0x0A
+	.ascii "    Menu"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_2:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'R' to start PWM"
+	.db 0x00
+__str_3:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'S' to stop PWM"
+	.db 0x00
+__str_4:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press '+' to increase PWM duty cycle"
+	.db 0x00
+__str_5:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press '-' to decrease PWM duty cycle"
+	.db 0x00
+__str_6:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'I' to enter idle mode"
+	.db 0x00
+__str_7:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'P' to enter power down mode"
+	.db 0x00
+__str_8:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'T' to disable PWM and use PCA0 as a Software Timer"
+	.db 0x00
+__str_9:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'D' to the Software Timer"
+	.db 0x00
+__str_10:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'H' to display this menu"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_11:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Starting PWM with duty cycle 40%%"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_12:
+	.ascii "Duty cycle at %d%%"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_13:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Stopping the PWM"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_14:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Increasing duty cycle by 5%%"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_15:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Decreasing duty cycle by 5%%"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_16:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Entering Idle Mode... Press INT0 Button to wake up"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_17:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Entering Power Down Mode... Press INT0 Button to wake up"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_18:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Starting the software timer at 4Hz"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_19:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Stopping the software timer"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
 	.area XINIT   (CODE)
