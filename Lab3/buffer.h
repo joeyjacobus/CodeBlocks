@@ -1,3 +1,10 @@
+/**
+ *  Lab 3
+ *  Author: Joey Jacobus
+ *  October 2016
+ *  Embedded Systems Design - University of Colorado at Boulder
+ */
+
 #ifndef BUFFER_H_INCLUDED
 #define BUFFER_H_INCLUDED
 #include <stdbool.h>

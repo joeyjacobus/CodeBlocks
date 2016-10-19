@@ -1,5 +1,8 @@
-/*
- * Lab 3 - Joey Jacobus 10/9/2016
+/**
+ *  Lab 3
+ *  Author: Joey Jacobus
+ *  October 2016
+ *  Embedded Systems Design - University of Colorado at Boulder
  */
 
 #include <mcs51/8051.h>
@@ -10,6 +13,7 @@
 #include <ctype.h>
 #include "serial.h"
 #include "buffer.h"
+#include "main.h"
 
 #define AUXR_ENABLE_XRAM_MASK 0x0C
 
@@ -23,6 +27,8 @@
 #define NEW_BUF_MAX_VALUE 400
 
 #define MAX_NUM_BUFFERS 100
+
+
 /** Function Prototypes */
 void displayPrompt(void);
 
@@ -53,6 +59,7 @@ void setupBuffers(void){
     bool alloc_failed = true;
     Buffer_Size = -1;
     Num_Buffers = 0;    //Reset
+    DEBUGPORT(0x02);
 
     //Initialize to not in use
     for (i = 0; i < MAX_NUM_BUFFERS; ++i){
@@ -127,7 +134,7 @@ void handlePlus(void){
     Num_Buffers++;
 
     if (alloc_success)
-        printf ("\r\nBuffer of size: %d allocated at address: %p \r\n", buffer_size, Buffers[Num_Buffers-1].buf_start);
+        printf ("\r\nBuffer %d of size: %d allocated at address: %p \r\n", first_free_buffer_index, buffer_size, Buffers[Num_Buffers-1].buf_start);
     else{
         printf("\r\nMalloc failed for buffer size %d\r\n", buffer_size);
         //Free the buffers if we failed for some reason
@@ -164,6 +171,8 @@ void handleMinus(void){
 
 void handleInput(char c){
     int i;
+    DEBUGPORT(0x03);
+
     if (isdigit(c) || isalpha(c)){
         //Add it to Buffer 0 if it isn't full
         if (Buffers[0].buf_start + Buffers[0].buf_insert < Buffers[0].buf_end ){
@@ -235,6 +244,7 @@ void FreeAll(void){
 }
 
 void displayWelcome(void){
+    DEBUGPORT(0x01);
     printf("\r\n********************");
     printf("\r\n* Welcome to Lab 3 *");
     printf("\r\n********************");
@@ -260,6 +270,8 @@ void displayPrompt(void){
 
 void main(void){
     char c;
+    DEBUGPORT(0x00);
+
     //unsigned char xdata *p;
     Restart = false;
 

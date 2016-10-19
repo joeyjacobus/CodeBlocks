@@ -258,12 +258,12 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     0734    l_CONST
-     0B78    l_XSEG
-     0B78    s_XISEG
-     20F9    l_CSEG
-     215A    s_CONST
-     288E    s_XINIT
+     0737    l_CONST
+     0B7B    l_XSEG
+     0B7B    s_XISEG
+     2152    l_CSEG
+     21B3    s_CONST
+     28EA    s_XINIT
 
 Hexadecimal
 
@@ -371,37 +371,38 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0B78 =   2936. bytes (REL,CON,XDATA)
+XSEG                               0000   0B7B =   2939. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
   0D:000E    _Buffer_ContentSwap_PARM_2
   0D:0014    _Buffer_Init_PARM_2
   0D:0016    _Buffer_Init_PARM_3
-  0D:001E    _heap
-  0D:065E    _Buffers
-  0D:0B25    _getstring_PARM_2
-  0D:0B2B    __sdcc_prev_memheader
-  0D:0B38    __sdcc_first_memheader
-  0D:0B3A    _init_dynamic_memory_PARM_2
-  0D:0B46    __gptrput_PARM_2
-  0D:0B47    __mulint_PARM_2
-  0D:0B4B    _vprintf_PARM_2
-  0D:0B5F    __print_format_PARM_2
-  0D:0B62    __print_format_PARM_3
-  0D:0B65    __print_format_PARM_4
+  0D:001E    _dataout_PARM_2
+  0D:0021    _heap
+  0D:0661    _Buffers
+  0D:0B28    _getstring_PARM_2
+  0D:0B2E    __sdcc_prev_memheader
+  0D:0B3B    __sdcc_first_memheader
+  0D:0B3D    _init_dynamic_memory_PARM_2
+  0D:0B49    __gptrput_PARM_2
+  0D:0B4A    __mulint_PARM_2
+  0D:0B4E    _vprintf_PARM_2
+  0D:0B62    __print_format_PARM_2
+  0D:0B65    __print_format_PARM_3
+  0D:0B68    __print_format_PARM_4
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0B78   0006 =      6. bytes (REL,CON,XDATA)
+XISEG                              0B7B   0006 =      6. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0B78    _Buffer_Size
-  0D:0B7A    _Num_Buffers
-  0D:0B7C    _Num_Input_Chars
+  0D:0B7B    _Buffer_Size
+  0D:0B7D    _Num_Buffers
+  0D:0B7F    _Num_Input_Chars
 
 Hexadecimal
 
@@ -474,7 +475,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0061   20F9 =   8441. bytes (REL,CON,CODE)
+CSEG                               0061   2152 =   8530. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -486,47 +487,48 @@ CSEG                               0061   20F9 =   8441. bytes (REL,CON,CODE)
   0C:06BE    _Buffer_Init
   0C:07F0    _Buffer_Free
   0C:0847    __sdcc_program_startup
-  0C:084C    __sdcc_external_startup
-  0C:0853    _setupBuffers
-  0C:0AF2    _handlePlus
-  0C:0CFA    _handleMinus
-  0C:0E18    _handleInput
-  0C:0FDF    _FreeAll
-  0C:1034    _displayWelcome
-  0C:118C    _displayPrompt
-  0C:11A2    _main
-  0C:1203    _putchar
-  0C:1215    _getchar
-  0C:121F    _Serial_GetInteger
-  0C:133D    _getstring
-  0C:13FA    _Serial_Init
-  0C:140B    __sdcc_find_memheader
-  0C:1480    _free
-  0C:14D3    _atoi
-  0C:1606    _isdigit
-  0C:1623    _init_dynamic_memory
-  0C:16A4    _malloc
-  0C:17E0    __gptrput
-  0C:17F9    __mulint
-  0C:1819    _islower
-  0C:1836    _isupper
-  0C:1860    _vprintf
-  0C:189F    _printf
-  0C:19B8    __print_format
-  0C:20EB    _strlen
-  0C:213E    __gptrget
+  0C:084C    _dataout
+  0C:086A    __sdcc_external_startup
+  0C:0871    _setupBuffers
+  0C:0B1C    _handlePlus
+  0C:0D30    _handleMinus
+  0C:0E4E    _handleInput
+  0C:1021    _FreeAll
+  0C:1076    _displayWelcome
+  0C:11DA    _displayPrompt
+  0C:11F0    _main
+  0C:125C    _putchar
+  0C:126E    _getchar
+  0C:1278    _Serial_GetInteger
+  0C:1396    _getstring
+  0C:1453    _Serial_Init
+  0C:1464    __sdcc_find_memheader
+  0C:14D9    _free
+  0C:152C    _atoi
+  0C:165F    _isdigit
+  0C:167C    _init_dynamic_memory
+  0C:16FD    _malloc
+  0C:1839    __gptrput
+  0C:1852    __mulint
+  0C:1872    _islower
+  0C:188F    _isupper
+  0C:18B9    _vprintf
+  0C:18F8    _printf
+  0C:1A11    __print_format
+  0C:2144    _strlen
+  0C:2197    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              215A   0734 =   1844. bytes (REL,CON,CODE)
+CONST                              21B3   0737 =   1847. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              288E   0006 =      6. bytes (REL,CON,CODE)
+XINIT                              28EA   0006 =      6. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

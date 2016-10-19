@@ -1,3 +1,10 @@
+/**
+ *  Lab 3
+ *  Author: Joey Jacobus
+ *  October 2016
+ *  Embedded Systems Design - University of Colorado at Boulder
+ */
+
 
 #include <mcs51/8051.h>
 #include "at89c51ed2.h"

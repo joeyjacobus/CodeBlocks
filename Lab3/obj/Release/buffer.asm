@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Tue Oct 11 21:00:08 2016
+; This file generated Wed Oct 12 21:53:21 2016
 ;--------------------------------------------------------
 	.module buffer
 	.optsdcc -mmcs51 --model-large
@@ -145,7 +145,7 @@ _Buffer_Free_buf_1_1:
 ;------------------------------------------------------------
 ;buf                       Allocated with name '_Buffer_Print_Info_buf_1_1'
 ;------------------------------------------------------------
-;	buffer.c:11: void Buffer_Print_Info(Buffer *buf){
+;	buffer.c:17: void Buffer_Print_Info(Buffer *buf){
 ;	-----------------------------------------
 ;	 function Buffer_Print_Info
 ;	-----------------------------------------
@@ -170,7 +170,7 @@ _Buffer_Print_Info:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:13: printf ("\r\n\r\n");
+;	buffer.c:19: printf ("\r\n\r\n");
 ;	genIpush
 	mov	a,#__str_0
 	push	acc
@@ -183,7 +183,7 @@ _Buffer_Print_Info:
 	dec	sp
 	dec	sp
 	dec	sp
-;	buffer.c:14: printf("********************************\r\n");
+;	buffer.c:20: printf("********************************\r\n");
 ;	genIpush
 	mov	a,#__str_1
 	push	acc
@@ -196,7 +196,7 @@ _Buffer_Print_Info:
 	dec	sp
 	dec	sp
 	dec	sp
-;	buffer.c:15: printf("Buffer Number:   %d\r\n", buf->buf_id);
+;	buffer.c:21: printf("Buffer Number:   %d\r\n", buf->buf_id);
 ;	genAssign
 	mov	dptr,#_Buffer_Print_Info_buf_1_1
 	movx	a,@dptr
@@ -250,7 +250,7 @@ _Buffer_Print_Info:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:16: printf("Start Address:   %p\r\n", buf->buf_start);
+;	buffer.c:22: printf("Start Address:   %p\r\n", buf->buf_start);
 ;	genPointerGet
 ;	genGenPointerGet
 	mov	dpl,r2
@@ -285,7 +285,7 @@ _Buffer_Print_Info:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:17: printf("End Address:     %p\r\n", buf->buf_end);
+;	buffer.c:23: printf("End Address:     %p\r\n", buf->buf_end);
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x02
@@ -332,7 +332,7 @@ _Buffer_Print_Info:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:18: printf("Buffer Size:     %d\r\n", buf->buf_size);
+;	buffer.c:24: printf("Buffer Size:     %d\r\n", buf->buf_size);
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x06
@@ -382,7 +382,7 @@ _Buffer_Print_Info:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:19: printf("Bytes Used:      %d\r\n", buf->buf_insert);
+;	buffer.c:25: printf("Bytes Used:      %d\r\n", buf->buf_insert);
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x04
@@ -431,7 +431,7 @@ _Buffer_Print_Info:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:20: printf("Bytes Remaining: %d\r\n", buf->buf_size - buf->buf_insert);
+;	buffer.c:26: printf("Bytes Remaining: %d\r\n", buf->buf_size - buf->buf_insert);
 ;	genPointerGet
 ;	genGenPointerGet
 	mov	dpl,r5
@@ -492,7 +492,7 @@ _Buffer_Print_Info:
 ;i                         Allocated with name '_Buffer_Print_Contents_i_1_1'
 ;num_output                Allocated with name '_Buffer_Print_Contents_num_output_1_1'
 ;------------------------------------------------------------
-;	buffer.c:26: void Buffer_Print_Contents(Buffer *buf, bool hex){
+;	buffer.c:32: void Buffer_Print_Contents(Buffer *buf, bool hex){
 ;	-----------------------------------------
 ;	 function Buffer_Print_Contents
 ;	-----------------------------------------
@@ -509,14 +509,14 @@ _Buffer_Print_Contents:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:29: int num_output = 0;
+;	buffer.c:35: int num_output = 0;
 ;	genAssign
 	mov	dptr,#_Buffer_Print_Contents_num_output_1_1
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	buffer.c:30: printf("Contents:\r\n\r\n");
+;	buffer.c:36: printf("Contents:\r\n\r\n");
 ;	genIpush
 	mov	a,#__str_8
 	push	acc
@@ -529,7 +529,7 @@ _Buffer_Print_Contents:
 	dec	sp
 	dec	sp
 	dec	sp
-;	buffer.c:32: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
+;	buffer.c:38: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
 ;	genAssign
 	mov	dptr,#_Buffer_Print_Contents_buf_1_1
 	movx	a,@dptr
@@ -609,7 +609,7 @@ _Buffer_Print_Contents:
 	jc	00124$
 	ljmp	00113$
 00124$:
-;	buffer.c:33: printf("%p: ", addr);
+;	buffer.c:39: printf("%p: ", addr);
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -651,12 +651,12 @@ _Buffer_Print_Contents:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:46: printf("\r\n");
+;	buffer.c:52: printf("\r\n");
 ;	genIpop
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:35: for (i = 0; i < 16; ++i){
+;	buffer.c:41: for (i = 0; i < 16; ++i){
 ;	genAssign
 	mov	_Buffer_Print_Contents_sloc0_1_0,r5
 	mov	(_Buffer_Print_Contents_sloc0_1_0 + 1),r6
@@ -687,7 +687,7 @@ _Buffer_Print_Contents:
 	jc	00125$
 	ljmp	00122$
 00125$:
-;	buffer.c:36: if (num_output < buf->buf_insert){
+;	buffer.c:42: if (num_output < buf->buf_insert){
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -722,13 +722,13 @@ _Buffer_Print_Contents:
 	jc	00126$
 	ljmp	00108$
 00126$:
-;	buffer.c:37: if (hex)
+;	buffer.c:43: if (hex)
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	_Buffer_Print_Contents_PARM_2,00102$
 ;	Peephole 300	removed redundant label 00127$
-;	buffer.c:38: printf("%x ", *(addr + i));
+;	buffer.c:44: printf("%x ", *(addr + i));
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -784,7 +784,7 @@ _Buffer_Print_Contents:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00103$
 00102$:
-;	buffer.c:40: printf("%c ", *(addr + i));
+;	buffer.c:46: printf("%c ", *(addr + i));
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -833,14 +833,14 @@ _Buffer_Print_Contents:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:46: printf("\r\n");
+;	buffer.c:52: printf("\r\n");
 ;	genIpop
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:40: printf("%c ", *(addr + i));
+;	buffer.c:46: printf("%c ", *(addr + i));
 00103$:
-;	buffer.c:41: num_output++;
+;	buffer.c:47: num_output++;
 ;	genPlus
 ;     genPlusIncr
 	inc	_Buffer_Print_Contents_sloc2_1_0
@@ -849,7 +849,7 @@ _Buffer_Print_Contents:
 	inc	(_Buffer_Print_Contents_sloc2_1_0 + 1)
 00128$:
 00108$:
-;	buffer.c:35: for (i = 0; i < 16; ++i){
+;	buffer.c:41: for (i = 0; i < 16; ++i){
 ;	genPlus
 ;     genPlusIncr
 	inc	_Buffer_Print_Contents_sloc3_1_0
@@ -866,7 +866,7 @@ _Buffer_Print_Contents:
 	inc	dptr
 	mov	a,(_Buffer_Print_Contents_sloc2_1_0 + 1)
 	movx	@dptr,a
-;	buffer.c:44: printf("\r\n");
+;	buffer.c:50: printf("\r\n");
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -895,7 +895,7 @@ _Buffer_Print_Contents:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:32: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
+;	buffer.c:38: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x10
@@ -909,7 +909,7 @@ _Buffer_Print_Contents:
 	mov	r6,a
 	ljmp	00110$
 00113$:
-;	buffer.c:46: printf("\r\n");
+;	buffer.c:52: printf("\r\n");
 ;	genIpush
 	mov	a,#__str_12
 	push	acc
@@ -929,7 +929,7 @@ _Buffer_Print_Contents:
 ;------------------------------------------------------------
 ;buf                       Allocated with name '_Buffer_Print_buf_1_1'
 ;------------------------------------------------------------
-;	buffer.c:53: void Buffer_Print(Buffer *buf, bool hex){
+;	buffer.c:59: void Buffer_Print(Buffer *buf, bool hex){
 ;	-----------------------------------------
 ;	 function Buffer_Print
 ;	-----------------------------------------
@@ -946,7 +946,7 @@ _Buffer_Print:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:54: Buffer_Print_Info(buf);
+;	buffer.c:60: Buffer_Print_Info(buf);
 ;	genAssign
 	mov	dptr,#_Buffer_Print_buf_1_1
 	movx	a,@dptr
@@ -962,7 +962,7 @@ _Buffer_Print:
 	mov	dph,r3
 	mov	b,r4
 	lcall	_Buffer_Print_Info
-;	buffer.c:55: Buffer_Print_Contents(buf, hex);
+;	buffer.c:61: Buffer_Print_Contents(buf, hex);
 ;	genAssign
 	mov	dptr,#_Buffer_Print_buf_1_1
 	movx	a,@dptr
@@ -988,7 +988,7 @@ _Buffer_Print:
 ;------------------------------------------------------------
 ;buf                       Allocated with name '_Buffer_Clear_buf_1_1'
 ;------------------------------------------------------------
-;	buffer.c:61: void Buffer_Clear(Buffer *buf){
+;	buffer.c:67: void Buffer_Clear(Buffer *buf){
 ;	-----------------------------------------
 ;	 function Buffer_Clear
 ;	-----------------------------------------
@@ -1005,7 +1005,7 @@ _Buffer_Clear:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:62: printf("Buffer %d Cleared\r\n", buf->buf_id);
+;	buffer.c:68: printf("Buffer %d Cleared\r\n", buf->buf_id);
 ;	genAssign
 	mov	dptr,#_Buffer_Clear_buf_1_1
 	movx	a,@dptr
@@ -1059,7 +1059,7 @@ _Buffer_Clear:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:63: buf->buf_insert = 0;
+;	buffer.c:69: buf->buf_insert = 0;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x04
@@ -1100,7 +1100,7 @@ _Buffer_Clear:
 ;insert_temp               Allocated with name '_Buffer_ContentSwap_insert_temp_1_1'
 ;temp                      Allocated with name '_Buffer_ContentSwap_temp_1_1'
 ;------------------------------------------------------------
-;	buffer.c:70: void Buffer_ContentSwap(Buffer *buf0, Buffer *buf1){
+;	buffer.c:76: void Buffer_ContentSwap(Buffer *buf0, Buffer *buf1){
 ;	-----------------------------------------
 ;	 function Buffer_ContentSwap
 ;	-----------------------------------------
@@ -1117,7 +1117,7 @@ _Buffer_ContentSwap:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:76: if (buf0->buf_size != buf1->buf_size){
+;	buffer.c:82: if (buf0->buf_size != buf1->buf_size){
 ;	genAssign
 	mov	dptr,#_Buffer_ContentSwap_buf0_1_1
 	movx	a,@dptr
@@ -1189,7 +1189,7 @@ _Buffer_ContentSwap:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00111$
 00113$:
-;	buffer.c:77: printf("Can't swap buffer contents with different sizes\r\n");
+;	buffer.c:83: printf("Can't swap buffer contents with different sizes\r\n");
 ;	genIpush
 	mov	a,#__str_14
 	push	acc
@@ -1202,11 +1202,11 @@ _Buffer_ContentSwap:
 	dec	sp
 	dec	sp
 	dec	sp
-;	buffer.c:78: return;
+;	buffer.c:84: return;
 ;	genRet
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
-;	buffer.c:80: for (i = 0; i < buf0->buf_size; ++i){
+;	buffer.c:86: for (i = 0; i < buf0->buf_size; ++i){
 00111$:
 ;	genAssign
 ;	genAssign
@@ -1225,7 +1225,7 @@ _Buffer_ContentSwap:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00106$
 ;	Peephole 300	removed redundant label 00114$
-;	buffer.c:81: temp = buf1->buf_start[i];
+;	buffer.c:87: temp = buf1->buf_start[i];
 ;	genIpush
 ;	genPointerGet
 ;	genGenPointerGet
@@ -1252,7 +1252,7 @@ _Buffer_ContentSwap:
 	mov	dph,r2
 	movx	a,@dptr
 	mov	_Buffer_ContentSwap_sloc2_1_0,a
-;	buffer.c:82: buf1->buf_start[i] = buf0->buf_start[i];
+;	buffer.c:88: buf1->buf_start[i] = buf0->buf_start[i];
 ;	genPointerGet
 ;	genGenPointerGet
 	mov	dpl,_Buffer_ContentSwap_sloc0_1_0
@@ -1284,14 +1284,14 @@ _Buffer_ContentSwap:
 	mov	dph,r2
 ;	Peephole 136	removed redundant move
 	movx	@dptr,a
-;	buffer.c:83: buf0->buf_start[i] = temp;
+;	buffer.c:89: buf0->buf_start[i] = temp;
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dpl,r3
 	mov	dph,r5
 	mov	a,_Buffer_ContentSwap_sloc2_1_0
 	movx	@dptr,a
-;	buffer.c:80: for (i = 0; i < buf0->buf_size; ++i){
+;	buffer.c:86: for (i = 0; i < buf0->buf_size; ++i){
 ;	genPlus
 ;     genPlusIncr
 	inc	_Buffer_ContentSwap_sloc1_1_0
@@ -1304,7 +1304,7 @@ _Buffer_ContentSwap:
 ;	Peephole 300	removed redundant label 00115$
 	sjmp	00103$
 00106$:
-;	buffer.c:86: insert_temp = buf1->buf_insert;
+;	buffer.c:92: insert_temp = buf1->buf_insert;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x04
@@ -1327,7 +1327,7 @@ _Buffer_ContentSwap:
 	inc	dptr
 	lcall	__gptrget
 	mov	(_Buffer_ContentSwap_sloc1_1_0 + 1),a
-;	buffer.c:87: buf1->buf_insert = buf0->buf_insert;
+;	buffer.c:93: buf1->buf_insert = buf0->buf_insert;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x04
@@ -1358,7 +1358,7 @@ _Buffer_ContentSwap:
 	inc	dptr
 	mov	a,r6
 	lcall	__gptrput
-;	buffer.c:88: buf0->buf_insert = insert_temp;
+;	buffer.c:94: buf0->buf_insert = insert_temp;
 ;	genPointerSet
 ;	genGenPointerSet
 	mov	dpl,r2
@@ -1369,7 +1369,7 @@ _Buffer_ContentSwap:
 	inc	dptr
 	mov	a,(_Buffer_ContentSwap_sloc1_1_0 + 1)
 	lcall	__gptrput
-;	buffer.c:91: buf0->buf_end = buf0->buf_start + buf0->buf_size;
+;	buffer.c:97: buf0->buf_end = buf0->buf_start + buf0->buf_size;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x02
@@ -1409,7 +1409,7 @@ _Buffer_ContentSwap:
 	inc	dptr
 	mov	a,r6
 	lcall	__gptrput
-;	buffer.c:92: buf1->buf_end = buf1->buf_start + buf1->buf_size;
+;	buffer.c:98: buf1->buf_end = buf1->buf_start + buf1->buf_size;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x02
@@ -1462,7 +1462,7 @@ _Buffer_ContentSwap:
 ;buf_id                    Allocated with name '_Buffer_Init_PARM_3'
 ;buf                       Allocated with name '_Buffer_Init_buf_1_1'
 ;------------------------------------------------------------
-;	buffer.c:98: bool Buffer_Init(Buffer *buf, int buffer_size, int buf_id){
+;	buffer.c:104: bool Buffer_Init(Buffer *buf, int buffer_size, int buf_id){
 ;	-----------------------------------------
 ;	 function Buffer_Init
 ;	-----------------------------------------
@@ -1479,7 +1479,7 @@ _Buffer_Init:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:99: buf->buf_start = (unsigned char xdata *) malloc(buffer_size);
+;	buffer.c:105: buf->buf_start = (unsigned char xdata *) malloc(buffer_size);
 ;	genAssign
 	mov	dptr,#_Buffer_Init_buf_1_1
 	movx	a,@dptr
@@ -1523,7 +1523,7 @@ _Buffer_Init:
 	inc	dptr
 	mov	a,r0
 	lcall	__gptrput
-;	buffer.c:100: if (buf->buf_start == NULL){
+;	buffer.c:106: if (buf->buf_start == NULL){
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1533,7 +1533,7 @@ _Buffer_Init:
 ;	Peephole 200.b	removed redundant sjmp
 ;	Peephole 300	removed redundant label 00106$
 ;	Peephole 300	removed redundant label 00107$
-;	buffer.c:101: printf("\r\nError. Buffer %d of size %d allocation failed\r\n", buf_id, buffer_size);
+;	buffer.c:107: printf("\r\nError. Buffer %d of size %d allocation failed\r\n", buf_id, buffer_size);
 ;	genIpush
 	push	ar5
 	push	ar6
@@ -1556,7 +1556,7 @@ _Buffer_Init:
 	mov	a,sp
 	add	a,#0xf9
 	mov	sp,a
-;	buffer.c:102: return false;
+;	buffer.c:108: return false;
 ;	genRet
 ;	Peephole 181	changed mov to clr
 	clr	a
@@ -1564,7 +1564,7 @@ _Buffer_Init:
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
 00102$:
-;	buffer.c:104: buf->buf_size = buffer_size;
+;	buffer.c:110: buf->buf_size = buffer_size;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x06
@@ -1587,7 +1587,7 @@ _Buffer_Init:
 	inc	dptr
 	mov	a,r6
 	lcall	__gptrput
-;	buffer.c:105: buf->buf_end = buf->buf_start + buf->buf_size;
+;	buffer.c:111: buf->buf_end = buf->buf_start + buf->buf_size;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x02
@@ -1639,7 +1639,7 @@ _Buffer_Init:
 	inc	dptr
 	mov	a,r1
 	lcall	__gptrput
-;	buffer.c:106: buf->buf_insert = 0;
+;	buffer.c:112: buf->buf_insert = 0;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x04
@@ -1664,7 +1664,7 @@ _Buffer_Init:
 ;	Peephole 181	changed mov to clr
 	clr	a
 	lcall	__gptrput
-;	buffer.c:107: buf->buf_id = buf_id;
+;	buffer.c:113: buf->buf_id = buf_id;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x08
@@ -1694,7 +1694,7 @@ _Buffer_Init:
 	inc	dptr
 	mov	a,r1
 	lcall	__gptrput
-;	buffer.c:108: buf->in_use = 1;
+;	buffer.c:114: buf->in_use = 1;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x0A
@@ -1717,7 +1717,7 @@ _Buffer_Init:
 ;	Peephole 181	changed mov to clr
 	clr	a
 	lcall	__gptrput
-;	buffer.c:109: return true;
+;	buffer.c:115: return true;
 ;	genRet
 	mov	a,#0x01
 	add	a,#0xff
@@ -1728,7 +1728,7 @@ _Buffer_Init:
 ;------------------------------------------------------------
 ;buf                       Allocated with name '_Buffer_Free_buf_1_1'
 ;------------------------------------------------------------
-;	buffer.c:113: void Buffer_Free(Buffer *buf){
+;	buffer.c:119: void Buffer_Free(Buffer *buf){
 ;	-----------------------------------------
 ;	 function Buffer_Free
 ;	-----------------------------------------
@@ -1745,7 +1745,7 @@ _Buffer_Free:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	buffer.c:114: free(buf->buf_start);
+;	buffer.c:120: free(buf->buf_start);
 ;	genAssign
 	mov	dptr,#_Buffer_Free_buf_1_1
 	movx	a,@dptr
@@ -1779,7 +1779,7 @@ _Buffer_Free:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	buffer.c:115: buf->in_use = 0;
+;	buffer.c:121: buf->in_use = 0;
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x0A

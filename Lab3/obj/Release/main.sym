@@ -187,7 +187,7 @@ Symbol Table
     _Buffer_Print                                                  **** GX
     _Buffer_Print_PARM_2                                           **** GX
   A _Buffer_Size                                                   0000 GR
-  9 _Buffers                                                       0640 GR
+  9 _Buffers                                                       0643 GR
     _CCAP0H                                                     =  00FA G
     _CCAP0L                                                     =  00EA G
     _CCAP1H                                                     =  00FB G
@@ -235,7 +235,7 @@ Symbol Table
     _EXF2                                                       =  00CE G
     _F0                                                         =  00D5 G
     _F1                                                         =  00D1 G
- 14 _FreeAll                                                       0798 GR
+ 14 _FreeAll                                                       07DA GR
     _IE                                                         =  00A8 G
     _IE0                                                        =  0089 G
     _IE1                                                        =  008B G
@@ -389,69 +389,72 @@ Symbol Table
     __mcs51_genXRAMCLEAR                                           **** GX
     __mulint                                                       **** GX
     __mulint_PARM_2                                                **** GX
- 14 __sdcc_external_startup                                        0005 GR
+ 14 __sdcc_external_startup                                        0023 GR
     __sdcc_gsinit_startup                                          **** GX
  14 __sdcc_program_startup                                         0000 GR
   5 __start__stack                                                 0000 GR
  15 __str_0                                                        0000 R
  15 __str_1                                                        004C R
- 15 __str_10                                                       01FD R
- 15 __str_11                                                       0225 R
- 15 __str_12                                                       0232 R
- 15 __str_13                                                       0269 R
- 15 __str_14                                                       027D R
- 15 __str_15                                                       0295 R
- 15 __str_16                                                       02C5 R
- 15 __str_17                                                       02F5 R
- 15 __str_18                                                       0328 R
- 15 __str_19                                                       033F R
+ 15 __str_10                                                       0200 R
+ 15 __str_11                                                       0228 R
+ 15 __str_12                                                       0235 R
+ 15 __str_13                                                       026C R
+ 15 __str_14                                                       0280 R
+ 15 __str_15                                                       0298 R
+ 15 __str_16                                                       02C8 R
+ 15 __str_17                                                       02F8 R
+ 15 __str_18                                                       032B R
+ 15 __str_19                                                       0342 R
  15 __str_2                                                        0075 R
- 15 __str_20                                                       0356 R
- 15 __str_21                                                       036D R
- 15 __str_22                                                       037C R
- 15 __str_23                                                       03BD R
- 15 __str_24                                                       03C2 R
- 15 __str_25                                                       03FD R
- 15 __str_26                                                       0443 R
- 15 __str_27                                                       045E R
- 15 __str_28                                                       047F R
- 15 __str_29                                                       04BD R
+ 15 __str_20                                                       0359 R
+ 15 __str_21                                                       0370 R
+ 15 __str_22                                                       037F R
+ 15 __str_23                                                       03C0 R
+ 15 __str_24                                                       03C5 R
+ 15 __str_25                                                       0400 R
+ 15 __str_26                                                       0446 R
+ 15 __str_27                                                       0461 R
+ 15 __str_28                                                       0482 R
+ 15 __str_29                                                       04C0 R
  15 __str_3                                                        009B R
- 15 __str_30                                                       04F4 R
- 15 __str_31                                                       0527 R
- 15 __str_32                                                       0554 R
- 15 __str_33                                                       057B R
+ 15 __str_30                                                       04F7 R
+ 15 __str_31                                                       052A R
+ 15 __str_32                                                       0557 R
+ 15 __str_33                                                       057E R
  15 __str_4                                                        00CB R
  15 __str_5                                                        0105 R
  15 __str_6                                                        0144 R
  15 __str_7                                                        017A R
  15 __str_8                                                        01A7 R
- 15 __str_9                                                        01D8 R
+ 15 __str_9                                                        01DB R
  16 __xinit__Buffer_Size                                           0000 R
  16 __xinit__Num_Buffers                                           0002 R
  16 __xinit__Num_Input_Chars                                       0004 R
- 14 _displayPrompt                                                 0945 GR
- 14 _displayWelcome                                                07ED GR
+ 14 _dataout                                                       0005 GR
+  9 _dataout_PARM_2                                                0000 GR
+  9 _dataout_p_1_1                                                 0001 R
+ 14 _displayPrompt                                                 0993 GR
+ 14 _displayWelcome                                                082F GR
     _getchar                                                       **** GX
- 14 _handleInput                                                   05D1 GR
-  9 _handleInput_c_1_1                                             0AF6 R
- 14 _handleMinus                                                   04B3 GR
-  9 _handleMinus_buffer_number_1_1                                 0AF4 R
- 14 _handlePlus                                                    02AB GR
+ 14 _handleInput                                                   0607 GR
+  9 _handleInput_c_1_1                                             0AF9 R
+ 14 _handleMinus                                                   04E9 GR
+  9 _handleMinus_buffer_number_1_1                                 0AF7 R
+ 14 _handlePlus                                                    02D5 GR
   7 _handlePlus_alloc_success_1_1                                  0003 R
-  9 _handlePlus_buffer_size_1_1                                    0AF2 R
-  9 _heap                                                          0000 GR
+  9 _handlePlus_buffer_size_1_1                                    0AF5 R
+  9 _heap                                                          0003 GR
     _init_dynamic_memory                                           **** GX
     _init_dynamic_memory_PARM_2                                    **** GX
     _isdigit                                                       **** GX
     _islower                                                       **** GX
     _isupper                                                       **** GX
- 14 _main                                                          095B GR
+ 14 _main                                                          09A9 GR
     _printf                                                        **** GX
     _putchar                                                       **** GX
- 14 _setupBuffers                                                  000C GR
+ 14 _setupBuffers                                                  002A GR
   7 _setupBuffers_alloc_failed_1_1                                 0001 R
-  9 _setupBuffers_i_1_1                                            0AF0 R
+  9 _setupBuffers_i_1_1                                            0AF3 R
   7 _setupBuffers_sloc0_1_0                                        0002 R
     a                                                              00D6 
     ac                                                             00D6 
@@ -643,7 +646,7 @@ Area Table
    6 ISEG                                                                               size    0   flags 0
    7 BSEG                                                                               size    4   flags 80
    8 PSEG                                                                               size    0   flags 50
-   9 XSEG                                                                               size  AF7   flags 40
+   9 XSEG                                                                               size  AFA   flags 40
    A XISEG                                                                              size    6   flags 40
    B HOME                                                                               size    3   flags 20
    C GSINIT0                                                                            size    0   flags 20
@@ -654,6 +657,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    2   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  9BC   flags 20
-  15 CONST                                                                              size  58D   flags 20
+  14 CSEG                                                                               size  A15   flags 20
+  15 CONST                                                                              size  590   flags 20
   16 XINIT                                                                              size    6   flags 20

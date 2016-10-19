@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Wed Oct 12 18:37:34 2016
+                              4 ; This file generated Wed Oct 12 21:53:23 2016
                               5 ;--------------------------------------------------------
                               6 	.module serial
                               7 	.optsdcc -mmcs51 --model-large
@@ -446,20 +446,20 @@
                             446 ; external ram data
                             447 ;--------------------------------------------------------
                             448 	.area XSEG    (XDATA)
-   0B15                     449 _putchar_c_1_1:
-   0B15                     450 	.ds 1
-   0B16                     451 _Serial_GetInteger_max_length_1_1:
-   0B16                     452 	.ds 2
-   0B18                     453 _Serial_GetInteger_buf_1_1:
-   0B18                     454 	.ds 11
-   0B23                     455 _Serial_GetInteger_index_1_1:
-   0B23                     456 	.ds 2
-   0B25                     457 _getstring_PARM_2:
-   0B25                     458 	.ds 2
-   0B27                     459 _getstring_buf_1_1:
-   0B27                     460 	.ds 3
-   0B2A                     461 _getstring_c_1_1:
-   0B2A                     462 	.ds 1
+   0B18                     449 _putchar_c_1_1:
+   0B18                     450 	.ds 1
+   0B19                     451 _Serial_GetInteger_max_length_1_1:
+   0B19                     452 	.ds 2
+   0B1B                     453 _Serial_GetInteger_buf_1_1:
+   0B1B                     454 	.ds 11
+   0B26                     455 _Serial_GetInteger_index_1_1:
+   0B26                     456 	.ds 2
+   0B28                     457 _getstring_PARM_2:
+   0B28                     458 	.ds 2
+   0B2A                     459 _getstring_buf_1_1:
+   0B2A                     460 	.ds 3
+   0B2D                     461 _getstring_c_1_1:
+   0B2D                     462 	.ds 1
                             463 ;--------------------------------------------------------
                             464 ; external initialized ram data
                             465 ;--------------------------------------------------------
@@ -495,11 +495,11 @@
                             495 ;------------------------------------------------------------
                             496 ;c                         Allocated with name '_putchar_c_1_1'
                             497 ;------------------------------------------------------------
-                            498 ;	serial.c:17: void putchar (char c){
+                            498 ;	serial.c:24: void putchar (char c){
                             499 ;	-----------------------------------------
                             500 ;	 function putchar
                             501 ;	-----------------------------------------
-   1203                     502 _putchar:
+   125C                     502 _putchar:
                     0002    503 	ar2 = 0x02
                     0003    504 	ar3 = 0x03
                     0004    505 	ar4 = 0x04
@@ -509,53 +509,53 @@
                     0000    509 	ar0 = 0x00
                     0001    510 	ar1 = 0x01
                             511 ;	genReceive
-   1203 E5 82               512 	mov	a,dpl
-   1205 90 0B 15            513 	mov	dptr,#_putchar_c_1_1
-   1208 F0                  514 	movx	@dptr,a
-                            515 ;	serial.c:18: while (TI == 0);
-   1209                     516 00101$:
+   125C E5 82               512 	mov	a,dpl
+   125E 90 0B 18            513 	mov	dptr,#_putchar_c_1_1
+   1261 F0                  514 	movx	@dptr,a
+                            515 ;	serial.c:25: while (TI == 0);
+   1262                     516 00101$:
                             517 ;	genIfx
                             518 ;	genIfxJump
                             519 ;	Peephole 108.d	removed ljmp by inverse jump logic
-   1209 30 99 FD            520 	jnb	_TI,00101$
+   1262 30 99 FD            520 	jnb	_TI,00101$
                             521 ;	Peephole 300	removed redundant label 00108$
-                            522 ;	serial.c:19: SBUF = c; // load serial port with transmit value
+                            522 ;	serial.c:26: SBUF = c; // load serial port with transmit value
                             523 ;	genAssign
-   120C 90 0B 15            524 	mov	dptr,#_putchar_c_1_1
-   120F E0                  525 	movx	a,@dptr
-   1210 F5 99               526 	mov	_SBUF,a
-                            527 ;	serial.c:20: TI = 0; // clear TI flag
+   1265 90 0B 18            524 	mov	dptr,#_putchar_c_1_1
+   1268 E0                  525 	movx	a,@dptr
+   1269 F5 99               526 	mov	_SBUF,a
+                            527 ;	serial.c:27: TI = 0; // clear TI flag
                             528 ;	genAssign
-   1212 C2 99               529 	clr	_TI
+   126B C2 99               529 	clr	_TI
                             530 ;	Peephole 300	removed redundant label 00104$
-   1214 22                  531 	ret
+   126D 22                  531 	ret
                             532 ;------------------------------------------------------------
                             533 ;Allocation info for local variables in function 'getchar'
                             534 ;------------------------------------------------------------
                             535 ;------------------------------------------------------------
-                            536 ;	serial.c:23: char getchar (){
+                            536 ;	serial.c:30: char getchar (){
                             537 ;	-----------------------------------------
                             538 ;	 function getchar
                             539 ;	-----------------------------------------
-   1215                     540 _getchar:
-                            541 ;	serial.c:25: while (RI == 0);
-   1215                     542 00101$:
+   126E                     540 _getchar:
+                            541 ;	serial.c:32: while (RI == 0);
+   126E                     542 00101$:
                             543 ;	genIfx
                             544 ;	genIfxJump
                             545 ;	Peephole 108.d	removed ljmp by inverse jump logic
-                            546 ;	serial.c:26: RI = 0; // clear RI flag
+                            546 ;	serial.c:33: RI = 0; // clear RI flag
                             547 ;	genAssign
                             548 ;	Peephole 250.a	using atomic test and clear
-   1215 10 98 02            549 	jbc	_RI,00108$
-   1218 80 FB               550 	sjmp	00101$
-   121A                     551 00108$:
-                            552 ;	serial.c:27: return SBUF; // return character from SBUF
+   126E 10 98 02            549 	jbc	_RI,00108$
+   1271 80 FB               550 	sjmp	00101$
+   1273                     551 00108$:
+                            552 ;	serial.c:34: return SBUF; // return character from SBUF
                             553 ;	genAssign
-   121A AA 99               554 	mov	r2,_SBUF
+   1273 AA 99               554 	mov	r2,_SBUF
                             555 ;	genRet
-   121C 8A 82               556 	mov	dpl,r2
+   1275 8A 82               556 	mov	dpl,r2
                             557 ;	Peephole 300	removed redundant label 00104$
-   121E 22                  558 	ret
+   1277 22                  558 	ret
                             559 ;------------------------------------------------------------
                             560 ;Allocation info for local variables in function 'Serial_GetInteger'
                             561 ;------------------------------------------------------------
@@ -564,277 +564,277 @@
                             564 ;buf                       Allocated with name '_Serial_GetInteger_buf_1_1'
                             565 ;index                     Allocated with name '_Serial_GetInteger_index_1_1'
                             566 ;------------------------------------------------------------
-                            567 ;	serial.c:36: int Serial_GetInteger(int max_length){
+                            567 ;	serial.c:43: int Serial_GetInteger(int max_length){
                             568 ;	-----------------------------------------
                             569 ;	 function Serial_GetInteger
                             570 ;	-----------------------------------------
-   121F                     571 _Serial_GetInteger:
+   1278                     571 _Serial_GetInteger:
                             572 ;	genReceive
-   121F AA 83               573 	mov	r2,dph
-   1221 E5 82               574 	mov	a,dpl
-   1223 90 0B 16            575 	mov	dptr,#_Serial_GetInteger_max_length_1_1
-   1226 F0                  576 	movx	@dptr,a
-   1227 A3                  577 	inc	dptr
-   1228 EA                  578 	mov	a,r2
-   1229 F0                  579 	movx	@dptr,a
-                            580 ;	serial.c:39: int index = 0;
+   1278 AA 83               573 	mov	r2,dph
+   127A E5 82               574 	mov	a,dpl
+   127C 90 0B 19            575 	mov	dptr,#_Serial_GetInteger_max_length_1_1
+   127F F0                  576 	movx	@dptr,a
+   1280 A3                  577 	inc	dptr
+   1281 EA                  578 	mov	a,r2
+   1282 F0                  579 	movx	@dptr,a
+                            580 ;	serial.c:46: int index = 0;
                             581 ;	genAssign
-   122A 90 0B 23            582 	mov	dptr,#_Serial_GetInteger_index_1_1
-   122D E4                  583 	clr	a
-   122E F0                  584 	movx	@dptr,a
-   122F A3                  585 	inc	dptr
-   1230 F0                  586 	movx	@dptr,a
-                            587 ;	serial.c:41: if (max_length > 10){
+   1283 90 0B 26            582 	mov	dptr,#_Serial_GetInteger_index_1_1
+   1286 E4                  583 	clr	a
+   1287 F0                  584 	movx	@dptr,a
+   1288 A3                  585 	inc	dptr
+   1289 F0                  586 	movx	@dptr,a
+                            587 ;	serial.c:48: if (max_length > 10){
                             588 ;	genAssign
-   1231 90 0B 16            589 	mov	dptr,#_Serial_GetInteger_max_length_1_1
-   1234 E0                  590 	movx	a,@dptr
-   1235 FA                  591 	mov	r2,a
-   1236 A3                  592 	inc	dptr
-   1237 E0                  593 	movx	a,@dptr
-   1238 FB                  594 	mov	r3,a
+   128A 90 0B 19            589 	mov	dptr,#_Serial_GetInteger_max_length_1_1
+   128D E0                  590 	movx	a,@dptr
+   128E FA                  591 	mov	r2,a
+   128F A3                  592 	inc	dptr
+   1290 E0                  593 	movx	a,@dptr
+   1291 FB                  594 	mov	r3,a
                             595 ;	genCmpGt
                             596 ;	genCmp
-   1239 C3                  597 	clr	c
-   123A 74 0A               598 	mov	a,#0x0A
-   123C 9A                  599 	subb	a,r2
+   1292 C3                  597 	clr	c
+   1293 74 0A               598 	mov	a,#0x0A
+   1295 9A                  599 	subb	a,r2
                             600 ;	Peephole 159	avoided xrl during execution
-   123D 74 80               601 	mov	a,#(0x00 ^ 0x80)
-   123F 8B F0               602 	mov	b,r3
-   1241 63 F0 80            603 	xrl	b,#0x80
-   1244 95 F0               604 	subb	a,b
+   1296 74 80               601 	mov	a,#(0x00 ^ 0x80)
+   1298 8B F0               602 	mov	b,r3
+   129A 63 F0 80            603 	xrl	b,#0x80
+   129D 95 F0               604 	subb	a,b
                             605 ;	genIfxJump
                             606 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   1246 50 19               607 	jnc	00125$
+   129F 50 19               607 	jnc	00125$
                             608 ;	Peephole 300	removed redundant label 00128$
-                            609 ;	serial.c:42: printf("Serial_getInteger(): Error. Max_Length too large.");
+                            609 ;	serial.c:49: printf("Serial_getInteger(): Error. Max_Length too large.");
                             610 ;	genIpush
-   1248 74 29               611 	mov	a,#__str_0
-   124A C0 E0               612 	push	acc
-   124C 74 28               613 	mov	a,#(__str_0 >> 8)
-   124E C0 E0               614 	push	acc
-   1250 74 80               615 	mov	a,#0x80
-   1252 C0 E0               616 	push	acc
+   12A1 74 85               611 	mov	a,#__str_0
+   12A3 C0 E0               612 	push	acc
+   12A5 74 28               613 	mov	a,#(__str_0 >> 8)
+   12A7 C0 E0               614 	push	acc
+   12A9 74 80               615 	mov	a,#0x80
+   12AB C0 E0               616 	push	acc
                             617 ;	genCall
-   1254 12 18 9F            618 	lcall	_printf
-   1257 15 81               619 	dec	sp
-   1259 15 81               620 	dec	sp
-   125B 15 81               621 	dec	sp
-                            622 ;	serial.c:43: return -1;
+   12AD 12 18 F8            618 	lcall	_printf
+   12B0 15 81               619 	dec	sp
+   12B2 15 81               620 	dec	sp
+   12B4 15 81               621 	dec	sp
+                            622 ;	serial.c:50: return -1;
                             623 ;	genRet
                             624 ;	Peephole 182.b	used 16 bit load of dptr
-   125D 90 FF FF            625 	mov	dptr,#0xFFFF
+   12B6 90 FF FF            625 	mov	dptr,#0xFFFF
                             626 ;	Peephole 251.a	replaced ljmp to ret with ret
-   1260 22                  627 	ret
-                            628 ;	serial.c:46: while (index < max_length ){
-   1261                     629 00125$:
+   12B9 22                  627 	ret
+                            628 ;	serial.c:53: while (index < max_length ){
+   12BA                     629 00125$:
                             630 ;	genAssign
-   1261                     631 00116$:
+   12BA                     631 00116$:
                             632 ;	genAssign
-   1261 90 0B 23            633 	mov	dptr,#_Serial_GetInteger_index_1_1
-   1264 E0                  634 	movx	a,@dptr
-   1265 FC                  635 	mov	r4,a
-   1266 A3                  636 	inc	dptr
-   1267 E0                  637 	movx	a,@dptr
-   1268 FD                  638 	mov	r5,a
+   12BA 90 0B 26            633 	mov	dptr,#_Serial_GetInteger_index_1_1
+   12BD E0                  634 	movx	a,@dptr
+   12BE FC                  635 	mov	r4,a
+   12BF A3                  636 	inc	dptr
+   12C0 E0                  637 	movx	a,@dptr
+   12C1 FD                  638 	mov	r5,a
                             639 ;	genCmpLt
                             640 ;	genCmp
-   1269 C3                  641 	clr	c
-   126A EC                  642 	mov	a,r4
-   126B 9A                  643 	subb	a,r2
-   126C ED                  644 	mov	a,r5
-   126D 64 80               645 	xrl	a,#0x80
-   126F 8B F0               646 	mov	b,r3
-   1271 63 F0 80            647 	xrl	b,#0x80
-   1274 95 F0               648 	subb	a,b
+   12C2 C3                  641 	clr	c
+   12C3 EC                  642 	mov	a,r4
+   12C4 9A                  643 	subb	a,r2
+   12C5 ED                  644 	mov	a,r5
+   12C6 64 80               645 	xrl	a,#0x80
+   12C8 8B F0               646 	mov	b,r3
+   12CA 63 F0 80            647 	xrl	b,#0x80
+   12CD 95 F0               648 	subb	a,b
                             649 ;	genIfxJump
-   1276 40 03               650 	jc	00129$
-   1278 02 13 20            651 	ljmp	00118$
-   127B                     652 00129$:
-                            653 ;	serial.c:47: c = getchar();
+   12CF 40 03               650 	jc	00129$
+   12D1 02 13 79            651 	ljmp	00118$
+   12D4                     652 00129$:
+                            653 ;	serial.c:54: c = getchar();
                             654 ;	genCall
-   127B C0 02               655 	push	ar2
-   127D C0 03               656 	push	ar3
-   127F C0 04               657 	push	ar4
-   1281 C0 05               658 	push	ar5
-   1283 12 12 15            659 	lcall	_getchar
-   1286 AE 82               660 	mov	r6,dpl
-   1288 D0 05               661 	pop	ar5
-   128A D0 04               662 	pop	ar4
-   128C D0 03               663 	pop	ar3
-   128E D0 02               664 	pop	ar2
-                            665 ;	serial.c:48: putchar(c);
+   12D4 C0 02               655 	push	ar2
+   12D6 C0 03               656 	push	ar3
+   12D8 C0 04               657 	push	ar4
+   12DA C0 05               658 	push	ar5
+   12DC 12 12 6E            659 	lcall	_getchar
+   12DF AE 82               660 	mov	r6,dpl
+   12E1 D0 05               661 	pop	ar5
+   12E3 D0 04               662 	pop	ar4
+   12E5 D0 03               663 	pop	ar3
+   12E7 D0 02               664 	pop	ar2
+                            665 ;	serial.c:55: putchar(c);
                             666 ;	genCall
-   1290 8E 82               667 	mov	dpl,r6
-   1292 C0 02               668 	push	ar2
-   1294 C0 03               669 	push	ar3
-   1296 C0 04               670 	push	ar4
-   1298 C0 05               671 	push	ar5
-   129A C0 06               672 	push	ar6
-   129C 12 12 03            673 	lcall	_putchar
-   129F D0 06               674 	pop	ar6
-   12A1 D0 05               675 	pop	ar5
-   12A3 D0 04               676 	pop	ar4
-   12A5 D0 03               677 	pop	ar3
-   12A7 D0 02               678 	pop	ar2
-                            679 ;	serial.c:49: if (c == ENTER_KEY)
+   12E9 8E 82               667 	mov	dpl,r6
+   12EB C0 02               668 	push	ar2
+   12ED C0 03               669 	push	ar3
+   12EF C0 04               670 	push	ar4
+   12F1 C0 05               671 	push	ar5
+   12F3 C0 06               672 	push	ar6
+   12F5 12 12 5C            673 	lcall	_putchar
+   12F8 D0 06               674 	pop	ar6
+   12FA D0 05               675 	pop	ar5
+   12FC D0 04               676 	pop	ar4
+   12FE D0 03               677 	pop	ar3
+   1300 D0 02               678 	pop	ar2
+                            679 ;	serial.c:56: if (c == ENTER_KEY)
                             680 ;	genCmpEq
                             681 ;	gencjneshort
-   12A9 BE 0D 03            682 	cjne	r6,#0x0D,00130$
-   12AC 02 13 20            683 	ljmp	00118$
-   12AF                     684 00130$:
-                            685 ;	serial.c:51: else if (c == BACKSPACE_KEY)
+   1302 BE 0D 03            682 	cjne	r6,#0x0D,00130$
+   1305 02 13 79            683 	ljmp	00118$
+   1308                     684 00130$:
+                            685 ;	serial.c:58: else if (c == BACKSPACE_KEY)
                             686 ;	genCmpEq
                             687 ;	gencjneshort
                             688 ;	Peephole 112.b	changed ljmp to sjmp
                             689 ;	Peephole 198.b	optimized misc jump sequence
-   12AF BE 08 12            690 	cjne	r6,#0x08,00111$
+   1308 BE 08 12            690 	cjne	r6,#0x08,00111$
                             691 ;	Peephole 200.b	removed redundant sjmp
                             692 ;	Peephole 300	removed redundant label 00131$
                             693 ;	Peephole 300	removed redundant label 00132$
-                            694 ;	serial.c:52: --index;
+                            694 ;	serial.c:59: --index;
                             695 ;	genMinus
                             696 ;	genMinusDec
-   12B2 EC                  697 	mov	a,r4
-   12B3 24 FF               698 	add	a,#0xff
-   12B5 FF                  699 	mov	r7,a
-   12B6 ED                  700 	mov	a,r5
-   12B7 34 FF               701 	addc	a,#0xff
-   12B9 F8                  702 	mov	r0,a
+   130B EC                  697 	mov	a,r4
+   130C 24 FF               698 	add	a,#0xff
+   130E FF                  699 	mov	r7,a
+   130F ED                  700 	mov	a,r5
+   1310 34 FF               701 	addc	a,#0xff
+   1312 F8                  702 	mov	r0,a
                             703 ;	genAssign
-   12BA 90 0B 23            704 	mov	dptr,#_Serial_GetInteger_index_1_1
-   12BD EF                  705 	mov	a,r7
-   12BE F0                  706 	movx	@dptr,a
-   12BF A3                  707 	inc	dptr
-   12C0 E8                  708 	mov	a,r0
-   12C1 F0                  709 	movx	@dptr,a
+   1313 90 0B 26            704 	mov	dptr,#_Serial_GetInteger_index_1_1
+   1316 EF                  705 	mov	a,r7
+   1317 F0                  706 	movx	@dptr,a
+   1318 A3                  707 	inc	dptr
+   1319 E8                  708 	mov	a,r0
+   131A F0                  709 	movx	@dptr,a
                             710 ;	Peephole 112.b	changed ljmp to sjmp
-   12C2 80 9D               711 	sjmp	00116$
-   12C4                     712 00111$:
-                            713 ;	serial.c:53: else if (c == 'q' || c == 'Q'){
+   131B 80 9D               711 	sjmp	00116$
+   131D                     712 00111$:
+                            713 ;	serial.c:60: else if (c == 'q' || c == 'Q'){
                             714 ;	genCmpEq
                             715 ;	gencjneshort
-   12C4 BE 71 02            716 	cjne	r6,#0x71,00133$
+   131D BE 71 02            716 	cjne	r6,#0x71,00133$
                             717 ;	Peephole 112.b	changed ljmp to sjmp
-   12C7 80 03               718 	sjmp	00106$
-   12C9                     719 00133$:
+   1320 80 03               718 	sjmp	00106$
+   1322                     719 00133$:
                             720 ;	genCmpEq
                             721 ;	gencjneshort
                             722 ;	Peephole 112.b	changed ljmp to sjmp
                             723 ;	Peephole 198.b	optimized misc jump sequence
-   12C9 BE 51 04            724 	cjne	r6,#0x51,00107$
+   1322 BE 51 04            724 	cjne	r6,#0x51,00107$
                             725 ;	Peephole 200.b	removed redundant sjmp
                             726 ;	Peephole 300	removed redundant label 00134$
                             727 ;	Peephole 300	removed redundant label 00135$
-   12CC                     728 00106$:
-                            729 ;	serial.c:54: return -2;
+   1325                     728 00106$:
+                            729 ;	serial.c:61: return -2;
                             730 ;	genRet
                             731 ;	Peephole 182.b	used 16 bit load of dptr
-   12CC 90 FF FE            732 	mov	dptr,#0xFFFE
+   1325 90 FF FE            732 	mov	dptr,#0xFFFE
                             733 ;	Peephole 251.a	replaced ljmp to ret with ret
-   12CF 22                  734 	ret
-   12D0                     735 00107$:
-                            736 ;	serial.c:56: else if ( isdigit(c) ){
+   1328 22                  734 	ret
+   1329                     735 00107$:
+                            736 ;	serial.c:63: else if ( isdigit(c) ){
                             737 ;	genCall
-   12D0 8E 82               738 	mov	dpl,r6
-   12D2 C0 02               739 	push	ar2
-   12D4 C0 03               740 	push	ar3
-   12D6 C0 04               741 	push	ar4
-   12D8 C0 05               742 	push	ar5
-   12DA C0 06               743 	push	ar6
-   12DC 12 16 06            744 	lcall	_isdigit
-   12DF E5 82               745 	mov	a,dpl
-   12E1 D0 06               746 	pop	ar6
-   12E3 D0 05               747 	pop	ar5
-   12E5 D0 04               748 	pop	ar4
-   12E7 D0 03               749 	pop	ar3
-   12E9 D0 02               750 	pop	ar2
+   1329 8E 82               738 	mov	dpl,r6
+   132B C0 02               739 	push	ar2
+   132D C0 03               740 	push	ar3
+   132F C0 04               741 	push	ar4
+   1331 C0 05               742 	push	ar5
+   1333 C0 06               743 	push	ar6
+   1335 12 16 5F            744 	lcall	_isdigit
+   1338 E5 82               745 	mov	a,dpl
+   133A D0 06               746 	pop	ar6
+   133C D0 05               747 	pop	ar5
+   133E D0 04               748 	pop	ar4
+   1340 D0 03               749 	pop	ar3
+   1342 D0 02               750 	pop	ar2
                             751 ;	genIfx
                             752 ;	genIfxJump
                             753 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   12EB 60 1A               754 	jz	00104$
+   1344 60 1A               754 	jz	00104$
                             755 ;	Peephole 300	removed redundant label 00136$
-                            756 ;	serial.c:57: buf[index] = c;
+                            756 ;	serial.c:64: buf[index] = c;
                             757 ;	genPlus
                             758 ;	Peephole 236.g	used r4 instead of ar4
-   12ED EC                  759 	mov	a,r4
-   12EE 24 18               760 	add	a,#_Serial_GetInteger_buf_1_1
-   12F0 F5 82               761 	mov	dpl,a
+   1346 EC                  759 	mov	a,r4
+   1347 24 1B               760 	add	a,#_Serial_GetInteger_buf_1_1
+   1349 F5 82               761 	mov	dpl,a
                             762 ;	Peephole 236.g	used r5 instead of ar5
-   12F2 ED                  763 	mov	a,r5
-   12F3 34 0B               764 	addc	a,#(_Serial_GetInteger_buf_1_1 >> 8)
-   12F5 F5 83               765 	mov	dph,a
+   134B ED                  763 	mov	a,r5
+   134C 34 0B               764 	addc	a,#(_Serial_GetInteger_buf_1_1 >> 8)
+   134E F5 83               765 	mov	dph,a
                             766 ;	genPointerSet
                             767 ;     genFarPointerSet
-   12F7 EE                  768 	mov	a,r6
-   12F8 F0                  769 	movx	@dptr,a
-                            770 ;	serial.c:58: ++index;
+   1350 EE                  768 	mov	a,r6
+   1351 F0                  769 	movx	@dptr,a
+                            770 ;	serial.c:65: ++index;
                             771 ;	genPlus
-   12F9 90 0B 23            772 	mov	dptr,#_Serial_GetInteger_index_1_1
+   1352 90 0B 26            772 	mov	dptr,#_Serial_GetInteger_index_1_1
                             773 ;     genPlusIncr
-   12FC 74 01               774 	mov	a,#0x01
+   1355 74 01               774 	mov	a,#0x01
                             775 ;	Peephole 236.a	used r4 instead of ar4
-   12FE 2C                  776 	add	a,r4
-   12FF F0                  777 	movx	@dptr,a
+   1357 2C                  776 	add	a,r4
+   1358 F0                  777 	movx	@dptr,a
                             778 ;	Peephole 181	changed mov to clr
-   1300 E4                  779 	clr	a
+   1359 E4                  779 	clr	a
                             780 ;	Peephole 236.b	used r5 instead of ar5
-   1301 3D                  781 	addc	a,r5
-   1302 A3                  782 	inc	dptr
-   1303 F0                  783 	movx	@dptr,a
-   1304 02 12 61            784 	ljmp	00116$
-   1307                     785 00104$:
-                            786 ;	serial.c:61: printf("\r\nInvalid character. Enter only digits.");
+   135A 3D                  781 	addc	a,r5
+   135B A3                  782 	inc	dptr
+   135C F0                  783 	movx	@dptr,a
+   135D 02 12 BA            784 	ljmp	00116$
+   1360                     785 00104$:
+                            786 ;	serial.c:68: printf("\r\nInvalid character. Enter only digits.");
                             787 ;	genIpush
-   1307 74 5B               788 	mov	a,#__str_1
-   1309 C0 E0               789 	push	acc
-   130B 74 28               790 	mov	a,#(__str_1 >> 8)
-   130D C0 E0               791 	push	acc
-   130F 74 80               792 	mov	a,#0x80
-   1311 C0 E0               793 	push	acc
+   1360 74 B7               788 	mov	a,#__str_1
+   1362 C0 E0               789 	push	acc
+   1364 74 28               790 	mov	a,#(__str_1 >> 8)
+   1366 C0 E0               791 	push	acc
+   1368 74 80               792 	mov	a,#0x80
+   136A C0 E0               793 	push	acc
                             794 ;	genCall
-   1313 12 18 9F            795 	lcall	_printf
-   1316 15 81               796 	dec	sp
-   1318 15 81               797 	dec	sp
-   131A 15 81               798 	dec	sp
-                            799 ;	serial.c:62: return -1;
+   136C 12 18 F8            795 	lcall	_printf
+   136F 15 81               796 	dec	sp
+   1371 15 81               797 	dec	sp
+   1373 15 81               798 	dec	sp
+                            799 ;	serial.c:69: return -1;
                             800 ;	genRet
                             801 ;	Peephole 182.b	used 16 bit load of dptr
-   131C 90 FF FF            802 	mov	dptr,#0xFFFF
+   1375 90 FF FF            802 	mov	dptr,#0xFFFF
                             803 ;	Peephole 112.b	changed ljmp to sjmp
                             804 ;	Peephole 251.b	replaced sjmp to ret with ret
-   131F 22                  805 	ret
-   1320                     806 00118$:
-                            807 ;	serial.c:65: buf[index] = '\0';  //Null terminate the string
+   1378 22                  805 	ret
+   1379                     806 00118$:
+                            807 ;	serial.c:72: buf[index] = '\0';  //Null terminate the string
                             808 ;	genAssign
-   1320 90 0B 23            809 	mov	dptr,#_Serial_GetInteger_index_1_1
-   1323 E0                  810 	movx	a,@dptr
-   1324 FA                  811 	mov	r2,a
-   1325 A3                  812 	inc	dptr
-   1326 E0                  813 	movx	a,@dptr
-   1327 FB                  814 	mov	r3,a
+   1379 90 0B 26            809 	mov	dptr,#_Serial_GetInteger_index_1_1
+   137C E0                  810 	movx	a,@dptr
+   137D FA                  811 	mov	r2,a
+   137E A3                  812 	inc	dptr
+   137F E0                  813 	movx	a,@dptr
+   1380 FB                  814 	mov	r3,a
                             815 ;	genPlus
                             816 ;	Peephole 236.g	used r2 instead of ar2
-   1328 EA                  817 	mov	a,r2
-   1329 24 18               818 	add	a,#_Serial_GetInteger_buf_1_1
-   132B F5 82               819 	mov	dpl,a
+   1381 EA                  817 	mov	a,r2
+   1382 24 1B               818 	add	a,#_Serial_GetInteger_buf_1_1
+   1384 F5 82               819 	mov	dpl,a
                             820 ;	Peephole 236.g	used r3 instead of ar3
-   132D EB                  821 	mov	a,r3
-   132E 34 0B               822 	addc	a,#(_Serial_GetInteger_buf_1_1 >> 8)
-   1330 F5 83               823 	mov	dph,a
+   1386 EB                  821 	mov	a,r3
+   1387 34 0B               822 	addc	a,#(_Serial_GetInteger_buf_1_1 >> 8)
+   1389 F5 83               823 	mov	dph,a
                             824 ;	genPointerSet
                             825 ;     genFarPointerSet
                             826 ;	Peephole 181	changed mov to clr
-   1332 E4                  827 	clr	a
-   1333 F0                  828 	movx	@dptr,a
-                            829 ;	serial.c:66: return atoi(buf);
+   138B E4                  827 	clr	a
+   138C F0                  828 	movx	@dptr,a
+                            829 ;	serial.c:73: return atoi(buf);
                             830 ;	genCall
                             831 ;	Peephole 182.a	used 16 bit load of DPTR
-   1334 90 0B 18            832 	mov	dptr,#_Serial_GetInteger_buf_1_1
-   1337 75 F0 00            833 	mov	b,#0x00
+   138D 90 0B 1B            832 	mov	dptr,#_Serial_GetInteger_buf_1_1
+   1390 75 F0 00            833 	mov	b,#0x00
                             834 ;	genRet
                             835 ;	Peephole 150.b	removed misc moves via dph, dpl before return
                             836 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   133A 02 14 D3            837 	ljmp	_atoi
+   1393 02 15 2C            837 	ljmp	_atoi
                             838 ;
                             839 ;------------------------------------------------------------
                             840 ;Allocation info for local variables in function 'getstring'
@@ -845,207 +845,207 @@
                             845 ;c                         Allocated with name '_getstring_c_1_1'
                             846 ;offset                    Allocated with name '_getstring_offset_1_1'
                             847 ;------------------------------------------------------------
-                            848 ;	serial.c:70: void getstring(unsigned char *buf, int length){
+                            848 ;	serial.c:77: void getstring(unsigned char *buf, int length){
                             849 ;	-----------------------------------------
                             850 ;	 function getstring
                             851 ;	-----------------------------------------
-   133D                     852 _getstring:
+   1396                     852 _getstring:
                             853 ;	genReceive
-   133D AA F0               854 	mov	r2,b
-   133F AB 83               855 	mov	r3,dph
-   1341 E5 82               856 	mov	a,dpl
-   1343 90 0B 27            857 	mov	dptr,#_getstring_buf_1_1
-   1346 F0                  858 	movx	@dptr,a
-   1347 A3                  859 	inc	dptr
-   1348 EB                  860 	mov	a,r3
-   1349 F0                  861 	movx	@dptr,a
-   134A A3                  862 	inc	dptr
-   134B EA                  863 	mov	a,r2
-   134C F0                  864 	movx	@dptr,a
-                            865 ;	serial.c:73: c = getchar();
+   1396 AA F0               854 	mov	r2,b
+   1398 AB 83               855 	mov	r3,dph
+   139A E5 82               856 	mov	a,dpl
+   139C 90 0B 2A            857 	mov	dptr,#_getstring_buf_1_1
+   139F F0                  858 	movx	@dptr,a
+   13A0 A3                  859 	inc	dptr
+   13A1 EB                  860 	mov	a,r3
+   13A2 F0                  861 	movx	@dptr,a
+   13A3 A3                  862 	inc	dptr
+   13A4 EA                  863 	mov	a,r2
+   13A5 F0                  864 	movx	@dptr,a
+                            865 ;	serial.c:80: c = getchar();
                             866 ;	genCall
-   134D 12 12 15            867 	lcall	_getchar
-   1350 AA 82               868 	mov	r2,dpl
+   13A6 12 12 6E            867 	lcall	_getchar
+   13A9 AA 82               868 	mov	r2,dpl
                             869 ;	genAssign
-   1352 90 0B 2A            870 	mov	dptr,#_getstring_c_1_1
-   1355 EA                  871 	mov	a,r2
-   1356 F0                  872 	movx	@dptr,a
-                            873 ;	serial.c:74: putchar(c);
+   13AB 90 0B 2D            870 	mov	dptr,#_getstring_c_1_1
+   13AE EA                  871 	mov	a,r2
+   13AF F0                  872 	movx	@dptr,a
+                            873 ;	serial.c:81: putchar(c);
                             874 ;	genCall
-   1357 8A 82               875 	mov	dpl,r2
-   1359 12 12 03            876 	lcall	_putchar
-                            877 ;	serial.c:75: while(c != ENTER_KEY && offset < length){
+   13B0 8A 82               875 	mov	dpl,r2
+   13B2 12 12 5C            876 	lcall	_putchar
+                            877 ;	serial.c:82: while(c != ENTER_KEY && offset < length){
                             878 ;	genAssign
-   135C 90 0B 25            879 	mov	dptr,#_getstring_PARM_2
-   135F E0                  880 	movx	a,@dptr
-   1360 FA                  881 	mov	r2,a
-   1361 A3                  882 	inc	dptr
-   1362 E0                  883 	movx	a,@dptr
-   1363 FB                  884 	mov	r3,a
+   13B5 90 0B 28            879 	mov	dptr,#_getstring_PARM_2
+   13B8 E0                  880 	movx	a,@dptr
+   13B9 FA                  881 	mov	r2,a
+   13BA A3                  882 	inc	dptr
+   13BB E0                  883 	movx	a,@dptr
+   13BC FB                  884 	mov	r3,a
                             885 ;	genAssign
-   1364 90 0B 27            886 	mov	dptr,#_getstring_buf_1_1
-   1367 E0                  887 	movx	a,@dptr
-   1368 F5 08               888 	mov	_getstring_sloc0_1_0,a
-   136A A3                  889 	inc	dptr
-   136B E0                  890 	movx	a,@dptr
-   136C F5 09               891 	mov	(_getstring_sloc0_1_0 + 1),a
-   136E A3                  892 	inc	dptr
-   136F E0                  893 	movx	a,@dptr
-   1370 F5 0A               894 	mov	(_getstring_sloc0_1_0 + 2),a
+   13BD 90 0B 2A            886 	mov	dptr,#_getstring_buf_1_1
+   13C0 E0                  887 	movx	a,@dptr
+   13C1 F5 08               888 	mov	_getstring_sloc0_1_0,a
+   13C3 A3                  889 	inc	dptr
+   13C4 E0                  890 	movx	a,@dptr
+   13C5 F5 09               891 	mov	(_getstring_sloc0_1_0 + 1),a
+   13C7 A3                  892 	inc	dptr
+   13C8 E0                  893 	movx	a,@dptr
+   13C9 F5 0A               894 	mov	(_getstring_sloc0_1_0 + 2),a
                             895 ;	genAssign
-   1372 7F 00               896 	mov	r7,#0x00
-   1374 78 00               897 	mov	r0,#0x00
-   1376                     898 00102$:
+   13CB 7F 00               896 	mov	r7,#0x00
+   13CD 78 00               897 	mov	r0,#0x00
+   13CF                     898 00102$:
                             899 ;	genAssign
-   1376 90 0B 2A            900 	mov	dptr,#_getstring_c_1_1
-   1379 E0                  901 	movx	a,@dptr
-   137A F9                  902 	mov	r1,a
+   13CF 90 0B 2D            900 	mov	dptr,#_getstring_c_1_1
+   13D2 E0                  901 	movx	a,@dptr
+   13D3 F9                  902 	mov	r1,a
                             903 ;	genCmpEq
                             904 ;	gencjneshort
-   137B B9 0D 02            905 	cjne	r1,#0x0D,00111$
+   13D4 B9 0D 02            905 	cjne	r1,#0x0D,00111$
                             906 ;	Peephole 112.b	changed ljmp to sjmp
-   137E 80 5D               907 	sjmp	00104$
-   1380                     908 00111$:
+   13D7 80 5D               907 	sjmp	00104$
+   13D9                     908 00111$:
                             909 ;	genCmpLt
                             910 ;	genCmp
-   1380 C3                  911 	clr	c
-   1381 EF                  912 	mov	a,r7
-   1382 9A                  913 	subb	a,r2
-   1383 E8                  914 	mov	a,r0
-   1384 64 80               915 	xrl	a,#0x80
-   1386 8B F0               916 	mov	b,r3
-   1388 63 F0 80            917 	xrl	b,#0x80
-   138B 95 F0               918 	subb	a,b
+   13D9 C3                  911 	clr	c
+   13DA EF                  912 	mov	a,r7
+   13DB 9A                  913 	subb	a,r2
+   13DC E8                  914 	mov	a,r0
+   13DD 64 80               915 	xrl	a,#0x80
+   13DF 8B F0               916 	mov	b,r3
+   13E1 63 F0 80            917 	xrl	b,#0x80
+   13E4 95 F0               918 	subb	a,b
                             919 ;	genIfxJump
                             920 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   138D 50 4E               921 	jnc	00104$
+   13E6 50 4E               921 	jnc	00104$
                             922 ;	Peephole 300	removed redundant label 00112$
-                            923 ;	serial.c:76: buf[offset] = c;
+                            923 ;	serial.c:83: buf[offset] = c;
                             924 ;	genIpush
-   138F C0 02               925 	push	ar2
-   1391 C0 03               926 	push	ar3
+   13E8 C0 02               925 	push	ar2
+   13EA C0 03               926 	push	ar3
                             927 ;	genPlus
                             928 ;	Peephole 236.g	used r7 instead of ar7
-   1393 EF                  929 	mov	a,r7
-   1394 25 08               930 	add	a,_getstring_sloc0_1_0
-   1396 FA                  931 	mov	r2,a
+   13EC EF                  929 	mov	a,r7
+   13ED 25 08               930 	add	a,_getstring_sloc0_1_0
+   13EF FA                  931 	mov	r2,a
                             932 ;	Peephole 236.g	used r0 instead of ar0
-   1397 E8                  933 	mov	a,r0
-   1398 35 09               934 	addc	a,(_getstring_sloc0_1_0 + 1)
-   139A FB                  935 	mov	r3,a
-   139B AC 0A               936 	mov	r4,(_getstring_sloc0_1_0 + 2)
+   13F0 E8                  933 	mov	a,r0
+   13F1 35 09               934 	addc	a,(_getstring_sloc0_1_0 + 1)
+   13F3 FB                  935 	mov	r3,a
+   13F4 AC 0A               936 	mov	r4,(_getstring_sloc0_1_0 + 2)
                             937 ;	genPointerSet
                             938 ;	genGenPointerSet
-   139D 8A 82               939 	mov	dpl,r2
-   139F 8B 83               940 	mov	dph,r3
-   13A1 8C F0               941 	mov	b,r4
-   13A3 E9                  942 	mov	a,r1
-   13A4 12 17 E0            943 	lcall	__gptrput
-                            944 ;	serial.c:77: c = getchar();
+   13F6 8A 82               939 	mov	dpl,r2
+   13F8 8B 83               940 	mov	dph,r3
+   13FA 8C F0               941 	mov	b,r4
+   13FC E9                  942 	mov	a,r1
+   13FD 12 18 39            943 	lcall	__gptrput
+                            944 ;	serial.c:84: c = getchar();
                             945 ;	genCall
-   13A7 C0 03               946 	push	ar3
-   13A9 C0 07               947 	push	ar7
-   13AB C0 00               948 	push	ar0
-   13AD 12 12 15            949 	lcall	_getchar
-   13B0 AA 82               950 	mov	r2,dpl
-   13B2 D0 00               951 	pop	ar0
-   13B4 D0 07               952 	pop	ar7
-   13B6 D0 03               953 	pop	ar3
+   1400 C0 03               946 	push	ar3
+   1402 C0 07               947 	push	ar7
+   1404 C0 00               948 	push	ar0
+   1406 12 12 6E            949 	lcall	_getchar
+   1409 AA 82               950 	mov	r2,dpl
+   140B D0 00               951 	pop	ar0
+   140D D0 07               952 	pop	ar7
+   140F D0 03               953 	pop	ar3
                             954 ;	genAssign
-   13B8 90 0B 2A            955 	mov	dptr,#_getstring_c_1_1
-   13BB EA                  956 	mov	a,r2
-   13BC F0                  957 	movx	@dptr,a
-                            958 ;	serial.c:78: putchar(c);
+   1411 90 0B 2D            955 	mov	dptr,#_getstring_c_1_1
+   1414 EA                  956 	mov	a,r2
+   1415 F0                  957 	movx	@dptr,a
+                            958 ;	serial.c:85: putchar(c);
                             959 ;	genCall
-   13BD 8A 82               960 	mov	dpl,r2
-   13BF C0 02               961 	push	ar2
-   13C1 C0 03               962 	push	ar3
-   13C3 C0 07               963 	push	ar7
-   13C5 C0 00               964 	push	ar0
-   13C7 12 12 03            965 	lcall	_putchar
-   13CA D0 00               966 	pop	ar0
-   13CC D0 07               967 	pop	ar7
-   13CE D0 03               968 	pop	ar3
-   13D0 D0 02               969 	pop	ar2
-                            970 ;	serial.c:80: ++offset;
+   1416 8A 82               960 	mov	dpl,r2
+   1418 C0 02               961 	push	ar2
+   141A C0 03               962 	push	ar3
+   141C C0 07               963 	push	ar7
+   141E C0 00               964 	push	ar0
+   1420 12 12 5C            965 	lcall	_putchar
+   1423 D0 00               966 	pop	ar0
+   1425 D0 07               967 	pop	ar7
+   1427 D0 03               968 	pop	ar3
+   1429 D0 02               969 	pop	ar2
+                            970 ;	serial.c:87: ++offset;
                             971 ;	genPlus
                             972 ;     genPlusIncr
-   13D2 0F                  973 	inc	r7
-   13D3 BF 00 01            974 	cjne	r7,#0x00,00113$
-   13D6 08                  975 	inc	r0
-   13D7                     976 00113$:
+   142B 0F                  973 	inc	r7
+   142C BF 00 01            974 	cjne	r7,#0x00,00113$
+   142F 08                  975 	inc	r0
+   1430                     976 00113$:
                             977 ;	genIpop
-   13D7 D0 03               978 	pop	ar3
-   13D9 D0 02               979 	pop	ar2
+   1430 D0 03               978 	pop	ar3
+   1432 D0 02               979 	pop	ar2
                             980 ;	Peephole 112.b	changed ljmp to sjmp
-   13DB 80 99               981 	sjmp	00102$
-   13DD                     982 00104$:
-                            983 ;	serial.c:84: buf[offset] = '\0';
+   1434 80 99               981 	sjmp	00102$
+   1436                     982 00104$:
+                            983 ;	serial.c:91: buf[offset] = '\0';
                             984 ;	genAssign
-   13DD 90 0B 27            985 	mov	dptr,#_getstring_buf_1_1
-   13E0 E0                  986 	movx	a,@dptr
-   13E1 FA                  987 	mov	r2,a
-   13E2 A3                  988 	inc	dptr
-   13E3 E0                  989 	movx	a,@dptr
-   13E4 FB                  990 	mov	r3,a
-   13E5 A3                  991 	inc	dptr
-   13E6 E0                  992 	movx	a,@dptr
-   13E7 FC                  993 	mov	r4,a
+   1436 90 0B 2A            985 	mov	dptr,#_getstring_buf_1_1
+   1439 E0                  986 	movx	a,@dptr
+   143A FA                  987 	mov	r2,a
+   143B A3                  988 	inc	dptr
+   143C E0                  989 	movx	a,@dptr
+   143D FB                  990 	mov	r3,a
+   143E A3                  991 	inc	dptr
+   143F E0                  992 	movx	a,@dptr
+   1440 FC                  993 	mov	r4,a
                             994 ;	genPlus
                             995 ;	Peephole 236.g	used r7 instead of ar7
-   13E8 EF                  996 	mov	a,r7
+   1441 EF                  996 	mov	a,r7
                             997 ;	Peephole 236.a	used r2 instead of ar2
-   13E9 2A                  998 	add	a,r2
-   13EA FF                  999 	mov	r7,a
+   1442 2A                  998 	add	a,r2
+   1443 FF                  999 	mov	r7,a
                            1000 ;	Peephole 236.g	used r0 instead of ar0
-   13EB E8                 1001 	mov	a,r0
+   1444 E8                 1001 	mov	a,r0
                            1002 ;	Peephole 236.b	used r3 instead of ar3
-   13EC 3B                 1003 	addc	a,r3
-   13ED F8                 1004 	mov	r0,a
-   13EE 8C 05              1005 	mov	ar5,r4
+   1445 3B                 1003 	addc	a,r3
+   1446 F8                 1004 	mov	r0,a
+   1447 8C 05              1005 	mov	ar5,r4
                            1006 ;	genPointerSet
                            1007 ;	genGenPointerSet
-   13F0 8F 82              1008 	mov	dpl,r7
-   13F2 88 83              1009 	mov	dph,r0
-   13F4 8D F0              1010 	mov	b,r5
+   1449 8F 82              1008 	mov	dpl,r7
+   144B 88 83              1009 	mov	dph,r0
+   144D 8D F0              1010 	mov	b,r5
                            1011 ;	Peephole 181	changed mov to clr
-   13F6 E4                 1012 	clr	a
+   144F E4                 1012 	clr	a
                            1013 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   13F7 02 17 E0           1014 	ljmp	__gptrput
+   1450 02 18 39           1014 	ljmp	__gptrput
                            1015 ;
                            1016 ;------------------------------------------------------------
                            1017 ;Allocation info for local variables in function 'Serial_Init'
                            1018 ;------------------------------------------------------------
                            1019 ;------------------------------------------------------------
-                           1020 ;	serial.c:90: void Serial_Init(void){
+                           1020 ;	serial.c:97: void Serial_Init(void){
                            1021 ;	-----------------------------------------
                            1022 ;	 function Serial_Init
                            1023 ;	-----------------------------------------
-   13FA                    1024 _Serial_Init:
-                           1025 ;	serial.c:91: SCON = SCON_SERIAL_INIT;    //Init serial port
+   1453                    1024 _Serial_Init:
+                           1025 ;	serial.c:98: SCON = SCON_SERIAL_INIT;    //Init serial port
                            1026 ;	genAssign
-   13FA 75 98 50           1027 	mov	_SCON,#0x50
-                           1028 ;	serial.c:92: TMOD = TIMER1_TMOD_VAL;     // 8 bit auto-reload mode 2
+   1453 75 98 50           1027 	mov	_SCON,#0x50
+                           1028 ;	serial.c:99: TMOD = TIMER1_TMOD_VAL;     // 8 bit auto-reload mode 2
                            1029 ;	genAssign
-   13FD 75 89 20           1030 	mov	_TMOD,#0x20
-                           1031 ;	serial.c:93: TH1 = TIMER1_RELOAD_VAL;
+   1456 75 89 20           1030 	mov	_TMOD,#0x20
+                           1031 ;	serial.c:100: TH1 = TIMER1_RELOAD_VAL;
                            1032 ;	genAssign
-   1400 75 8D FD           1033 	mov	_TH1,#0xFD
-                           1034 ;	serial.c:94: TL1 = TIMER1_RELOAD_VAL;  //Auto-Reload value for timer 1 baud-rate = 9600
+   1459 75 8D FD           1033 	mov	_TH1,#0xFD
+                           1034 ;	serial.c:101: TL1 = TIMER1_RELOAD_VAL;  //Auto-Reload value for timer 1 baud-rate = 9600
                            1035 ;	genAssign
-   1403 75 8B FD           1036 	mov	_TL1,#0xFD
-                           1037 ;	serial.c:96: TR1 = 1;
+   145C 75 8B FD           1036 	mov	_TL1,#0xFD
+                           1037 ;	serial.c:103: TR1 = 1;
                            1038 ;	genAssign
-   1406 D2 8E              1039 	setb	_TR1
-                           1040 ;	serial.c:97: TI = 1; //Clear to start
+   145F D2 8E              1039 	setb	_TR1
+                           1040 ;	serial.c:104: TI = 1; //Clear to start
                            1041 ;	genAssign
-   1408 D2 99              1042 	setb	_TI
+   1461 D2 99              1042 	setb	_TI
                            1043 ;	Peephole 300	removed redundant label 00101$
-   140A 22                 1044 	ret
+   1463 22                 1044 	ret
                            1045 	.area CSEG    (CODE)
                            1046 	.area CONST   (CODE)
-   2829                    1047 __str_0:
-   2829 53 65 72 69 61 6C  1048 	.ascii "Serial_getInteger(): Error. Max_Length too large."
+   2885                    1047 __str_0:
+   2885 53 65 72 69 61 6C  1048 	.ascii "Serial_getInteger(): Error. Max_Length too large."
         5F 67 65 74 49 6E
         74 65 67 65 72 28
         29 3A 20 45 72 72
@@ -1054,16 +1054,16 @@
         74 68 20 74 6F 6F
         20 6C 61 72 67 65
         2E
-   285A 00                 1049 	.db 0x00
-   285B                    1050 __str_1:
-   285B 0D                 1051 	.db 0x0D
-   285C 0A                 1052 	.db 0x0A
-   285D 49 6E 76 61 6C 69  1053 	.ascii "Invalid character. Enter only digits."
+   28B6 00                 1049 	.db 0x00
+   28B7                    1050 __str_1:
+   28B7 0D                 1051 	.db 0x0D
+   28B8 0A                 1052 	.db 0x0A
+   28B9 49 6E 76 61 6C 69  1053 	.ascii "Invalid character. Enter only digits."
         64 20 63 68 61 72
         61 63 74 65 72 2E
         20 45 6E 74 65 72
         20 6F 6E 6C 79 20
         64 69 67 69 74 73
         2E
-   2882 00                 1054 	.db 0x00
+   28DE 00                 1054 	.db 0x00
                            1055 	.area XINIT   (CODE)

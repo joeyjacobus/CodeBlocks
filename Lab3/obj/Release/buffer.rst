@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Tue Oct 11 21:00:08 2016
+                              4 ; This file generated Wed Oct 12 21:53:21 2016
                               5 ;--------------------------------------------------------
                               6 	.module buffer
                               7 	.optsdcc -mmcs51 --model-large
@@ -145,7 +145,7 @@
                             145 ;------------------------------------------------------------
                             146 ;buf                       Allocated with name '_Buffer_Print_Info_buf_1_1'
                             147 ;------------------------------------------------------------
-                            148 ;	buffer.c:11: void Buffer_Print_Info(Buffer *buf){
+                            148 ;	buffer.c:17: void Buffer_Print_Info(Buffer *buf){
                             149 ;	-----------------------------------------
                             150 ;	 function Buffer_Print_Info
                             151 ;	-----------------------------------------
@@ -170,33 +170,33 @@
    006E A3                  170 	inc	dptr
    006F EA                  171 	mov	a,r2
    0070 F0                  172 	movx	@dptr,a
-                            173 ;	buffer.c:13: printf ("\r\n\r\n");
+                            173 ;	buffer.c:19: printf ("\r\n\r\n");
                             174 ;	genIpush
-   0071 74 5A               175 	mov	a,#__str_0
+   0071 74 B3               175 	mov	a,#__str_0
    0073 C0 E0               176 	push	acc
    0075 74 21               177 	mov	a,#(__str_0 >> 8)
    0077 C0 E0               178 	push	acc
    0079 74 80               179 	mov	a,#0x80
    007B C0 E0               180 	push	acc
                             181 ;	genCall
-   007D 12 18 9F            182 	lcall	_printf
+   007D 12 18 F8            182 	lcall	_printf
    0080 15 81               183 	dec	sp
    0082 15 81               184 	dec	sp
    0084 15 81               185 	dec	sp
-                            186 ;	buffer.c:14: printf("********************************\r\n");
+                            186 ;	buffer.c:20: printf("********************************\r\n");
                             187 ;	genIpush
-   0086 74 5F               188 	mov	a,#__str_1
+   0086 74 B8               188 	mov	a,#__str_1
    0088 C0 E0               189 	push	acc
    008A 74 21               190 	mov	a,#(__str_1 >> 8)
    008C C0 E0               191 	push	acc
    008E 74 80               192 	mov	a,#0x80
    0090 C0 E0               193 	push	acc
                             194 ;	genCall
-   0092 12 18 9F            195 	lcall	_printf
+   0092 12 18 F8            195 	lcall	_printf
    0095 15 81               196 	dec	sp
    0097 15 81               197 	dec	sp
    0099 15 81               198 	dec	sp
-                            199 ;	buffer.c:15: printf("Buffer Number:   %d\r\n", buf->buf_id);
+                            199 ;	buffer.c:21: printf("Buffer Number:   %d\r\n", buf->buf_id);
                             200 ;	genAssign
    009B 90 00 00            201 	mov	dptr,#_Buffer_Print_Info_buf_1_1
    009E E0                  202 	movx	a,@dptr
@@ -224,10 +224,10 @@
    00AF 8D 82               224 	mov	dpl,r5
    00B1 8E 83               225 	mov	dph,r6
    00B3 8F F0               226 	mov	b,r7
-   00B5 12 21 3E            227 	lcall	__gptrget
+   00B5 12 21 97            227 	lcall	__gptrget
    00B8 FD                  228 	mov	r5,a
    00B9 A3                  229 	inc	dptr
-   00BA 12 21 3E            230 	lcall	__gptrget
+   00BA 12 21 97            230 	lcall	__gptrget
    00BD FE                  231 	mov	r6,a
                             232 ;	genIpush
    00BE C0 02               233 	push	ar2
@@ -236,30 +236,30 @@
    00C4 C0 05               236 	push	ar5
    00C6 C0 06               237 	push	ar6
                             238 ;	genIpush
-   00C8 74 82               239 	mov	a,#__str_2
+   00C8 74 DB               239 	mov	a,#__str_2
    00CA C0 E0               240 	push	acc
    00CC 74 21               241 	mov	a,#(__str_2 >> 8)
    00CE C0 E0               242 	push	acc
    00D0 74 80               243 	mov	a,#0x80
    00D2 C0 E0               244 	push	acc
                             245 ;	genCall
-   00D4 12 18 9F            246 	lcall	_printf
+   00D4 12 18 F8            246 	lcall	_printf
    00D7 E5 81               247 	mov	a,sp
    00D9 24 FB               248 	add	a,#0xfb
    00DB F5 81               249 	mov	sp,a
    00DD D0 04               250 	pop	ar4
    00DF D0 03               251 	pop	ar3
    00E1 D0 02               252 	pop	ar2
-                            253 ;	buffer.c:16: printf("Start Address:   %p\r\n", buf->buf_start);
+                            253 ;	buffer.c:22: printf("Start Address:   %p\r\n", buf->buf_start);
                             254 ;	genPointerGet
                             255 ;	genGenPointerGet
    00E3 8A 82               256 	mov	dpl,r2
    00E5 8B 83               257 	mov	dph,r3
    00E7 8C F0               258 	mov	b,r4
-   00E9 12 21 3E            259 	lcall	__gptrget
+   00E9 12 21 97            259 	lcall	__gptrget
    00EC FD                  260 	mov	r5,a
    00ED A3                  261 	inc	dptr
-   00EE 12 21 3E            262 	lcall	__gptrget
+   00EE 12 21 97            262 	lcall	__gptrget
    00F1 FE                  263 	mov	r6,a
                             264 ;	genCast
    00F2 7F 00               265 	mov	r7,#0x0
@@ -271,21 +271,21 @@
    00FC C0 06               271 	push	ar6
    00FE C0 07               272 	push	ar7
                             273 ;	genIpush
-   0100 74 98               274 	mov	a,#__str_3
+   0100 74 F1               274 	mov	a,#__str_3
    0102 C0 E0               275 	push	acc
    0104 74 21               276 	mov	a,#(__str_3 >> 8)
    0106 C0 E0               277 	push	acc
    0108 74 80               278 	mov	a,#0x80
    010A C0 E0               279 	push	acc
                             280 ;	genCall
-   010C 12 18 9F            281 	lcall	_printf
+   010C 12 18 F8            281 	lcall	_printf
    010F E5 81               282 	mov	a,sp
    0111 24 FA               283 	add	a,#0xfa
    0113 F5 81               284 	mov	sp,a
    0115 D0 04               285 	pop	ar4
    0117 D0 03               286 	pop	ar3
    0119 D0 02               287 	pop	ar2
-                            288 ;	buffer.c:17: printf("End Address:     %p\r\n", buf->buf_end);
+                            288 ;	buffer.c:23: printf("End Address:     %p\r\n", buf->buf_end);
                             289 ;	genPlus
                             290 ;     genPlusIncr
    011B 74 02               291 	mov	a,#0x02
@@ -303,10 +303,10 @@
    0124 8D 82               303 	mov	dpl,r5
    0126 8E 83               304 	mov	dph,r6
    0128 8F F0               305 	mov	b,r7
-   012A 12 21 3E            306 	lcall	__gptrget
+   012A 12 21 97            306 	lcall	__gptrget
    012D FD                  307 	mov	r5,a
    012E A3                  308 	inc	dptr
-   012F 12 21 3E            309 	lcall	__gptrget
+   012F 12 21 97            309 	lcall	__gptrget
    0132 FE                  310 	mov	r6,a
                             311 ;	genCast
    0133 7F 00               312 	mov	r7,#0x0
@@ -318,21 +318,21 @@
    013D C0 06               318 	push	ar6
    013F C0 07               319 	push	ar7
                             320 ;	genIpush
-   0141 74 AE               321 	mov	a,#__str_4
+   0141 74 07               321 	mov	a,#__str_4
    0143 C0 E0               322 	push	acc
-   0145 74 21               323 	mov	a,#(__str_4 >> 8)
+   0145 74 22               323 	mov	a,#(__str_4 >> 8)
    0147 C0 E0               324 	push	acc
    0149 74 80               325 	mov	a,#0x80
    014B C0 E0               326 	push	acc
                             327 ;	genCall
-   014D 12 18 9F            328 	lcall	_printf
+   014D 12 18 F8            328 	lcall	_printf
    0150 E5 81               329 	mov	a,sp
    0152 24 FA               330 	add	a,#0xfa
    0154 F5 81               331 	mov	sp,a
    0156 D0 04               332 	pop	ar4
    0158 D0 03               333 	pop	ar3
    015A D0 02               334 	pop	ar2
-                            335 ;	buffer.c:18: printf("Buffer Size:     %d\r\n", buf->buf_size);
+                            335 ;	buffer.c:24: printf("Buffer Size:     %d\r\n", buf->buf_size);
                             336 ;	genPlus
                             337 ;     genPlusIncr
    015C 74 06               338 	mov	a,#0x06
@@ -350,10 +350,10 @@
    0165 8D 82               350 	mov	dpl,r5
    0167 8E 83               351 	mov	dph,r6
    0169 8F F0               352 	mov	b,r7
-   016B 12 21 3E            353 	lcall	__gptrget
+   016B 12 21 97            353 	lcall	__gptrget
    016E F8                  354 	mov	r0,a
    016F A3                  355 	inc	dptr
-   0170 12 21 3E            356 	lcall	__gptrget
+   0170 12 21 97            356 	lcall	__gptrget
    0173 F9                  357 	mov	r1,a
                             358 ;	genIpush
    0174 C0 02               359 	push	ar2
@@ -365,14 +365,14 @@
    0180 C0 00               365 	push	ar0
    0182 C0 01               366 	push	ar1
                             367 ;	genIpush
-   0184 74 C4               368 	mov	a,#__str_5
+   0184 74 1D               368 	mov	a,#__str_5
    0186 C0 E0               369 	push	acc
-   0188 74 21               370 	mov	a,#(__str_5 >> 8)
+   0188 74 22               370 	mov	a,#(__str_5 >> 8)
    018A C0 E0               371 	push	acc
    018C 74 80               372 	mov	a,#0x80
    018E C0 E0               373 	push	acc
                             374 ;	genCall
-   0190 12 18 9F            375 	lcall	_printf
+   0190 12 18 F8            375 	lcall	_printf
    0193 E5 81               376 	mov	a,sp
    0195 24 FB               377 	add	a,#0xfb
    0197 F5 81               378 	mov	sp,a
@@ -382,7 +382,7 @@
    019F D0 04               382 	pop	ar4
    01A1 D0 03               383 	pop	ar3
    01A3 D0 02               384 	pop	ar2
-                            385 ;	buffer.c:19: printf("Bytes Used:      %d\r\n", buf->buf_insert);
+                            385 ;	buffer.c:25: printf("Bytes Used:      %d\r\n", buf->buf_insert);
                             386 ;	genPlus
                             387 ;     genPlusIncr
    01A5 74 04               388 	mov	a,#0x04
@@ -399,10 +399,10 @@
    01AC 8A 82               399 	mov	dpl,r2
    01AE 8B 83               400 	mov	dph,r3
    01B0 8C F0               401 	mov	b,r4
-   01B2 12 21 3E            402 	lcall	__gptrget
+   01B2 12 21 97            402 	lcall	__gptrget
    01B5 F8                  403 	mov	r0,a
    01B6 A3                  404 	inc	dptr
-   01B7 12 21 3E            405 	lcall	__gptrget
+   01B7 12 21 97            405 	lcall	__gptrget
    01BA F9                  406 	mov	r1,a
                             407 ;	genIpush
    01BB C0 02               408 	push	ar2
@@ -414,14 +414,14 @@
    01C7 C0 00               414 	push	ar0
    01C9 C0 01               415 	push	ar1
                             416 ;	genIpush
-   01CB 74 DA               417 	mov	a,#__str_6
+   01CB 74 33               417 	mov	a,#__str_6
    01CD C0 E0               418 	push	acc
-   01CF 74 21               419 	mov	a,#(__str_6 >> 8)
+   01CF 74 22               419 	mov	a,#(__str_6 >> 8)
    01D1 C0 E0               420 	push	acc
    01D3 74 80               421 	mov	a,#0x80
    01D5 C0 E0               422 	push	acc
                             423 ;	genCall
-   01D7 12 18 9F            424 	lcall	_printf
+   01D7 12 18 F8            424 	lcall	_printf
    01DA E5 81               425 	mov	a,sp
    01DC 24 FB               426 	add	a,#0xfb
    01DE F5 81               427 	mov	sp,a
@@ -431,26 +431,26 @@
    01E6 D0 04               431 	pop	ar4
    01E8 D0 03               432 	pop	ar3
    01EA D0 02               433 	pop	ar2
-                            434 ;	buffer.c:20: printf("Bytes Remaining: %d\r\n", buf->buf_size - buf->buf_insert);
+                            434 ;	buffer.c:26: printf("Bytes Remaining: %d\r\n", buf->buf_size - buf->buf_insert);
                             435 ;	genPointerGet
                             436 ;	genGenPointerGet
    01EC 8D 82               437 	mov	dpl,r5
    01EE 8E 83               438 	mov	dph,r6
    01F0 8F F0               439 	mov	b,r7
-   01F2 12 21 3E            440 	lcall	__gptrget
+   01F2 12 21 97            440 	lcall	__gptrget
    01F5 FD                  441 	mov	r5,a
    01F6 A3                  442 	inc	dptr
-   01F7 12 21 3E            443 	lcall	__gptrget
+   01F7 12 21 97            443 	lcall	__gptrget
    01FA FE                  444 	mov	r6,a
                             445 ;	genPointerGet
                             446 ;	genGenPointerGet
    01FB 8A 82               447 	mov	dpl,r2
    01FD 8B 83               448 	mov	dph,r3
    01FF 8C F0               449 	mov	b,r4
-   0201 12 21 3E            450 	lcall	__gptrget
+   0201 12 21 97            450 	lcall	__gptrget
    0204 FA                  451 	mov	r2,a
    0205 A3                  452 	inc	dptr
-   0206 12 21 3E            453 	lcall	__gptrget
+   0206 12 21 97            453 	lcall	__gptrget
    0209 FB                  454 	mov	r3,a
                             455 ;	genMinus
    020A ED                  456 	mov	a,r5
@@ -466,14 +466,14 @@
    0211 C0 05               466 	push	ar5
    0213 C0 06               467 	push	ar6
                             468 ;	genIpush
-   0215 74 F0               469 	mov	a,#__str_7
+   0215 74 49               469 	mov	a,#__str_7
    0217 C0 E0               470 	push	acc
-   0219 74 21               471 	mov	a,#(__str_7 >> 8)
+   0219 74 22               471 	mov	a,#(__str_7 >> 8)
    021B C0 E0               472 	push	acc
    021D 74 80               473 	mov	a,#0x80
    021F C0 E0               474 	push	acc
                             475 ;	genCall
-   0221 12 18 9F            476 	lcall	_printf
+   0221 12 18 F8            476 	lcall	_printf
    0224 E5 81               477 	mov	a,sp
    0226 24 FB               478 	add	a,#0xfb
    0228 F5 81               479 	mov	sp,a
@@ -492,7 +492,7 @@
                             492 ;i                         Allocated with name '_Buffer_Print_Contents_i_1_1'
                             493 ;num_output                Allocated with name '_Buffer_Print_Contents_num_output_1_1'
                             494 ;------------------------------------------------------------
-                            495 ;	buffer.c:26: void Buffer_Print_Contents(Buffer *buf, bool hex){
+                            495 ;	buffer.c:32: void Buffer_Print_Contents(Buffer *buf, bool hex){
                             496 ;	-----------------------------------------
                             497 ;	 function Buffer_Print_Contents
                             498 ;	-----------------------------------------
@@ -509,27 +509,27 @@
    0238 A3                  509 	inc	dptr
    0239 EA                  510 	mov	a,r2
    023A F0                  511 	movx	@dptr,a
-                            512 ;	buffer.c:29: int num_output = 0;
+                            512 ;	buffer.c:35: int num_output = 0;
                             513 ;	genAssign
    023B 90 00 06            514 	mov	dptr,#_Buffer_Print_Contents_num_output_1_1
    023E E4                  515 	clr	a
    023F F0                  516 	movx	@dptr,a
    0240 A3                  517 	inc	dptr
    0241 F0                  518 	movx	@dptr,a
-                            519 ;	buffer.c:30: printf("Contents:\r\n\r\n");
+                            519 ;	buffer.c:36: printf("Contents:\r\n\r\n");
                             520 ;	genIpush
-   0242 74 06               521 	mov	a,#__str_8
+   0242 74 5F               521 	mov	a,#__str_8
    0244 C0 E0               522 	push	acc
    0246 74 22               523 	mov	a,#(__str_8 >> 8)
    0248 C0 E0               524 	push	acc
    024A 74 80               525 	mov	a,#0x80
    024C C0 E0               526 	push	acc
                             527 ;	genCall
-   024E 12 18 9F            528 	lcall	_printf
+   024E 12 18 F8            528 	lcall	_printf
    0251 15 81               529 	dec	sp
    0253 15 81               530 	dec	sp
    0255 15 81               531 	dec	sp
-                            532 ;	buffer.c:32: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
+                            532 ;	buffer.c:38: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
                             533 ;	genAssign
    0257 90 00 03            534 	mov	dptr,#_Buffer_Print_Contents_buf_1_1
    025A E0                  535 	movx	a,@dptr
@@ -545,10 +545,10 @@
    0262 8A 82               545 	mov	dpl,r2
    0264 8B 83               546 	mov	dph,r3
    0266 8C F0               547 	mov	b,r4
-   0268 12 21 3E            548 	lcall	__gptrget
+   0268 12 21 97            548 	lcall	__gptrget
    026B FD                  549 	mov	r5,a
    026C A3                  550 	inc	dptr
-   026D 12 21 3E            551 	lcall	__gptrget
+   026D 12 21 97            551 	lcall	__gptrget
    0270 FE                  552 	mov	r6,a
                             553 ;	genPlus
                             554 ;     genPlusIncr
@@ -584,10 +584,10 @@
    0287 8A 82               584 	mov	dpl,r2
    0289 8B 83               585 	mov	dph,r3
    028B 8C F0               586 	mov	b,r4
-   028D 12 21 3E            587 	lcall	__gptrget
+   028D 12 21 97            587 	lcall	__gptrget
    0290 F5 22               588 	mov	_Buffer_Print_Contents_sloc0_1_0,a
    0292 A3                  589 	inc	dptr
-   0293 12 21 3E            590 	lcall	__gptrget
+   0293 12 21 97            590 	lcall	__gptrget
    0296 F5 23               591 	mov	(_Buffer_Print_Contents_sloc0_1_0 + 1),a
                             592 ;	genAssign
    0298 8D 01               593 	mov	ar1,r5
@@ -609,7 +609,7 @@
    02A9 40 03               609 	jc	00124$
    02AB 02 04 5A            610 	ljmp	00113$
    02AE                     611 00124$:
-                            612 ;	buffer.c:33: printf("%p: ", addr);
+                            612 ;	buffer.c:39: printf("%p: ", addr);
                             613 ;	genIpush
    02AE C0 02               614 	push	ar2
    02B0 C0 03               615 	push	ar3
@@ -632,14 +632,14 @@
    02CC C0 03               632 	push	ar3
    02CE C0 04               633 	push	ar4
                             634 ;	genIpush
-   02D0 74 14               635 	mov	a,#__str_9
+   02D0 74 6D               635 	mov	a,#__str_9
    02D2 C0 E0               636 	push	acc
    02D4 74 22               637 	mov	a,#(__str_9 >> 8)
    02D6 C0 E0               638 	push	acc
    02D8 74 80               639 	mov	a,#0x80
    02DA C0 E0               640 	push	acc
                             641 ;	genCall
-   02DC 12 18 9F            642 	lcall	_printf
+   02DC 12 18 F8            642 	lcall	_printf
    02DF E5 81               643 	mov	a,sp
    02E1 24 FA               644 	add	a,#0xfa
    02E3 F5 81               645 	mov	sp,a
@@ -651,12 +651,12 @@
    02EF D0 04               651 	pop	ar4
    02F1 D0 03               652 	pop	ar3
    02F3 D0 02               653 	pop	ar2
-                            654 ;	buffer.c:46: printf("\r\n");
+                            654 ;	buffer.c:52: printf("\r\n");
                             655 ;	genIpop
    02F5 D0 04               656 	pop	ar4
    02F7 D0 03               657 	pop	ar3
    02F9 D0 02               658 	pop	ar2
-                            659 ;	buffer.c:35: for (i = 0; i < 16; ++i){
+                            659 ;	buffer.c:41: for (i = 0; i < 16; ++i){
                             660 ;	genAssign
    02FB 8D 22               661 	mov	_Buffer_Print_Contents_sloc0_1_0,r5
    02FD 8E 23               662 	mov	(_Buffer_Print_Contents_sloc0_1_0 + 1),r6
@@ -687,7 +687,7 @@
    031D 40 03               687 	jc	00125$
    031F 02 04 11            688 	ljmp	00122$
    0322                     689 00125$:
-                            690 ;	buffer.c:36: if (num_output < buf->buf_insert){
+                            690 ;	buffer.c:42: if (num_output < buf->buf_insert){
                             691 ;	genIpush
    0322 C0 02               692 	push	ar2
    0324 C0 03               693 	push	ar3
@@ -697,10 +697,10 @@
    0328 8F 82               697 	mov	dpl,r7
    032A 88 83               698 	mov	dph,r0
    032C 89 F0               699 	mov	b,r1
-   032E 12 21 3E            700 	lcall	__gptrget
+   032E 12 21 97            700 	lcall	__gptrget
    0331 F5 2A               701 	mov	_Buffer_Print_Contents_sloc4_1_0,a
    0333 A3                  702 	inc	dptr
-   0334 12 21 3E            703 	lcall	__gptrget
+   0334 12 21 97            703 	lcall	__gptrget
    0337 F5 2B               704 	mov	(_Buffer_Print_Contents_sloc4_1_0 + 1),a
                             705 ;	genAssign
    0339 AC 26               706 	mov	r4,_Buffer_Print_Contents_sloc2_1_0
@@ -722,13 +722,13 @@
    034A 40 03               722 	jc	00126$
    034C 02 04 06            723 	ljmp	00108$
    034F                     724 00126$:
-                            725 ;	buffer.c:37: if (hex)
+                            725 ;	buffer.c:43: if (hex)
                             726 ;	genIfx
                             727 ;	genIfxJump
                             728 ;	Peephole 108.d	removed ljmp by inverse jump logic
    034F 30 00 57            729 	jnb	_Buffer_Print_Contents_PARM_2,00102$
                             730 ;	Peephole 300	removed redundant label 00127$
-                            731 ;	buffer.c:38: printf("%x ", *(addr + i));
+                            731 ;	buffer.c:44: printf("%x ", *(addr + i));
                             732 ;	genIpush
    0352 C0 02               733 	push	ar2
    0354 C0 03               734 	push	ar3
@@ -758,14 +758,14 @@
    0378 C0 02               758 	push	ar2
    037A C0 03               759 	push	ar3
                             760 ;	genIpush
-   037C 74 19               761 	mov	a,#__str_10
+   037C 74 72               761 	mov	a,#__str_10
    037E C0 E0               762 	push	acc
    0380 74 22               763 	mov	a,#(__str_10 >> 8)
    0382 C0 E0               764 	push	acc
    0384 74 80               765 	mov	a,#0x80
    0386 C0 E0               766 	push	acc
                             767 ;	genCall
-   0388 12 18 9F            768 	lcall	_printf
+   0388 12 18 F8            768 	lcall	_printf
    038B E5 81               769 	mov	a,sp
    038D 24 FB               770 	add	a,#0xfb
    038F F5 81               771 	mov	sp,a
@@ -784,7 +784,7 @@
                             784 ;	Peephole 112.b	changed ljmp to sjmp
    03A7 80 55               785 	sjmp	00103$
    03A9                     786 00102$:
-                            787 ;	buffer.c:40: printf("%c ", *(addr + i));
+                            787 ;	buffer.c:46: printf("%c ", *(addr + i));
                             788 ;	genIpush
    03A9 C0 02               789 	push	ar2
    03AB C0 03               790 	push	ar3
@@ -814,14 +814,14 @@
    03CF C0 02               814 	push	ar2
    03D1 C0 03               815 	push	ar3
                             816 ;	genIpush
-   03D3 74 1D               817 	mov	a,#__str_11
+   03D3 74 76               817 	mov	a,#__str_11
    03D5 C0 E0               818 	push	acc
    03D7 74 22               819 	mov	a,#(__str_11 >> 8)
    03D9 C0 E0               820 	push	acc
    03DB 74 80               821 	mov	a,#0x80
    03DD C0 E0               822 	push	acc
                             823 ;	genCall
-   03DF 12 18 9F            824 	lcall	_printf
+   03DF 12 18 F8            824 	lcall	_printf
    03E2 E5 81               825 	mov	a,sp
    03E4 24 FB               826 	add	a,#0xfb
    03E6 F5 81               827 	mov	sp,a
@@ -833,14 +833,14 @@
    03F2 D0 04               833 	pop	ar4
    03F4 D0 03               834 	pop	ar3
    03F6 D0 02               835 	pop	ar2
-                            836 ;	buffer.c:46: printf("\r\n");
+                            836 ;	buffer.c:52: printf("\r\n");
                             837 ;	genIpop
    03F8 D0 04               838 	pop	ar4
    03FA D0 03               839 	pop	ar3
    03FC D0 02               840 	pop	ar2
-                            841 ;	buffer.c:40: printf("%c ", *(addr + i));
+                            841 ;	buffer.c:46: printf("%c ", *(addr + i));
    03FE                     842 00103$:
-                            843 ;	buffer.c:41: num_output++;
+                            843 ;	buffer.c:47: num_output++;
                             844 ;	genPlus
                             845 ;     genPlusIncr
    03FE 05 26               846 	inc	_Buffer_Print_Contents_sloc2_1_0
@@ -849,7 +849,7 @@
    0404 05 27               849 	inc	(_Buffer_Print_Contents_sloc2_1_0 + 1)
    0406                     850 00128$:
    0406                     851 00108$:
-                            852 ;	buffer.c:35: for (i = 0; i < 16; ++i){
+                            852 ;	buffer.c:41: for (i = 0; i < 16; ++i){
                             853 ;	genPlus
                             854 ;     genPlusIncr
    0406 05 28               855 	inc	_Buffer_Print_Contents_sloc3_1_0
@@ -866,7 +866,7 @@
    0417 A3                  866 	inc	dptr
    0418 E5 27               867 	mov	a,(_Buffer_Print_Contents_sloc2_1_0 + 1)
    041A F0                  868 	movx	@dptr,a
-                            869 ;	buffer.c:44: printf("\r\n");
+                            869 ;	buffer.c:50: printf("\r\n");
                             870 ;	genIpush
    041B C0 02               871 	push	ar2
    041D C0 03               872 	push	ar3
@@ -876,14 +876,14 @@
    0425 C0 07               876 	push	ar7
    0427 C0 00               877 	push	ar0
    0429 C0 01               878 	push	ar1
-   042B 74 21               879 	mov	a,#__str_12
+   042B 74 7A               879 	mov	a,#__str_12
    042D C0 E0               880 	push	acc
    042F 74 22               881 	mov	a,#(__str_12 >> 8)
    0431 C0 E0               882 	push	acc
    0433 74 80               883 	mov	a,#0x80
    0435 C0 E0               884 	push	acc
                             885 ;	genCall
-   0437 12 18 9F            886 	lcall	_printf
+   0437 12 18 F8            886 	lcall	_printf
    043A 15 81               887 	dec	sp
    043C 15 81               888 	dec	sp
    043E 15 81               889 	dec	sp
@@ -895,7 +895,7 @@
    044A D0 04               895 	pop	ar4
    044C D0 03               896 	pop	ar3
    044E D0 02               897 	pop	ar2
-                            898 ;	buffer.c:32: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
+                            898 ;	buffer.c:38: for (addr = buf->buf_start; addr < buf->buf_end; addr += 16){
                             899 ;	genPlus
                             900 ;     genPlusIncr
    0450 74 10               901 	mov	a,#0x10
@@ -909,16 +909,16 @@
    0456 FE                  909 	mov	r6,a
    0457 02 02 81            910 	ljmp	00110$
    045A                     911 00113$:
-                            912 ;	buffer.c:46: printf("\r\n");
+                            912 ;	buffer.c:52: printf("\r\n");
                             913 ;	genIpush
-   045A 74 21               914 	mov	a,#__str_12
+   045A 74 7A               914 	mov	a,#__str_12
    045C C0 E0               915 	push	acc
    045E 74 22               916 	mov	a,#(__str_12 >> 8)
    0460 C0 E0               917 	push	acc
    0462 74 80               918 	mov	a,#0x80
    0464 C0 E0               919 	push	acc
                             920 ;	genCall
-   0466 12 18 9F            921 	lcall	_printf
+   0466 12 18 F8            921 	lcall	_printf
    0469 15 81               922 	dec	sp
    046B 15 81               923 	dec	sp
    046D 15 81               924 	dec	sp
@@ -929,7 +929,7 @@
                             929 ;------------------------------------------------------------
                             930 ;buf                       Allocated with name '_Buffer_Print_buf_1_1'
                             931 ;------------------------------------------------------------
-                            932 ;	buffer.c:53: void Buffer_Print(Buffer *buf, bool hex){
+                            932 ;	buffer.c:59: void Buffer_Print(Buffer *buf, bool hex){
                             933 ;	-----------------------------------------
                             934 ;	 function Buffer_Print
                             935 ;	-----------------------------------------
@@ -946,7 +946,7 @@
    047D A3                  946 	inc	dptr
    047E EA                  947 	mov	a,r2
    047F F0                  948 	movx	@dptr,a
-                            949 ;	buffer.c:54: Buffer_Print_Info(buf);
+                            949 ;	buffer.c:60: Buffer_Print_Info(buf);
                             950 ;	genAssign
    0480 90 00 08            951 	mov	dptr,#_Buffer_Print_buf_1_1
    0483 E0                  952 	movx	a,@dptr
@@ -962,7 +962,7 @@
    048D 8B 83               962 	mov	dph,r3
    048F 8C F0               963 	mov	b,r4
    0491 12 00 61            964 	lcall	_Buffer_Print_Info
-                            965 ;	buffer.c:55: Buffer_Print_Contents(buf, hex);
+                            965 ;	buffer.c:61: Buffer_Print_Contents(buf, hex);
                             966 ;	genAssign
    0494 90 00 08            967 	mov	dptr,#_Buffer_Print_buf_1_1
    0497 E0                  968 	movx	a,@dptr
@@ -988,7 +988,7 @@
                             988 ;------------------------------------------------------------
                             989 ;buf                       Allocated with name '_Buffer_Clear_buf_1_1'
                             990 ;------------------------------------------------------------
-                            991 ;	buffer.c:61: void Buffer_Clear(Buffer *buf){
+                            991 ;	buffer.c:67: void Buffer_Clear(Buffer *buf){
                             992 ;	-----------------------------------------
                             993 ;	 function Buffer_Clear
                             994 ;	-----------------------------------------
@@ -1005,7 +1005,7 @@
    04B9 A3                 1005 	inc	dptr
    04BA EA                 1006 	mov	a,r2
    04BB F0                 1007 	movx	@dptr,a
-                           1008 ;	buffer.c:62: printf("Buffer %d Cleared\r\n", buf->buf_id);
+                           1008 ;	buffer.c:68: printf("Buffer %d Cleared\r\n", buf->buf_id);
                            1009 ;	genAssign
    04BC 90 00 0B           1010 	mov	dptr,#_Buffer_Clear_buf_1_1
    04BF E0                 1011 	movx	a,@dptr
@@ -1033,10 +1033,10 @@
    04D0 8D 82              1033 	mov	dpl,r5
    04D2 8E 83              1034 	mov	dph,r6
    04D4 8F F0              1035 	mov	b,r7
-   04D6 12 21 3E           1036 	lcall	__gptrget
+   04D6 12 21 97           1036 	lcall	__gptrget
    04D9 FD                 1037 	mov	r5,a
    04DA A3                 1038 	inc	dptr
-   04DB 12 21 3E           1039 	lcall	__gptrget
+   04DB 12 21 97           1039 	lcall	__gptrget
    04DE FE                 1040 	mov	r6,a
                            1041 ;	genIpush
    04DF C0 02              1042 	push	ar2
@@ -1045,21 +1045,21 @@
    04E5 C0 05              1045 	push	ar5
    04E7 C0 06              1046 	push	ar6
                            1047 ;	genIpush
-   04E9 74 24              1048 	mov	a,#__str_13
+   04E9 74 7D              1048 	mov	a,#__str_13
    04EB C0 E0              1049 	push	acc
    04ED 74 22              1050 	mov	a,#(__str_13 >> 8)
    04EF C0 E0              1051 	push	acc
    04F1 74 80              1052 	mov	a,#0x80
    04F3 C0 E0              1053 	push	acc
                            1054 ;	genCall
-   04F5 12 18 9F           1055 	lcall	_printf
+   04F5 12 18 F8           1055 	lcall	_printf
    04F8 E5 81              1056 	mov	a,sp
    04FA 24 FB              1057 	add	a,#0xfb
    04FC F5 81              1058 	mov	sp,a
    04FE D0 04              1059 	pop	ar4
    0500 D0 03              1060 	pop	ar3
    0502 D0 02              1061 	pop	ar2
-                           1062 ;	buffer.c:63: buf->buf_insert = 0;
+                           1062 ;	buffer.c:69: buf->buf_insert = 0;
                            1063 ;	genPlus
                            1064 ;     genPlusIncr
    0504 74 04              1065 	mov	a,#0x04
@@ -1078,12 +1078,12 @@
    050F 8C F0              1078 	mov	b,r4
                            1079 ;	Peephole 181	changed mov to clr
    0511 E4                 1080 	clr	a
-   0512 12 17 E0           1081 	lcall	__gptrput
+   0512 12 18 39           1081 	lcall	__gptrput
    0515 A3                 1082 	inc	dptr
                            1083 ;	Peephole 181	changed mov to clr
    0516 E4                 1084 	clr	a
                            1085 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0517 02 17 E0           1086 	ljmp	__gptrput
+   0517 02 18 39           1086 	ljmp	__gptrput
                            1087 ;
                            1088 ;------------------------------------------------------------
                            1089 ;Allocation info for local variables in function 'Buffer_ContentSwap'
@@ -1100,7 +1100,7 @@
                            1100 ;insert_temp               Allocated with name '_Buffer_ContentSwap_insert_temp_1_1'
                            1101 ;temp                      Allocated with name '_Buffer_ContentSwap_temp_1_1'
                            1102 ;------------------------------------------------------------
-                           1103 ;	buffer.c:70: void Buffer_ContentSwap(Buffer *buf0, Buffer *buf1){
+                           1103 ;	buffer.c:76: void Buffer_ContentSwap(Buffer *buf0, Buffer *buf1){
                            1104 ;	-----------------------------------------
                            1105 ;	 function Buffer_ContentSwap
                            1106 ;	-----------------------------------------
@@ -1117,7 +1117,7 @@
    0527 A3                 1117 	inc	dptr
    0528 EA                 1118 	mov	a,r2
    0529 F0                 1119 	movx	@dptr,a
-                           1120 ;	buffer.c:76: if (buf0->buf_size != buf1->buf_size){
+                           1120 ;	buffer.c:82: if (buf0->buf_size != buf1->buf_size){
                            1121 ;	genAssign
    052A 90 00 11           1122 	mov	dptr,#_Buffer_ContentSwap_buf0_1_1
    052D E0                 1123 	movx	a,@dptr
@@ -1143,10 +1143,10 @@
    0543 8D 82              1143 	mov	dpl,r5
    0545 8E 83              1144 	mov	dph,r6
    0547 8F F0              1145 	mov	b,r7
-   0549 12 21 3E           1146 	lcall	__gptrget
+   0549 12 21 97           1146 	lcall	__gptrget
    054C F5 32              1147 	mov	_Buffer_ContentSwap_sloc3_1_0,a
    054E A3                 1148 	inc	dptr
-   054F 12 21 3E           1149 	lcall	__gptrget
+   054F 12 21 97           1149 	lcall	__gptrget
    0552 F5 33              1150 	mov	(_Buffer_ContentSwap_sloc3_1_0 + 1),a
                            1151 ;	genAssign
    0554 90 00 0E           1152 	mov	dptr,#_Buffer_ContentSwap_PARM_2
@@ -1175,10 +1175,10 @@
    0568 8A 82              1175 	mov	dpl,r2
    056A 8B 83              1176 	mov	dph,r3
    056C 8C F0              1177 	mov	b,r4
-   056E 12 21 3E           1178 	lcall	__gptrget
+   056E 12 21 97           1178 	lcall	__gptrget
    0571 F5 34              1179 	mov	_Buffer_ContentSwap_sloc4_1_0,a
    0573 A3                 1180 	inc	dptr
-   0574 12 21 3E           1181 	lcall	__gptrget
+   0574 12 21 97           1181 	lcall	__gptrget
    0577 F5 35              1182 	mov	(_Buffer_ContentSwap_sloc4_1_0 + 1),a
                            1183 ;	genCmpEq
                            1184 ;	gencjneshort
@@ -1189,24 +1189,24 @@
                            1189 ;	Peephole 112.b	changed ljmp to sjmp
    0583 80 16              1190 	sjmp	00111$
    0585                    1191 00113$:
-                           1192 ;	buffer.c:77: printf("Can't swap buffer contents with different sizes\r\n");
+                           1192 ;	buffer.c:83: printf("Can't swap buffer contents with different sizes\r\n");
                            1193 ;	genIpush
-   0585 74 38              1194 	mov	a,#__str_14
+   0585 74 91              1194 	mov	a,#__str_14
    0587 C0 E0              1195 	push	acc
    0589 74 22              1196 	mov	a,#(__str_14 >> 8)
    058B C0 E0              1197 	push	acc
    058D 74 80              1198 	mov	a,#0x80
    058F C0 E0              1199 	push	acc
                            1200 ;	genCall
-   0591 12 18 9F           1201 	lcall	_printf
+   0591 12 18 F8           1201 	lcall	_printf
    0594 15 81              1202 	dec	sp
    0596 15 81              1203 	dec	sp
    0598 15 81              1204 	dec	sp
-                           1205 ;	buffer.c:78: return;
+                           1205 ;	buffer.c:84: return;
                            1206 ;	genRet
                            1207 ;	Peephole 251.a	replaced ljmp to ret with ret
    059A 22                 1208 	ret
-                           1209 ;	buffer.c:80: for (i = 0; i < buf0->buf_size; ++i){
+                           1209 ;	buffer.c:86: for (i = 0; i < buf0->buf_size; ++i){
    059B                    1210 00111$:
                            1211 ;	genAssign
                            1212 ;	genAssign
@@ -1225,17 +1225,17 @@
                            1225 ;	Peephole 108.a	removed ljmp by inverse jump logic
    05A9 50 54              1226 	jnc	00106$
                            1227 ;	Peephole 300	removed redundant label 00114$
-                           1228 ;	buffer.c:81: temp = buf1->buf_start[i];
+                           1228 ;	buffer.c:87: temp = buf1->buf_start[i];
                            1229 ;	genIpush
                            1230 ;	genPointerGet
                            1231 ;	genGenPointerGet
    05AB 8F 82              1232 	mov	dpl,r7
    05AD 88 83              1233 	mov	dph,r0
    05AF 89 F0              1234 	mov	b,r1
-   05B1 12 21 3E           1235 	lcall	__gptrget
+   05B1 12 21 97           1235 	lcall	__gptrget
    05B4 FC                 1236 	mov	r4,a
    05B5 A3                 1237 	inc	dptr
-   05B6 12 21 3E           1238 	lcall	__gptrget
+   05B6 12 21 97           1238 	lcall	__gptrget
    05B9 FA                 1239 	mov	r2,a
                            1240 ;	genPlus
    05BA E5 2F              1241 	mov	a,_Buffer_ContentSwap_sloc1_1_0
@@ -1252,16 +1252,16 @@
    05C4 8A 83              1252 	mov	dph,r2
    05C6 E0                 1253 	movx	a,@dptr
    05C7 F5 31              1254 	mov	_Buffer_ContentSwap_sloc2_1_0,a
-                           1255 ;	buffer.c:82: buf1->buf_start[i] = buf0->buf_start[i];
+                           1255 ;	buffer.c:88: buf1->buf_start[i] = buf0->buf_start[i];
                            1256 ;	genPointerGet
                            1257 ;	genGenPointerGet
    05C9 85 2C 82           1258 	mov	dpl,_Buffer_ContentSwap_sloc0_1_0
    05CC 85 2D 83           1259 	mov	dph,(_Buffer_ContentSwap_sloc0_1_0 + 1)
    05CF 85 2E F0           1260 	mov	b,(_Buffer_ContentSwap_sloc0_1_0 + 2)
-   05D2 12 21 3E           1261 	lcall	__gptrget
+   05D2 12 21 97           1261 	lcall	__gptrget
    05D5 FB                 1262 	mov	r3,a
    05D6 A3                 1263 	inc	dptr
-   05D7 12 21 3E           1264 	lcall	__gptrget
+   05D7 12 21 97           1264 	lcall	__gptrget
    05DA FD                 1265 	mov	r5,a
                            1266 ;	genPlus
    05DB E5 2F              1267 	mov	a,_Buffer_ContentSwap_sloc1_1_0
@@ -1284,14 +1284,14 @@
    05EB 8A 83              1284 	mov	dph,r2
                            1285 ;	Peephole 136	removed redundant move
    05ED F0                 1286 	movx	@dptr,a
-                           1287 ;	buffer.c:83: buf0->buf_start[i] = temp;
+                           1287 ;	buffer.c:89: buf0->buf_start[i] = temp;
                            1288 ;	genPointerSet
                            1289 ;     genFarPointerSet
    05EE 8B 82              1290 	mov	dpl,r3
    05F0 8D 83              1291 	mov	dph,r5
    05F2 E5 31              1292 	mov	a,_Buffer_ContentSwap_sloc2_1_0
    05F4 F0                 1293 	movx	@dptr,a
-                           1294 ;	buffer.c:80: for (i = 0; i < buf0->buf_size; ++i){
+                           1294 ;	buffer.c:86: for (i = 0; i < buf0->buf_size; ++i){
                            1295 ;	genPlus
                            1296 ;     genPlusIncr
    05F5 05 2F              1297 	inc	_Buffer_ContentSwap_sloc1_1_0
@@ -1304,7 +1304,7 @@
                            1304 ;	Peephole 300	removed redundant label 00115$
    05FD 80 A1              1305 	sjmp	00103$
    05FF                    1306 00106$:
-                           1307 ;	buffer.c:86: insert_temp = buf1->buf_insert;
+                           1307 ;	buffer.c:92: insert_temp = buf1->buf_insert;
                            1308 ;	genPlus
                            1309 ;     genPlusIncr
    05FF 74 04              1310 	mov	a,#0x04
@@ -1322,12 +1322,12 @@
    060A 85 36 82           1322 	mov	dpl,_Buffer_ContentSwap_sloc5_1_0
    060D 85 37 83           1323 	mov	dph,(_Buffer_ContentSwap_sloc5_1_0 + 1)
    0610 85 38 F0           1324 	mov	b,(_Buffer_ContentSwap_sloc5_1_0 + 2)
-   0613 12 21 3E           1325 	lcall	__gptrget
+   0613 12 21 97           1325 	lcall	__gptrget
    0616 F5 2F              1326 	mov	_Buffer_ContentSwap_sloc1_1_0,a
    0618 A3                 1327 	inc	dptr
-   0619 12 21 3E           1328 	lcall	__gptrget
+   0619 12 21 97           1328 	lcall	__gptrget
    061C F5 30              1329 	mov	(_Buffer_ContentSwap_sloc1_1_0 + 1),a
-                           1330 ;	buffer.c:87: buf1->buf_insert = buf0->buf_insert;
+                           1330 ;	buffer.c:93: buf1->buf_insert = buf0->buf_insert;
                            1331 ;	genPlus
                            1332 ;     genPlusIncr
    061E 74 04              1333 	mov	a,#0x04
@@ -1343,10 +1343,10 @@
    0629 8A 82              1343 	mov	dpl,r2
    062B 8B 83              1344 	mov	dph,r3
    062D 8C F0              1345 	mov	b,r4
-   062F 12 21 3E           1346 	lcall	__gptrget
+   062F 12 21 97           1346 	lcall	__gptrget
    0632 FD                 1347 	mov	r5,a
    0633 A3                 1348 	inc	dptr
-   0634 12 21 3E           1349 	lcall	__gptrget
+   0634 12 21 97           1349 	lcall	__gptrget
    0637 FE                 1350 	mov	r6,a
                            1351 ;	genPointerSet
                            1352 ;	genGenPointerSet
@@ -1354,22 +1354,22 @@
    063B 85 37 83           1354 	mov	dph,(_Buffer_ContentSwap_sloc5_1_0 + 1)
    063E 85 38 F0           1355 	mov	b,(_Buffer_ContentSwap_sloc5_1_0 + 2)
    0641 ED                 1356 	mov	a,r5
-   0642 12 17 E0           1357 	lcall	__gptrput
+   0642 12 18 39           1357 	lcall	__gptrput
    0645 A3                 1358 	inc	dptr
    0646 EE                 1359 	mov	a,r6
-   0647 12 17 E0           1360 	lcall	__gptrput
-                           1361 ;	buffer.c:88: buf0->buf_insert = insert_temp;
+   0647 12 18 39           1360 	lcall	__gptrput
+                           1361 ;	buffer.c:94: buf0->buf_insert = insert_temp;
                            1362 ;	genPointerSet
                            1363 ;	genGenPointerSet
    064A 8A 82              1364 	mov	dpl,r2
    064C 8B 83              1365 	mov	dph,r3
    064E 8C F0              1366 	mov	b,r4
    0650 E5 2F              1367 	mov	a,_Buffer_ContentSwap_sloc1_1_0
-   0652 12 17 E0           1368 	lcall	__gptrput
+   0652 12 18 39           1368 	lcall	__gptrput
    0655 A3                 1369 	inc	dptr
    0656 E5 30              1370 	mov	a,(_Buffer_ContentSwap_sloc1_1_0 + 1)
-   0658 12 17 E0           1371 	lcall	__gptrput
-                           1372 ;	buffer.c:91: buf0->buf_end = buf0->buf_start + buf0->buf_size;
+   0658 12 18 39           1371 	lcall	__gptrput
+                           1372 ;	buffer.c:97: buf0->buf_end = buf0->buf_start + buf0->buf_size;
                            1373 ;	genPlus
                            1374 ;     genPlusIncr
    065B 74 02              1375 	mov	a,#0x02
@@ -1385,10 +1385,10 @@
    0666 85 2C 82           1385 	mov	dpl,_Buffer_ContentSwap_sloc0_1_0
    0669 85 2D 83           1386 	mov	dph,(_Buffer_ContentSwap_sloc0_1_0 + 1)
    066C 85 2E F0           1387 	mov	b,(_Buffer_ContentSwap_sloc0_1_0 + 2)
-   066F 12 21 3E           1388 	lcall	__gptrget
+   066F 12 21 97           1388 	lcall	__gptrget
    0672 FD                 1389 	mov	r5,a
    0673 A3                 1390 	inc	dptr
-   0674 12 21 3E           1391 	lcall	__gptrget
+   0674 12 21 97           1391 	lcall	__gptrget
    0677 FE                 1392 	mov	r6,a
                            1393 ;	genPlus
    0678 E5 32              1394 	mov	a,_Buffer_ContentSwap_sloc3_1_0
@@ -1405,11 +1405,11 @@
    0682 8B 83              1405 	mov	dph,r3
    0684 8C F0              1406 	mov	b,r4
    0686 ED                 1407 	mov	a,r5
-   0687 12 17 E0           1408 	lcall	__gptrput
+   0687 12 18 39           1408 	lcall	__gptrput
    068A A3                 1409 	inc	dptr
    068B EE                 1410 	mov	a,r6
-   068C 12 17 E0           1411 	lcall	__gptrput
-                           1412 ;	buffer.c:92: buf1->buf_end = buf1->buf_start + buf1->buf_size;
+   068C 12 18 39           1411 	lcall	__gptrput
+                           1412 ;	buffer.c:98: buf1->buf_end = buf1->buf_start + buf1->buf_size;
                            1413 ;	genPlus
                            1414 ;     genPlusIncr
    068F 74 02              1415 	mov	a,#0x02
@@ -1427,10 +1427,10 @@
    0698 8F 82              1427 	mov	dpl,r7
    069A 88 83              1428 	mov	dph,r0
    069C 89 F0              1429 	mov	b,r1
-   069E 12 21 3E           1430 	lcall	__gptrget
+   069E 12 21 97           1430 	lcall	__gptrget
    06A1 FF                 1431 	mov	r7,a
    06A2 A3                 1432 	inc	dptr
-   06A3 12 21 3E           1433 	lcall	__gptrget
+   06A3 12 21 97           1433 	lcall	__gptrget
    06A6 F8                 1434 	mov	r0,a
                            1435 ;	genPlus
    06A7 E5 34              1436 	mov	a,_Buffer_ContentSwap_sloc4_1_0
@@ -1447,11 +1447,11 @@
    06B1 8B 83              1447 	mov	dph,r3
    06B3 8C F0              1448 	mov	b,r4
    06B5 EF                 1449 	mov	a,r7
-   06B6 12 17 E0           1450 	lcall	__gptrput
+   06B6 12 18 39           1450 	lcall	__gptrput
    06B9 A3                 1451 	inc	dptr
    06BA E8                 1452 	mov	a,r0
                            1453 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   06BB 02 17 E0           1454 	ljmp	__gptrput
+   06BB 02 18 39           1454 	ljmp	__gptrput
                            1455 ;
                            1456 ;------------------------------------------------------------
                            1457 ;Allocation info for local variables in function 'Buffer_Init'
@@ -1462,7 +1462,7 @@
                            1462 ;buf_id                    Allocated with name '_Buffer_Init_PARM_3'
                            1463 ;buf                       Allocated with name '_Buffer_Init_buf_1_1'
                            1464 ;------------------------------------------------------------
-                           1465 ;	buffer.c:98: bool Buffer_Init(Buffer *buf, int buffer_size, int buf_id){
+                           1465 ;	buffer.c:104: bool Buffer_Init(Buffer *buf, int buffer_size, int buf_id){
                            1466 ;	-----------------------------------------
                            1467 ;	 function Buffer_Init
                            1468 ;	-----------------------------------------
@@ -1479,7 +1479,7 @@
    06CB A3                 1479 	inc	dptr
    06CC EA                 1480 	mov	a,r2
    06CD F0                 1481 	movx	@dptr,a
-                           1482 ;	buffer.c:99: buf->buf_start = (unsigned char xdata *) malloc(buffer_size);
+                           1482 ;	buffer.c:105: buf->buf_start = (unsigned char xdata *) malloc(buffer_size);
                            1483 ;	genAssign
    06CE 90 00 18           1484 	mov	dptr,#_Buffer_Init_buf_1_1
    06D1 E0                 1485 	movx	a,@dptr
@@ -1505,7 +1505,7 @@
    06E9 C0 04              1505 	push	ar4
    06EB C0 05              1506 	push	ar5
    06ED C0 06              1507 	push	ar6
-   06EF 12 16 A4           1508 	lcall	_malloc
+   06EF 12 16 FD           1508 	lcall	_malloc
    06F2 AF 82              1509 	mov	r7,dpl
    06F4 A8 83              1510 	mov	r0,dph
    06F6 D0 06              1511 	pop	ar6
@@ -1519,11 +1519,11 @@
    0702 8B 83              1519 	mov	dph,r3
    0704 8C F0              1520 	mov	b,r4
    0706 EF                 1521 	mov	a,r7
-   0707 12 17 E0           1522 	lcall	__gptrput
+   0707 12 18 39           1522 	lcall	__gptrput
    070A A3                 1523 	inc	dptr
    070B E8                 1524 	mov	a,r0
-   070C 12 17 E0           1525 	lcall	__gptrput
-                           1526 ;	buffer.c:100: if (buf->buf_start == NULL){
+   070C 12 18 39           1525 	lcall	__gptrput
+                           1526 ;	buffer.c:106: if (buf->buf_start == NULL){
                            1527 ;	genCmpEq
                            1528 ;	gencjneshort
                            1529 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1533,7 +1533,7 @@
                            1533 ;	Peephole 200.b	removed redundant sjmp
                            1534 ;	Peephole 300	removed redundant label 00106$
                            1535 ;	Peephole 300	removed redundant label 00107$
-                           1536 ;	buffer.c:101: printf("\r\nError. Buffer %d of size %d allocation failed\r\n", buf_id, buffer_size);
+                           1536 ;	buffer.c:107: printf("\r\nError. Buffer %d of size %d allocation failed\r\n", buf_id, buffer_size);
                            1537 ;	genIpush
    0715 C0 05              1538 	push	ar5
    0717 C0 06              1539 	push	ar6
@@ -1545,18 +1545,18 @@
    0720 E0                 1545 	movx	a,@dptr
    0721 C0 E0              1546 	push	acc
                            1547 ;	genIpush
-   0723 74 6A              1548 	mov	a,#__str_15
+   0723 74 C3              1548 	mov	a,#__str_15
    0725 C0 E0              1549 	push	acc
    0727 74 22              1550 	mov	a,#(__str_15 >> 8)
    0729 C0 E0              1551 	push	acc
    072B 74 80              1552 	mov	a,#0x80
    072D C0 E0              1553 	push	acc
                            1554 ;	genCall
-   072F 12 18 9F           1555 	lcall	_printf
+   072F 12 18 F8           1555 	lcall	_printf
    0732 E5 81              1556 	mov	a,sp
    0734 24 F9              1557 	add	a,#0xf9
    0736 F5 81              1558 	mov	sp,a
-                           1559 ;	buffer.c:102: return false;
+                           1559 ;	buffer.c:108: return false;
                            1560 ;	genRet
                            1561 ;	Peephole 181	changed mov to clr
    0738 E4                 1562 	clr	a
@@ -1564,7 +1564,7 @@
                            1564 ;	Peephole 251.a	replaced ljmp to ret with ret
    073B 22                 1565 	ret
    073C                    1566 00102$:
-                           1567 ;	buffer.c:104: buf->buf_size = buffer_size;
+                           1567 ;	buffer.c:110: buf->buf_size = buffer_size;
                            1568 ;	genPlus
                            1569 ;     genPlusIncr
    073C 74 06              1570 	mov	a,#0x06
@@ -1583,11 +1583,11 @@
    074A 85 3A 83           1583 	mov	dph,(_Buffer_Init_sloc0_1_0 + 1)
    074D 85 3B F0           1584 	mov	b,(_Buffer_Init_sloc0_1_0 + 2)
    0750 ED                 1585 	mov	a,r5
-   0751 12 17 E0           1586 	lcall	__gptrput
+   0751 12 18 39           1586 	lcall	__gptrput
    0754 A3                 1587 	inc	dptr
    0755 EE                 1588 	mov	a,r6
-   0756 12 17 E0           1589 	lcall	__gptrput
-                           1590 ;	buffer.c:105: buf->buf_end = buf->buf_start + buf->buf_size;
+   0756 12 18 39           1589 	lcall	__gptrput
+                           1590 ;	buffer.c:111: buf->buf_end = buf->buf_start + buf->buf_size;
                            1591 ;	genPlus
                            1592 ;     genPlusIncr
    0759 74 02              1593 	mov	a,#0x02
@@ -1605,20 +1605,20 @@
    0762 8A 82              1605 	mov	dpl,r2
    0764 8B 83              1606 	mov	dph,r3
    0766 8C F0              1607 	mov	b,r4
-   0768 12 21 3E           1608 	lcall	__gptrget
+   0768 12 21 97           1608 	lcall	__gptrget
    076B F5 3C              1609 	mov	_Buffer_Init_sloc1_1_0,a
    076D A3                 1610 	inc	dptr
-   076E 12 21 3E           1611 	lcall	__gptrget
+   076E 12 21 97           1611 	lcall	__gptrget
    0771 F5 3D              1612 	mov	(_Buffer_Init_sloc1_1_0 + 1),a
                            1613 ;	genPointerGet
                            1614 ;	genGenPointerGet
    0773 85 39 82           1615 	mov	dpl,_Buffer_Init_sloc0_1_0
    0776 85 3A 83           1616 	mov	dph,(_Buffer_Init_sloc0_1_0 + 1)
    0779 85 3B F0           1617 	mov	b,(_Buffer_Init_sloc0_1_0 + 2)
-   077C 12 21 3E           1618 	lcall	__gptrget
+   077C 12 21 97           1618 	lcall	__gptrget
    077F F8                 1619 	mov	r0,a
    0780 A3                 1620 	inc	dptr
-   0781 12 21 3E           1621 	lcall	__gptrget
+   0781 12 21 97           1621 	lcall	__gptrget
    0784 F9                 1622 	mov	r1,a
                            1623 ;	genPlus
                            1624 ;	Peephole 236.g	used r0 instead of ar0
@@ -1635,11 +1635,11 @@
    078F 8E 83              1635 	mov	dph,r6
    0791 8F F0              1636 	mov	b,r7
    0793 E8                 1637 	mov	a,r0
-   0794 12 17 E0           1638 	lcall	__gptrput
+   0794 12 18 39           1638 	lcall	__gptrput
    0797 A3                 1639 	inc	dptr
    0798 E9                 1640 	mov	a,r1
-   0799 12 17 E0           1641 	lcall	__gptrput
-                           1642 ;	buffer.c:106: buf->buf_insert = 0;
+   0799 12 18 39           1641 	lcall	__gptrput
+                           1642 ;	buffer.c:112: buf->buf_insert = 0;
                            1643 ;	genPlus
                            1644 ;     genPlusIncr
    079C 74 04              1645 	mov	a,#0x04
@@ -1659,12 +1659,12 @@
    07A9 8F F0              1659 	mov	b,r7
                            1660 ;	Peephole 181	changed mov to clr
    07AB E4                 1661 	clr	a
-   07AC 12 17 E0           1662 	lcall	__gptrput
+   07AC 12 18 39           1662 	lcall	__gptrput
    07AF A3                 1663 	inc	dptr
                            1664 ;	Peephole 181	changed mov to clr
    07B0 E4                 1665 	clr	a
-   07B1 12 17 E0           1666 	lcall	__gptrput
-                           1667 ;	buffer.c:107: buf->buf_id = buf_id;
+   07B1 12 18 39           1666 	lcall	__gptrput
+                           1667 ;	buffer.c:113: buf->buf_id = buf_id;
                            1668 ;	genPlus
                            1669 ;     genPlusIncr
    07B4 74 08              1670 	mov	a,#0x08
@@ -1690,11 +1690,11 @@
    07C7 8E 83              1690 	mov	dph,r6
    07C9 8F F0              1691 	mov	b,r7
    07CB E8                 1692 	mov	a,r0
-   07CC 12 17 E0           1693 	lcall	__gptrput
+   07CC 12 18 39           1693 	lcall	__gptrput
    07CF A3                 1694 	inc	dptr
    07D0 E9                 1695 	mov	a,r1
-   07D1 12 17 E0           1696 	lcall	__gptrput
-                           1697 ;	buffer.c:108: buf->in_use = 1;
+   07D1 12 18 39           1696 	lcall	__gptrput
+                           1697 ;	buffer.c:114: buf->in_use = 1;
                            1698 ;	genPlus
                            1699 ;     genPlusIncr
    07D4 74 0A              1700 	mov	a,#0x0A
@@ -1712,12 +1712,12 @@
    07DD 8B 83              1712 	mov	dph,r3
    07DF 8C F0              1713 	mov	b,r4
    07E1 74 01              1714 	mov	a,#0x01
-   07E3 12 17 E0           1715 	lcall	__gptrput
+   07E3 12 18 39           1715 	lcall	__gptrput
    07E6 A3                 1716 	inc	dptr
                            1717 ;	Peephole 181	changed mov to clr
    07E7 E4                 1718 	clr	a
-   07E8 12 17 E0           1719 	lcall	__gptrput
-                           1720 ;	buffer.c:109: return true;
+   07E8 12 18 39           1719 	lcall	__gptrput
+                           1720 ;	buffer.c:115: return true;
                            1721 ;	genRet
    07EB 74 01              1722 	mov	a,#0x01
    07ED 24 FF              1723 	add	a,#0xff
@@ -1728,7 +1728,7 @@
                            1728 ;------------------------------------------------------------
                            1729 ;buf                       Allocated with name '_Buffer_Free_buf_1_1'
                            1730 ;------------------------------------------------------------
-                           1731 ;	buffer.c:113: void Buffer_Free(Buffer *buf){
+                           1731 ;	buffer.c:119: void Buffer_Free(Buffer *buf){
                            1732 ;	-----------------------------------------
                            1733 ;	 function Buffer_Free
                            1734 ;	-----------------------------------------
@@ -1745,7 +1745,7 @@
    07FD A3                 1745 	inc	dptr
    07FE EA                 1746 	mov	a,r2
    07FF F0                 1747 	movx	@dptr,a
-                           1748 ;	buffer.c:114: free(buf->buf_start);
+                           1748 ;	buffer.c:120: free(buf->buf_start);
                            1749 ;	genAssign
    0800 90 00 1B           1750 	mov	dptr,#_Buffer_Free_buf_1_1
    0803 E0                 1751 	movx	a,@dptr
@@ -1761,10 +1761,10 @@
    080B 8A 82              1761 	mov	dpl,r2
    080D 8B 83              1762 	mov	dph,r3
    080F 8C F0              1763 	mov	b,r4
-   0811 12 21 3E           1764 	lcall	__gptrget
+   0811 12 21 97           1764 	lcall	__gptrget
    0814 FD                 1765 	mov	r5,a
    0815 A3                 1766 	inc	dptr
-   0816 12 21 3E           1767 	lcall	__gptrget
+   0816 12 21 97           1767 	lcall	__gptrget
    0819 FE                 1768 	mov	r6,a
                            1769 ;	genCast
    081A 7F 00              1770 	mov	r7,#0x0
@@ -1775,11 +1775,11 @@
    0822 C0 02              1775 	push	ar2
    0824 C0 03              1776 	push	ar3
    0826 C0 04              1777 	push	ar4
-   0828 12 14 80           1778 	lcall	_free
+   0828 12 14 D9           1778 	lcall	_free
    082B D0 04              1779 	pop	ar4
    082D D0 03              1780 	pop	ar3
    082F D0 02              1781 	pop	ar2
-                           1782 ;	buffer.c:115: buf->in_use = 0;
+                           1782 ;	buffer.c:121: buf->in_use = 0;
                            1783 ;	genPlus
                            1784 ;     genPlusIncr
    0831 74 0A              1785 	mov	a,#0x0A
@@ -1798,109 +1798,109 @@
    083C 8C F0              1798 	mov	b,r4
                            1799 ;	Peephole 181	changed mov to clr
    083E E4                 1800 	clr	a
-   083F 12 17 E0           1801 	lcall	__gptrput
+   083F 12 18 39           1801 	lcall	__gptrput
    0842 A3                 1802 	inc	dptr
                            1803 ;	Peephole 181	changed mov to clr
    0843 E4                 1804 	clr	a
                            1805 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0844 02 17 E0           1806 	ljmp	__gptrput
+   0844 02 18 39           1806 	ljmp	__gptrput
                            1807 ;
                            1808 	.area CSEG    (CODE)
                            1809 	.area CONST   (CODE)
-   215A                    1810 __str_0:
-   215A 0D                 1811 	.db 0x0D
-   215B 0A                 1812 	.db 0x0A
-   215C 0D                 1813 	.db 0x0D
-   215D 0A                 1814 	.db 0x0A
-   215E 00                 1815 	.db 0x00
-   215F                    1816 __str_1:
-   215F 2A 2A 2A 2A 2A 2A  1817 	.ascii "********************************"
+   21B3                    1810 __str_0:
+   21B3 0D                 1811 	.db 0x0D
+   21B4 0A                 1812 	.db 0x0A
+   21B5 0D                 1813 	.db 0x0D
+   21B6 0A                 1814 	.db 0x0A
+   21B7 00                 1815 	.db 0x00
+   21B8                    1816 __str_1:
+   21B8 2A 2A 2A 2A 2A 2A  1817 	.ascii "********************************"
         2A 2A 2A 2A 2A 2A
         2A 2A 2A 2A 2A 2A
         2A 2A 2A 2A 2A 2A
         2A 2A 2A 2A 2A 2A
         2A 2A
-   217F 0D                 1818 	.db 0x0D
-   2180 0A                 1819 	.db 0x0A
-   2181 00                 1820 	.db 0x00
-   2182                    1821 __str_2:
-   2182 42 75 66 66 65 72  1822 	.ascii "Buffer Number:   %d"
+   21D8 0D                 1818 	.db 0x0D
+   21D9 0A                 1819 	.db 0x0A
+   21DA 00                 1820 	.db 0x00
+   21DB                    1821 __str_2:
+   21DB 42 75 66 66 65 72  1822 	.ascii "Buffer Number:   %d"
         20 4E 75 6D 62 65
         72 3A 20 20 20 25
         64
-   2195 0D                 1823 	.db 0x0D
-   2196 0A                 1824 	.db 0x0A
-   2197 00                 1825 	.db 0x00
-   2198                    1826 __str_3:
-   2198 53 74 61 72 74 20  1827 	.ascii "Start Address:   %p"
+   21EE 0D                 1823 	.db 0x0D
+   21EF 0A                 1824 	.db 0x0A
+   21F0 00                 1825 	.db 0x00
+   21F1                    1826 __str_3:
+   21F1 53 74 61 72 74 20  1827 	.ascii "Start Address:   %p"
         41 64 64 72 65 73
         73 3A 20 20 20 25
         70
-   21AB 0D                 1828 	.db 0x0D
-   21AC 0A                 1829 	.db 0x0A
-   21AD 00                 1830 	.db 0x00
-   21AE                    1831 __str_4:
-   21AE 45 6E 64 20 41 64  1832 	.ascii "End Address:     %p"
+   2204 0D                 1828 	.db 0x0D
+   2205 0A                 1829 	.db 0x0A
+   2206 00                 1830 	.db 0x00
+   2207                    1831 __str_4:
+   2207 45 6E 64 20 41 64  1832 	.ascii "End Address:     %p"
         64 72 65 73 73 3A
         20 20 20 20 20 25
         70
-   21C1 0D                 1833 	.db 0x0D
-   21C2 0A                 1834 	.db 0x0A
-   21C3 00                 1835 	.db 0x00
-   21C4                    1836 __str_5:
-   21C4 42 75 66 66 65 72  1837 	.ascii "Buffer Size:     %d"
+   221A 0D                 1833 	.db 0x0D
+   221B 0A                 1834 	.db 0x0A
+   221C 00                 1835 	.db 0x00
+   221D                    1836 __str_5:
+   221D 42 75 66 66 65 72  1837 	.ascii "Buffer Size:     %d"
         20 53 69 7A 65 3A
         20 20 20 20 20 25
         64
-   21D7 0D                 1838 	.db 0x0D
-   21D8 0A                 1839 	.db 0x0A
-   21D9 00                 1840 	.db 0x00
-   21DA                    1841 __str_6:
-   21DA 42 79 74 65 73 20  1842 	.ascii "Bytes Used:      %d"
+   2230 0D                 1838 	.db 0x0D
+   2231 0A                 1839 	.db 0x0A
+   2232 00                 1840 	.db 0x00
+   2233                    1841 __str_6:
+   2233 42 79 74 65 73 20  1842 	.ascii "Bytes Used:      %d"
         55 73 65 64 3A 20
         20 20 20 20 20 25
         64
-   21ED 0D                 1843 	.db 0x0D
-   21EE 0A                 1844 	.db 0x0A
-   21EF 00                 1845 	.db 0x00
-   21F0                    1846 __str_7:
-   21F0 42 79 74 65 73 20  1847 	.ascii "Bytes Remaining: %d"
+   2246 0D                 1843 	.db 0x0D
+   2247 0A                 1844 	.db 0x0A
+   2248 00                 1845 	.db 0x00
+   2249                    1846 __str_7:
+   2249 42 79 74 65 73 20  1847 	.ascii "Bytes Remaining: %d"
         52 65 6D 61 69 6E
         69 6E 67 3A 20 25
         64
-   2203 0D                 1848 	.db 0x0D
-   2204 0A                 1849 	.db 0x0A
-   2205 00                 1850 	.db 0x00
-   2206                    1851 __str_8:
-   2206 43 6F 6E 74 65 6E  1852 	.ascii "Contents:"
+   225C 0D                 1848 	.db 0x0D
+   225D 0A                 1849 	.db 0x0A
+   225E 00                 1850 	.db 0x00
+   225F                    1851 __str_8:
+   225F 43 6F 6E 74 65 6E  1852 	.ascii "Contents:"
         74 73 3A
-   220F 0D                 1853 	.db 0x0D
-   2210 0A                 1854 	.db 0x0A
-   2211 0D                 1855 	.db 0x0D
-   2212 0A                 1856 	.db 0x0A
-   2213 00                 1857 	.db 0x00
-   2214                    1858 __str_9:
-   2214 25 70 3A 20        1859 	.ascii "%p: "
-   2218 00                 1860 	.db 0x00
-   2219                    1861 __str_10:
-   2219 25 78 20           1862 	.ascii "%x "
-   221C 00                 1863 	.db 0x00
-   221D                    1864 __str_11:
-   221D 25 63 20           1865 	.ascii "%c "
-   2220 00                 1866 	.db 0x00
-   2221                    1867 __str_12:
-   2221 0D                 1868 	.db 0x0D
-   2222 0A                 1869 	.db 0x0A
-   2223 00                 1870 	.db 0x00
-   2224                    1871 __str_13:
-   2224 42 75 66 66 65 72  1872 	.ascii "Buffer %d Cleared"
+   2268 0D                 1853 	.db 0x0D
+   2269 0A                 1854 	.db 0x0A
+   226A 0D                 1855 	.db 0x0D
+   226B 0A                 1856 	.db 0x0A
+   226C 00                 1857 	.db 0x00
+   226D                    1858 __str_9:
+   226D 25 70 3A 20        1859 	.ascii "%p: "
+   2271 00                 1860 	.db 0x00
+   2272                    1861 __str_10:
+   2272 25 78 20           1862 	.ascii "%x "
+   2275 00                 1863 	.db 0x00
+   2276                    1864 __str_11:
+   2276 25 63 20           1865 	.ascii "%c "
+   2279 00                 1866 	.db 0x00
+   227A                    1867 __str_12:
+   227A 0D                 1868 	.db 0x0D
+   227B 0A                 1869 	.db 0x0A
+   227C 00                 1870 	.db 0x00
+   227D                    1871 __str_13:
+   227D 42 75 66 66 65 72  1872 	.ascii "Buffer %d Cleared"
         20 25 64 20 43 6C
         65 61 72 65 64
-   2235 0D                 1873 	.db 0x0D
-   2236 0A                 1874 	.db 0x0A
-   2237 00                 1875 	.db 0x00
-   2238                    1876 __str_14:
-   2238 43 61 6E 27 74 20  1877 	.ascii "Can't swap buffer contents with different sizes"
+   228E 0D                 1873 	.db 0x0D
+   228F 0A                 1874 	.db 0x0A
+   2290 00                 1875 	.db 0x00
+   2291                    1876 __str_14:
+   2291 43 61 6E 27 74 20  1877 	.ascii "Can't swap buffer contents with different sizes"
         73 77 61 70 20 62
         75 66 66 65 72 20
         63 6F 6E 74 65 6E
@@ -1908,13 +1908,13 @@
         68 20 64 69 66 66
         65 72 65 6E 74 20
         73 69 7A 65 73
-   2267 0D                 1878 	.db 0x0D
-   2268 0A                 1879 	.db 0x0A
-   2269 00                 1880 	.db 0x00
-   226A                    1881 __str_15:
-   226A 0D                 1882 	.db 0x0D
-   226B 0A                 1883 	.db 0x0A
-   226C 45 72 72 6F 72 2E  1884 	.ascii "Error. Buffer %d of size %d allocation failed"
+   22C0 0D                 1878 	.db 0x0D
+   22C1 0A                 1879 	.db 0x0A
+   22C2 00                 1880 	.db 0x00
+   22C3                    1881 __str_15:
+   22C3 0D                 1882 	.db 0x0D
+   22C4 0A                 1883 	.db 0x0A
+   22C5 45 72 72 6F 72 2E  1884 	.ascii "Error. Buffer %d of size %d allocation failed"
         20 42 75 66 66 65
         72 20 25 64 20 6F
         66 20 73 69 7A 65
@@ -1922,7 +1922,7 @@
         6C 6F 63 61 74 69
         6F 6E 20 66 61 69
         6C 65 64
-   2299 0D                 1885 	.db 0x0D
-   229A 0A                 1886 	.db 0x0A
-   229B 00                 1887 	.db 0x00
+   22F2 0D                 1885 	.db 0x0D
+   22F3 0A                 1886 	.db 0x0A
+   22F4 00                 1887 	.db 0x00
                            1888 	.area XINIT   (CODE)

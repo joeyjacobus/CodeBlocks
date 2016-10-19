@@ -1,3 +1,9 @@
+/**
+ *  Lab 3
+ *  Author: Joey Jacobus
+ *  October 2016
+ *  Embedded Systems Design - University of Colorado at Boulder
+ */
 
 #include <stdbool.h>
 #include <stdio.h>
